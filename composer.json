@@ -1,0 +1,31 @@
+{
+    "name": "worksome/coding-style",
+    "description": "Worksomes coding style",
+    "type": "composer-plugin",
+    "require": {
+        "PHP": "^8.0",
+        "composer-plugin-api": "^2.0",
+        "worksome/code-sniffer": "^0.1.0",
+        "nunomaduro/larastan": "^0.7.0",
+        "rector/rector": "^0.9.31",
+        "jetbrains/phpstorm-attributes": "^1.0"
+    },
+    "require-dev": {
+        "composer/composer": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Worksome\\CodingStyle\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Nybroe",
+            "email": "oliver@worksome.com"
+        }
+    ],
+    "extra": {
+        "class": "Worksome\\CodingStyle\\Plugin"
+    }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="YourCompany">
+    <description>YourCompany Coding Standard</description>
+
+    <file>./app</file>
+    <file>./tests</file>
+    <file>./config</file>
+
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+
+    <rule ref="WorksomeSniff"/>
+</ruleset>

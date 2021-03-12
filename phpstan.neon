@@ -1,0 +1,8 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    ignoreErrors:
+        - '#Static call to instance method .*?::dispatch(Now)?\(\)\.#'
+
+    checkMissingIterableValueType: false
