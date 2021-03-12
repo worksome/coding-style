@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ../../nunomaduro/larastan/extension.neon
 
 parameters:
     ignoreErrors:
