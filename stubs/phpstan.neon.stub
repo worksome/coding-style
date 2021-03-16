@@ -9,3 +9,4 @@ parameters:
     level: 0
 
     ignoreErrors:
+        - '#Static call to instance method .*?::dispatch(Now)?\(\)\.#'
