@@ -8,6 +8,7 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
+use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 class WorksomeRectorConfig
@@ -26,6 +27,7 @@ class WorksomeRectorConfig
 
         // Define what rule sets will be applied
         $parameters->set(Option::SETS, [
+            SetList::DEAD_DOC_BLOCK,
             // SetList::DEAD_CODE,
             // SetList::PHP_80,
         ]);
