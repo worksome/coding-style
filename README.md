@@ -1,3 +1,5 @@
+[![Latest Stable Version](https://poser.pugx.org/worksome/coding-style/v)](//packagist.org/packages/worksome/coding-style) [![Total Downloads](https://poser.pugx.org/worksome/coding-style/downloads)](//packagist.org/packages/worksome/coding-style) [![Latest Unstable Version](https://poser.pugx.org/worksome/coding-style/v/unstable)](//packagist.org/packages/worksome/coding-style) [![License](https://poser.pugx.org/worksome/coding-style/license)](//packagist.org/packages/worksome/coding-style)
+
 # Worksomes Coding Style
 This repository contains the coding style followed by Worksome.
 
