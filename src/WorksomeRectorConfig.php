@@ -3,6 +3,7 @@
 namespace Worksome\CodingStyle;
 
 use Rector\Core\Configuration\Option;
+use Rector\DeadCode\Rector\ClassMethod\RemoveDelegatingParentCallRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
@@ -45,6 +46,7 @@ class WorksomeRectorConfig
         // DEAD CODE set rules
         $services->set(\Rector\DeadCode\Rector\FunctionLike\RemoveCodeAfterReturnRector::class);
         $services->set(\Rector\DeadCode\Rector\ClassMethod\RemoveDeadConstructorRector::class);
+        $services->set(RemoveDelegatingParentCallRector::class);
 
         // Naming set rules
         $services->set(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
