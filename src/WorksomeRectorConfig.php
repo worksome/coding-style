@@ -4,6 +4,9 @@ namespace Worksome\CodingStyle;
 
 use Rector\Core\Configuration\Option;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDelegatingParentCallRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
@@ -28,7 +31,6 @@ class WorksomeRectorConfig
 
         // Define what rule sets will be applied
         $parameters->set(Option::SETS, [
-            SetList::DEAD_DOC_BLOCK,
             // SetList::DEAD_CODE,
             // SetList::PHP_80,
         ]);
@@ -47,8 +49,11 @@ class WorksomeRectorConfig
         $services->set(\Rector\DeadCode\Rector\FunctionLike\RemoveCodeAfterReturnRector::class);
         $services->set(\Rector\DeadCode\Rector\ClassMethod\RemoveDeadConstructorRector::class);
         $services->set(RemoveDelegatingParentCallRector::class);
+        $services->set(RemoveUselessParamTagRector::class);
+        $services->set(RemoveUselessReturnTagRector::class);
+        $services->set(RemoveNonExistingVarAnnotationRector::class);
 
         // Naming set rules
-        $services->set(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
+        // $services->set(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
     }
 }
