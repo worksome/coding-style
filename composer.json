@@ -5,9 +5,9 @@
     "require": {
         "PHP": "^8.0",
         "composer-plugin-api": "^2.0",
-        "worksome/code-sniffer": "^0.1.2",
-        "nunomaduro/larastan": "^0.7.0",
-        "rector/rector": "^0.9.31",
+        "worksome/code-sniffer": "^0.1.4",
+        "nunomaduro/larastan": "^0.7.3",
+        "rector/rector": "^0.10.4",
         "jetbrains/phpstorm-attributes": "^1.0"
     },
     "require-dev": {
