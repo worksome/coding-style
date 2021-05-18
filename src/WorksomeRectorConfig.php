@@ -30,10 +30,8 @@ class WorksomeRectorConfig
         $parameters->set(Option::ENABLE_CACHE, true);
 
         // Define what rule sets will be applied
-        $parameters->set(Option::SETS, [
-            // SetList::DEAD_CODE,
-            // SetList::PHP_80,
-        ]);
+        // SetList::DEAD_CODE,
+        // SetList::PHP_80,
 
         // get services (needed for register a single rule)
         $services = $containerConfigurator->services();
