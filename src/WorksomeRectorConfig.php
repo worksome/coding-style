@@ -22,12 +22,11 @@ class WorksomeRectorConfig
         // get parameters
         $parameters = $containerConfigurator->parameters();
 
-        $parameters->set(Option::AUTOLOAD_PATHS, [
+        $parameters->set(Option::BOOTSTRAP_FILES, [
             getcwd() . '/vendor/nunomaduro/larastan/bootstrap.php',
         ]);
 
         $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, getcwd() . '/phpstan.neon');
-        $parameters->set(Option::ENABLE_CACHE, true);
 
         // Define what rule sets will be applied
         // SetList::DEAD_CODE,
