@@ -12,8 +12,8 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
-use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
 {
@@ -31,6 +31,8 @@ class WorksomeRectorConfig
         // Define what rule sets will be applied
         // SetList::DEAD_CODE,
         // SetList::PHP_80,
+
+        $containerConfigurator->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
 
         // get services (needed for register a single rule)
         $services = $containerConfigurator->services();
