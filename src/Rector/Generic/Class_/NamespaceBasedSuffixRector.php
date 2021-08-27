@@ -17,7 +17,7 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
     /**
      * @var array<string, string>
      */
-    private $namespaceAndSuffix = [];
+    private array $namespaceAndSuffix = [];
 
     public function __construct(
         private ClassRenamer $classRenamer,
