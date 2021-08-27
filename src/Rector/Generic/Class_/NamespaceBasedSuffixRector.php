@@ -3,6 +3,7 @@
 namespace Worksome\CodingStyle\Rector\Generic\Class_;
 
 use PhpParser\Node;
+use Rector\Core\Configuration\RenamedClassesDataCollector;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Renaming\NodeManipulator\ClassRenamer;
@@ -20,6 +21,7 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
 
     public function __construct(
         private ClassRenamer $classRenamer,
+        private RenamedClassesDataCollector $renamedClassesDataCollector,
     ) {}
 
     public function getRuleDefinition(): RuleDefinition
@@ -57,12 +59,12 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
                 return;
             }
 
-            $this->classRenamer->renameNode(
-                $node,
-                [
-                    $className => "$className$suffix",
-                ]
-            );
+            $oldToNewClasses = [
+                $className => "$className$suffix",
+            ];
+
+            $this->classRenamer->renameNode($node, $oldToNewClasses);
+            $this->renamedClassesDataCollector->addOldToNewClasses($oldToNewClasses);
         }
     }
 
