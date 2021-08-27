@@ -9,6 +9,8 @@ use Rector\Core\Rector\AbstractRector;
 use Rector\Renaming\NodeManipulator\ClassRenamer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use function dirname;
+use const DIRECTORY_SEPARATOR;
 
 class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableRectorInterface
 {
@@ -59,12 +61,15 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
                 return;
             }
 
+            $newClassName = "$className$suffix";
             $oldToNewClasses = [
-                $className => "$className$suffix",
+                $className => $newClassName,
             ];
 
             $this->classRenamer->renameNode($node, $oldToNewClasses);
             $this->renamedClassesDataCollector->addOldToNewClasses($oldToNewClasses);
+
+            $this->moveFile($newClassName);
         }
     }
 
@@ -74,5 +79,17 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
     public function configure(array $configuration): void
     {
         $this->namespaceAndSuffix = $configuration[self::NAMESPACE_AND_SUFFIX];
+    }
+
+    public function moveFile(string $newClassName): void
+    {
+        $newClassShortName = $this->nodeNameResolver->getShortName($newClassName);
+        $currentDirectory = dirname($this->file->getSmartFileInfo()->getRealPath());
+        $newFileLocation = $currentDirectory . DIRECTORY_SEPARATOR . $newClassShortName . '.php';
+
+        $this->removedAndAddedFilesCollector->addMovedFile(
+            $this->file,
+            $newFileLocation
+        );
     }
 }

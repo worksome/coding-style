@@ -12,7 +12,6 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
-use Rector\Restoration\Rector\ClassLike\UpdateFileNameByClassNameFileSystemRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Worksome\CodingStyle\Rector\WorksomeSetList;
 
@@ -52,7 +51,6 @@ class WorksomeRectorConfig
         $services->set(RemoveUselessParamTagRector::class);
         $services->set(RemoveUselessReturnTagRector::class);
         $services->set(RemoveNonExistingVarAnnotationRector::class);
-        $services->set(UpdateFileNameByClassNameFileSystemRector::class);
 
         // Naming set rules
         // $services->set(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
