@@ -3,3 +3,15 @@ includes:
 
 parameters:
     checkMissingIterableValueType: false
+
+services:
+    -
+        class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
+        arguments:
+            namespaceAndSuffix:
+                App\Events: Event
+                App\Listener: Listener
+                App\Policies: Policy
+                App\Jobs: Job
+        tags:
+            - phpstan.rules.rule
