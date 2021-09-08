@@ -1,0 +1,13 @@
+includes:
+    - ./phpstan.neon
+    - ../../nunomaduro/larastan/extension.neon
+
+parameters:
+    checkMissingIterableValueType: false
+    namespaceAndSuffix:
+        App\Events: Event
+        App\Listener: Listener
+        App\Policies: Policy
+        App\Jobs: Job
+
+services:

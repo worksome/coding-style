@@ -30,7 +30,7 @@ class NamespaceBasedSuffixRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $fullyQualifiedNameSpace = $node->namespacedName?->toString();
+        $fullyQualifiedNameSpace = ($node->namespacedName ?? null)?->toString();
 
         if ($fullyQualifiedNameSpace === null) {
             return [];

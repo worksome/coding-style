@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/worksome/coding-style/phpstan.neon
+    - ./vendor/worksome/coding-style/larastan.neon
 
 parameters:
     paths:

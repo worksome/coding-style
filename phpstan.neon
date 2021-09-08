@@ -1,17 +1,10 @@
-includes:
-    - ../../nunomaduro/larastan/extension.neon
-
 parameters:
-    checkMissingIterableValueType: false
+    namespaceAndSuffix: []
 
 services:
     -
         class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
         arguments:
-            namespaceAndSuffix:
-                App\Events: Event
-                App\Listener: Listener
-                App\Policies: Policy
-                App\Jobs: Job
+            namespaceAndSuffix: %namespaceAndSuffix%
         tags:
             - phpstan.rules.rule
