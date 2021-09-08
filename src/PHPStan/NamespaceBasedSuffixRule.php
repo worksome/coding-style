@@ -34,7 +34,7 @@ class NamespaceBasedSuffixRule implements Rule
 
 
         foreach ($this->namespaceAndSuffix as $nameSpace => $suffix) {
-            if (! str_starts_with($nameSpace, $nameSpace)) {
+            if (! str_starts_with($fullyQualifiedNameSpace, $nameSpace)) {
                 continue;
             }
 
