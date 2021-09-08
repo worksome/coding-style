@@ -21,7 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [[
             ParentBasedSuffixRector::PARENT_AND_SUFFIX => [
                 'App\\Jobs\\Job' => 'Job',
-                'Illuminate\\Notifications\\Notification' => 'Notification',
             ]
         ]]);
 };
