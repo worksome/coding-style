@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'App\\Events\\' => 'Event',
                 'App\\Listener\\' => 'Listener',
                 'App\\Policies\\' => 'Policy',
+                'App\\Jobs\\' => 'Job',
             ],
         ]]);
 
