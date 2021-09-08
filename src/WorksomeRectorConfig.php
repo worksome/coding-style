@@ -31,6 +31,7 @@ class WorksomeRectorConfig
         // Define what rule sets will be applied
         // SetList::DEAD_CODE,
         // SetList::PHP_80,
+        $parameters->set(Option::AUTO_IMPORT_NAMES, true);
 
         $containerConfigurator->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
 

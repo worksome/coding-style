@@ -8,20 +8,11 @@ use Worksome\CodingStyle\Rector\Generic\Class_\ParentBasedSuffixRector;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
-    $services->set(NamespaceBasedSuffixRector::class)
-        ->call('configure', [[
-            NamespaceBasedSuffixRector::NAMESPACE_AND_SUFFIX => [
-                'App\\Events\\' => 'Event',
-                'App\\Listener\\' => 'Listener',
-                'App\\Policies\\' => 'Policy',
-            ],
-        ]]);
-
     $services->set(ParentBasedSuffixRector::class)
         ->call('configure', [[
             ParentBasedSuffixRector::PARENT_AND_SUFFIX => [
                 'App\\Jobs\\Job' => 'Job',
-                'Illuminate\\Notifications\\Notification' => 'Notification',
-            ]
+                'App\\Jobs\\SomeInterface' => 'Job',
+            ],
         ]]);
 };

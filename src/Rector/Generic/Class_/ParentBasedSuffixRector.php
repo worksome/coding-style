@@ -2,24 +2,32 @@
 
 namespace Worksome\CodingStyle\Rector\Generic\Class_;
 
+use Error;
+use Exception;
+use Illuminate\Support\Arr;
 use PhpParser\Node;
+use PHPStan\Analyser\Scope;
+use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
+use PHPStan\Reflection\ClassReflection;
 use Rector\Core\Configuration\RenamedClassesDataCollector;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\Renaming\NodeManipulator\ClassRenamer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Throwable;
 use function dirname;
 use const DIRECTORY_SEPARATOR;
 
-class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableRectorInterface
+class ParentBasedSuffixRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    public const NAMESPACE_AND_SUFFIX = 'namespace_and_suffix';
+    public const PARENT_AND_SUFFIX = 'parent_and_suffix';
 
     /**
      * @var array<string, string>
      */
-    private array $namespaceAndSuffix = [];
+    private array $parentAndSuffix = [];
 
     public function __construct(
         private ClassRenamer $classRenamer,
@@ -29,11 +37,11 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            "Change events to be suffixed with Event",
+            "Suffix a class based on parent class or interface",
             [
                 new CodeSample(
-                    'class BalanceUpdated {}',
-                    'class BalanceUpdatedEvent {}',
+                    'class UpdateBalance extends Job {}',
+                    'class UpdateBalanceJob {}',
                 )
             ]
         );
@@ -52,8 +60,18 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
 
         $className = $this->getName($node);
 
-        foreach ($this->namespaceAndSuffix as $namespace => $suffix) {
-            if (! str_starts_with($className, $namespace)) {
+        $scope = $node->getAttribute(AttributeKey::SCOPE);
+        if (!$scope instanceof Scope) {
+            return null;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if (!$classReflection instanceof ClassReflection) {
+            return null;
+        }
+
+        foreach ($this->parentAndSuffix as $parentNameSpace => $suffix) {
+            if (! $this->extendsClassOrInterface($classReflection, $parentNameSpace)) {
                 continue;
             }
 
@@ -81,7 +99,7 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
      */
     public function configure(array $configuration): void
     {
-        $this->namespaceAndSuffix = $configuration[self::NAMESPACE_AND_SUFFIX];
+        $this->parentAndSuffix = $configuration[self::PARENT_AND_SUFFIX];
     }
 
     public function moveFile(string $newClassName): void
@@ -94,5 +112,18 @@ class NamespaceBasedSuffixRector extends AbstractRector implements ConfigurableR
             $this->file,
             $newFileLocation
         );
+    }
+
+    private function extendsClassOrInterface(ClassReflection $classReflection, string $namespace): bool
+    {
+        try {
+            if ($classReflection->implementsInterface($namespace)) {
+                return true;
+            }
+
+            return $classReflection->isSubclassOf($namespace);
+        } catch (Throwable $e) {
+            return false;
+        }
     }
 }
