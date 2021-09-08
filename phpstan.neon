@@ -1,6 +1,9 @@
 parameters:
     namespaceAndSuffix: []
 
+parametersSchema:
+    namespaceAndSuffix: arrayOf(string(), string())
+
 services:
     -
         class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
