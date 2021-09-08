@@ -30,8 +30,11 @@ class NamespaceBasedSuffixRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $fullyQualifiedNameSpace = $node->namespacedName->toString();
+        $fullyQualifiedNameSpace = $node->namespacedName?->toString();
 
+        if ($fullyQualifiedNameSpace === null) {
+            return [];
+        }
 
         foreach ($this->namespaceAndSuffix as $nameSpace => $suffix) {
             if (! str_starts_with($fullyQualifiedNameSpace, $nameSpace)) {

@@ -51,6 +51,10 @@ class NamespaceBasedSuffixRuleTest extends RuleTestCase
                 __DIR__ . '/Fixture/skip_suffix_event.php.inc',
                 [],
             ],
+            'has namespace, but is anonymous class' => [
+                __DIR__ . '/Fixture/skip_annonymous_class_in_namespace.php.inc',
+                [],
+            ]
         ];
     }
 }
