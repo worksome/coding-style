@@ -1,3 +1,6 @@
+includes:
+    - ../../phpstan/phpstan-mockery/extension.neon
+
 parameters:
     namespaceAndSuffix: []
 
