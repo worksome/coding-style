@@ -8,6 +8,7 @@ use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
@@ -51,6 +52,9 @@ class WorksomeRectorConfig
         $services->set(RemoveUselessParamTagRector::class);
         $services->set(RemoveUselessReturnTagRector::class);
         $services->set(RemoveNonExistingVarAnnotationRector::class);
+
+        // PHP 80 set rules
+        $services->set(ClassPropertyAssignToConstructorPromotionRector::class);
 
         // Naming set rules
         // $services->set(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
