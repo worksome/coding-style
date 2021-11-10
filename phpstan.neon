@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/phpstan/phpstan-mockery/extension.neon
+    - ../../phpstan/phpstan-mockery/extension.neon
 
 parameters:
     namespaceAndSuffix: []
