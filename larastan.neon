@@ -9,5 +9,6 @@ parameters:
         App\Listener: Listener
         App\Policies: Policy
         App\Jobs: Job
-
+rules:
+	- Worksome\CodingStyle\PHPStan\Laravel\DisallowAppHelperUsageRule
 services:

@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+
+jobs:
+  setup:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    name: Pest on PHP ${{ matrix.php }}
+    strategy:
+      matrix:
+        php: ["8.0", "8.1"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: ${{ matrix.php }}
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer dependencies
+        uses: worksome/composer-install@fix-race-condition
+
+      - name: Test php code
+        run: vendor/bin/phpunit
