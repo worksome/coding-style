@@ -36,3 +36,27 @@ $ composer phpcs
 $ composer phpstan
 $ composer rector-ci
 ```
+
+## Custom PhpStan rules
+This section will list all the custom phpstan rules this package adds.
+
+### Generic
+Rules that are applied to all projects.
+
+#### NamespaceBasedSuffix (configurable)
+
+### Laravel
+Rules that are only applied in a Laravel context.
+
+#### DisallowAppHelperUsage
+This rule disallows the usage of laravel's `app` helper function in favour of using dependency injection instead.
+
+#### NamespaceBasedSuffix
+Sets up configuration for suffixing the following namespaces
+
+- `App\Events`: `Event`
+- `App\Listener`: `Listener`
+- `App\Policies`: `Policy`
+- `App\Jobs`: `Job`
+
+This makes sures events, listeners, policies and jobs has the same suffix.
