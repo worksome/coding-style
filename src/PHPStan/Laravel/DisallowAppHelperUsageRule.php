@@ -25,7 +25,13 @@ class DisallowAppHelperUsageRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $functionName = $node->name->toString();
+        $nodeName = $node->name;
+
+        if (!$nodeName instanceof Node\Name\FullyQualified) {
+            return [];
+        }
+
+        $functionName = $nodeName->toString();
 
         if ($functionName !== self::FUNCTION_NAME) {
             return [];

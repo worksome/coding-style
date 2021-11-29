@@ -23,7 +23,10 @@ it('checks app helper rule', function (string $path, array ...$errors) {
             7,
         ],
     ],
-    'calls app function from other namespace' => [
+    'skips app function from other namespace' => [
         __DIR__ . '/Fixture/skip_app_function_in_namespace.php.inc',
-    ]
+    ],
+    'skips function call on variable' => [
+        __DIR__ . '/Fixture/skip_variable_call.php.inc',
+    ],
 ]);
