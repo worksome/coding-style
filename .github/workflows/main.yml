@@ -28,4 +28,4 @@ jobs:
         uses: worksome/composer-install@fix-race-condition
 
       - name: Test php code
-        run: vendor/bin/phpunit
+        run: vendor/bin/pest
