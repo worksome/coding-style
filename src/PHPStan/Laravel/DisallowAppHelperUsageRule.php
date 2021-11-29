@@ -27,7 +27,7 @@ class DisallowAppHelperUsageRule implements Rule
     {
         $nodeName = $node->name;
 
-        if (!$nodeName instanceof Node\Name\FullyQualified) {
+        if (!$nodeName instanceof Node\Name) {
             return [];
         }
 

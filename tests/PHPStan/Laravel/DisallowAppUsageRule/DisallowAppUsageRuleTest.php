@@ -29,4 +29,18 @@ it('checks app helper rule', function (string $path, array ...$errors) {
     'skips function call on variable' => [
         __DIR__ . '/Fixture/skip_variable_call.php.inc',
     ],
+    'calls app helper when inside a namespace' => [
+        __DIR__ . '/Fixture/app_helper_in_namespace.php.inc',
+        [
+            'Usage of app helper is disallowed. Use dependency injection instead.',
+            9,
+        ],
+    ],
+    'calls app helper with chain calls after' => [
+        __DIR__ . '/Fixture/app_helper_with_chain_calls.php.inc',
+        [
+            'Usage of app helper is disallowed. Use dependency injection instead.',
+            9,
+        ],
+    ],
 ]);
