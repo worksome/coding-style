@@ -9,6 +9,10 @@ parametersSchema:
 
 services:
     -
+        class: Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule
+        tags:
+            - phpstan.rules.rule
+    -
         class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
         arguments:
             namespaceAndSuffix: %namespaceAndSuffix%
