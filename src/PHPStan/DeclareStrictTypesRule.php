@@ -24,11 +24,11 @@ class DeclareStrictTypesRule implements Rule
     {
         $nodes = $node->getNodes();
 
-        if (0 === \count($nodes)) {
+        if (count($nodes) === 0) {
             return [];
         }
 
-        $firstNode = \array_shift($nodes);
+        $firstNode = array_shift($nodes);
 
         if ($firstNode instanceof Node\Stmt\Declare_) {
             foreach ($firstNode->declares as $declare) {
