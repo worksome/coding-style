@@ -13,7 +13,8 @@
     },
     "require-dev": {
         "composer/composer": "^2.0",
-        "pestphp/pest": "^1.21"
+        "pestphp/pest": "^1.21",
+        "spatie/ray": "^1.32"
     },
     "autoload": {
         "psr-4": {

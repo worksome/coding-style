@@ -35,7 +35,11 @@ class DisallowPartialRouteResourceRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (join('\\', $node->class->parts) !== Route::class) {
+        if (! $node instanceof Node\Expr\StaticCall) {
+            return [];
+        }
+
+        if ($node->class->toString() !== Route::class) {
             return [];
         }
 
@@ -43,8 +47,14 @@ class DisallowPartialRouteResourceRule implements Rule
             return [];
         }
 
-        if (in_array($node->getAttributes()['next']->name, $this->partialMethods)) {
-            return [$this->errorFor($node->getAttributes()['next']->name)];
+        $next = $node->getAttribute('next');
+
+        while ($next !== null) {
+            if (in_array($next->name, $this->partialMethods)) {
+                return [$this->errorFor($next->name)];
+            }
+
+            $next = $next->getAttribute('parent')->getAttribute('next');
         }
 
         return [];

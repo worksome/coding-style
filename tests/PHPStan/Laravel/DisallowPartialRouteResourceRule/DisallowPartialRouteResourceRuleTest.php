@@ -28,6 +28,13 @@ it('checks for partial route resources', function (string $path, array ...$error
             5
         ]
     ],
+    'calls except at end of method chain' => [
+        __DIR__ . '/Fixture/route_resource_with_except_after_after_chain.php.inc',
+        [
+            'Usage of [except] method on route resource is disallowed. Please split the resource into multiple routes.',
+            5
+        ]
+    ],
     'calls complete route resource' => [
         __DIR__ . '/Fixture/route_resource.php.inc'
     ],
