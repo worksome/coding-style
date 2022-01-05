@@ -26,3 +26,8 @@ Route::resource('blogs', 'BlogController')->parameters([
 Route::resource('photos.comments', 'PhotoCommentController')->scoped([
     'comment' => 'slug',
 ]);
+
+Route::group([], function ($router) {
+    $router->resource('photos', 'PhotoController')->scoped();
+    $router->apiResource('books', 'BookController')->scoped();
+});

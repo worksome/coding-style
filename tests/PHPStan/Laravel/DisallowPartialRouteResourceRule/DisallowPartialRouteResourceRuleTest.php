@@ -1,9 +1,11 @@
 <?php
 
-use Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResourceRule;
+use Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule;
+use Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule;
+use Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\PartialRouteResourceInspector;
 
-it('checks for partial route resources', function (string $path, array ...$errors) {
-    $this->rule = new DisallowPartialRouteResourceRule();
+it('checks for partial route facade resources', function (string $path, array ...$errors) {
+    $this->rule = new DisallowPartialRouteFacadeResourceRule(new PartialRouteResourceInspector());
 
     expect($path)->toHaveRuleErrors($errors);
 })->with([
@@ -37,5 +39,26 @@ it('checks for partial route resources', function (string $path, array ...$error
     ],
     'calls complete route resource' => [
         __DIR__ . '/Fixture/route_resource.php.inc'
+    ],
+]);
+
+it('checks for partial route variable resources', function (string $path, array ...$errors) {
+    $this->rule = new DisallowPartialRouteVariableResourceRule(new PartialRouteResourceInspector());
+
+    expect($path)->toHaveRuleErrors($errors);
+})->with([
+    'calls grouped resource' => [
+        __DIR__ . '/Fixture/grouped_route_resource_with_except.php.inc',
+        [
+            'Usage of [except] method on route resource is disallowed. Please split the resource into multiple routes.',
+            6
+        ],
+        [
+            'Usage of [only] method on route resource is disallowed. Please split the resource into multiple routes.',
+            7
+        ]
+    ],
+    'calls complete route resource' => [
+        __DIR__ . '/Fixture/route_resource.php.inc',
     ],
 ]);

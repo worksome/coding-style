@@ -11,5 +11,6 @@ parameters:
         App\Jobs: Job
 rules:
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowAppHelperUsageRule
-	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResourceRule
+	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteFacadeResourceRule
+	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteVariableResourceRule
 services:
