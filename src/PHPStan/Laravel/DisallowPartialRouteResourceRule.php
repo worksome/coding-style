@@ -11,7 +11,7 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 
 /**
- * @implements Rule<FuncCall>
+ * @implements Rule<Node\Expr\StaticCall>
  */
 class DisallowPartialRouteResourceRule implements Rule
 {
