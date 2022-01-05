@@ -15,11 +15,17 @@ use PHPStan\Rules\RuleErrorBuilder;
  */
 class DisallowPartialRouteResourceRule implements Rule
 {
+    /**
+     * @var string[]
+     */
     private array $resourceMethods = [
         'resource',
         'apiResource',
     ];
 
+    /**
+     * @var string[]
+     */
     private array $partialMethods = [
         'except',
         'only',
@@ -32,6 +38,7 @@ class DisallowPartialRouteResourceRule implements Rule
 
     /**
      * @param Node\Expr\StaticCall $node
+     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
