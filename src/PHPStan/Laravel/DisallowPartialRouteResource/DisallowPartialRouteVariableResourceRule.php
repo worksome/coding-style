@@ -2,7 +2,9 @@
 
 namespace Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource;
 
+use Illuminate\Support\Facades\Route;
 use PhpParser\Node;
+use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 
@@ -26,6 +28,37 @@ class DisallowPartialRouteVariableResourceRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        return $this->inspector->inspect($node, $scope);
+        if (! $this->inspector->isApplicable($node)) {
+            return [];
+        }
+
+        if (! $this->isCalledInRouteGroupClosure($node, $scope)) {
+            return [];
+        }
+
+        return $this->inspector->inspect($node);
+    }
+
+    private function isCalledInRouteGroupClosure(Node\Expr\CallLike $node, Scope $scope): bool
+    {
+        if (! $node instanceof MethodCall) {
+            return false;
+        }
+
+        if (! $scope->isInAnonymousFunction()) {
+            return false;
+        }
+
+        $parent = $node->getAttribute('parent');
+
+        while ($parent !== null) {
+            if ($parent instanceof Node\Expr\StaticCall) {
+                return $parent->class->toString() === Route::class;
+            }
+
+            $parent = $parent->getAttribute('parent');
+        }
+
+        return false;
     }
 }
