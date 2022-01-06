@@ -43,13 +43,8 @@ This section will list all the custom phpstan rules this package adds.
 ### Generic
 Rules that are applied to all projects.
 
-#### NamespaceBasedSuffix (configurable)
-
-### Laravel
-Rules that are only applied in a Laravel context.
-
-#### DisallowAppHelperUsage
-This rule disallows the usage of laravel's `app` helper function in favour of using dependency injection instead.
+#### DeclareStrictTypes
+This rule is used to ensure that all PHP files include with the `declare(strict_types=1)` statement.
 
 #### NamespaceBasedSuffix
 Sets up configuration for suffixing the following namespaces
@@ -60,3 +55,16 @@ Sets up configuration for suffixing the following namespaces
 - `App\Jobs`: `Job`
 
 This makes sures events, listeners, policies and jobs has the same suffix.
+
+### Laravel
+Rules that are only applied in a Laravel context.
+
+#### DisallowAppHelperUsage
+This rule disallows the usage of laravel's `app` helper function in favour of using dependency injection instead.
+
+#### DisallowPartialRouteFacadeResource
+This rule disallows the usage of the `Route::resource` method when combined with `only` or `except`. Instead, 
+partial route resources should be split into multiple routes.
+
+#### DisallowPartialRouteFacadeResource
+Similar to `DisallowPartialRouteFacadeResource`, but prevents partial resource usage when used in a route group.
