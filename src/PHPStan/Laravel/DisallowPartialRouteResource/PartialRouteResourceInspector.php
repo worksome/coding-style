@@ -30,6 +30,14 @@ final class PartialRouteResourceInspector
             return false;
         }
 
+        if (! property_exists($node, 'name')) {
+            return false;
+        }
+
+        if (! property_exists($node->name, 'name')) {
+            return false;
+        }
+
         if (! in_array($node->name->name, $this->resourceMethods)) {
             return false;
         }
