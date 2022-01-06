@@ -14,3 +14,5 @@ rules:
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
 services:
+    -
+        class: Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\PartialRouteResourceInspector
