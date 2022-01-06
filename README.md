@@ -62,6 +62,9 @@ Rules that are only applied in a Laravel context.
 #### DisallowAppHelperUsage
 This rule disallows the usage of laravel's `app` helper function in favour of using dependency injection instead.
 
-#### DisallowPartialRouteResource
+#### DisallowPartialRouteFacadeResource
 This rule disallows the usage of the `Route::resource` method when combined with `only` or `except`. Instead, 
 partial route resources should be split into multiple routes.
+
+#### DisallowPartialRouteFacadeResource
+Similar to `DisallowPartialRouteFacadeResource`, but prevents partial resource usage when used in a route group.
