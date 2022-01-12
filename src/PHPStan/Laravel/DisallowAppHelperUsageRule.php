@@ -13,7 +13,10 @@ use PHPStan\Rules\RuleErrorBuilder;
  */
 class DisallowAppHelperUsageRule implements Rule
 {
-    const FUNCTION_NAME = 'app';
+    private array $forbiddenFunctions = [
+        'app',
+        'resolve',
+    ];
 
     public function getNodeType(): string
     {
@@ -33,13 +36,13 @@ class DisallowAppHelperUsageRule implements Rule
 
         $functionName = $nodeName->toString();
 
-        if ($functionName !== self::FUNCTION_NAME) {
+        if (! in_array($functionName, $this->forbiddenFunctions)) {
             return [];
         }
 
         return [
             RuleErrorBuilder::message(
-                "Usage of app helper is disallowed. Use dependency injection instead."
+                "Usage of {$functionName} helper is disallowed. Use dependency injection instead."
             )->build(),
         ];
     }
