@@ -68,3 +68,6 @@ partial route resources should be split into multiple routes.
 
 #### DisallowPartialRouteFacadeResource
 Similar to `DisallowPartialRouteFacadeResource`, but prevents partial resource usage when used in a route group.
+
+#### DisallowPHPUnit
+This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `TestCase` classes.
