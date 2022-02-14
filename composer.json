@@ -35,5 +35,11 @@
     ],
     "extra": {
         "class": "Worksome\\CodingStyle\\Plugin"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "pestphp/pest-plugin": true
+        }
     }
 }
