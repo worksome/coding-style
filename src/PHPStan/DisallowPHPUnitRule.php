@@ -31,6 +31,10 @@ final class DisallowPHPUnitRule implements Rule
             return [];
         }
 
+        if ($node->namespacedName === null) {
+            return [];
+        }
+
         if (! is_subclass_of($node->namespacedName->toString(), TestCase::class)) {
             return [];
         }
