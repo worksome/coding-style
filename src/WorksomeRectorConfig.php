@@ -34,6 +34,7 @@ class WorksomeRectorConfig
         // SetList::PHP_80,
 
         $containerConfigurator->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
+        $containerConfigurator->import(WorksomeSetList::GENERIC_CODE_QUALITY);
 
         // get services (needed for register a single rule)
         $services = $containerConfigurator->services();
