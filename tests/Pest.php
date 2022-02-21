@@ -12,8 +12,10 @@
 */
 
 use Worksome\CodingStyle\Tests\PHPStan\BaseRuleTestCase;
+use Worksome\CodingStyle\Tests\Rector\BaseRectorTestCase;
 
 uses(BaseRuleTestCase::class)->in('PHPStan');
+uses(BaseRectorTestCase::class)->in('Rector');
 
 /*
 |--------------------------------------------------------------------------
