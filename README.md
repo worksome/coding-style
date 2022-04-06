@@ -71,3 +71,6 @@ Similar to `DisallowPartialRouteFacadeResource`, but prevents partial resource u
 
 #### DisallowPHPUnit
 This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `TestCase` classes.
+
+#### EnforceKebabCaseArtisanCommandsRule
+This rule will enforce the use of kebab-case for Artisan commands.
