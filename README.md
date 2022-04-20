@@ -3,7 +3,7 @@
 # Worksomes Coding Style
 This repository contains the coding style followed by Worksome.
 
-It includes configuration for `phpcs`, `phpstan` and `rector`.
+It includes configuration for `php-cs-fixer`, `phpcs`, `phpstan` and `rector`.
 
 ## Setup
 Install this composer package
@@ -21,6 +21,8 @@ Add the following section to your `composer.json` file
 ```json
 "scripts": {
     "phpcs": "vendor/bin/phpcs",
+    "php-cs-fixer": "vendor/bin/php-cs-fixer fix --ansi",
+    "php-cs-fixer-ci": "vendor/bin/php-cs-fixer fix --dry-run --ansi",
     "phpcbf": "vendor/bin/phpcbf",
     "phpstan": "vendor/bin/phpstan analyse",
     "rector-ci": "vendor/bin/rector process --dry-run --ansi",
@@ -33,6 +35,7 @@ Add the following section to your `composer.json` file
 For using it simply run one of the scripts added to composer.
 ```
 $ composer phpcs
+$ composer php-cs-fixer
 $ composer phpstan
 $ composer rector-ci
 ```

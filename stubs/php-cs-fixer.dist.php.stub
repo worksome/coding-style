@@ -1,0 +1,17 @@
+<?php
+
+use PhpCsFixer\Finder;
+use Worksome\CodingStyle\PhpCsFixerConfig;
+
+require __DIR__.'/vendor/autoload.php';
+
+$finder = Finder::create()
+    ->in(__DIR__);
+
+return PhpCsFixerConfig::make()
+    ->setFinder($finder)
+    ->setRules([
+        '@worksome' => true,
+        '@worksome:risky' => true,
+    ])
+    ->setRiskyAllowed(true);
