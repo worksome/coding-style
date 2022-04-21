@@ -21,7 +21,7 @@ class PhpCsFixerConfig extends Config
         parent::__construct('Worksome');
     }
 
-    public function make(): self
+    public static function make(): self
     {
         return new self();
     }
