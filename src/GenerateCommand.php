@@ -18,7 +18,7 @@ class GenerateCommand extends BaseCommand
         $output->writeln("Worksome's Coding style has 3 stub files (phpcs, phpstan and rector)");
 
         $files = [
-            'php-cs-fixer.dist.php' => __DIR__ . '/../stubs/php-cs-fixer.dist.php.stub',
+            '.php-cs-fixer.dist.php' => __DIR__ . '/../stubs/php-cs-fixer.dist.php.stub',
             'phpcs.xml' => __DIR__ . '/../stubs/phpcs.xml.stub',
             'phpstan.neon' => __DIR__ . '/../stubs/phpstan.neon.stub',
             'rector.php' => __DIR__ . '/../stubs/rector.php.stub',
@@ -46,5 +46,7 @@ class GenerateCommand extends BaseCommand
                 "rector" => "vendor/bin/rector process --ansi",
             ]
         ]);
+
+        return 0;
     }
 }
