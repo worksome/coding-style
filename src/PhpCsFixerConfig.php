@@ -12,6 +12,7 @@ class PhpCsFixerConfig extends Config
             'phpdoc_align' => [
                 'align' => 'vertical',
             ],
+            'phpdoc_separation' => true,
         ],
         '@worksome:risky' => [
             // ...
