@@ -9,7 +9,9 @@ class PhpCsFixerConfig extends Config
 {
     const RULE_DEFINITIONS = [
         '@worksome' => [
-            'align_multiline_comment' => [],
+            'phpdoc_align' => [
+                'align' => 'vertical',
+            ],
         ],
         '@worksome:risky' => [
             // ...
