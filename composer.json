@@ -5,18 +5,19 @@
     "require": {
         "PHP": "^8.0",
         "composer-plugin-api": "^2.0",
-        "worksome/code-sniffer": "^0.8.0",
-        "nunomaduro/larastan": "^1.0 || ^2.0",
-        "rector/rector": "^0.12.0",
+        "canvural/larastan-strict-rules": "^1.0",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "jetbrains/phpstorm-attributes": "^1.0",
+        "nunomaduro/larastan": "^1.0 || ^2.0",
         "phpstan/phpstan-mockery": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3.8"
+        "rector/rector": "^0.12.0",
+        "worksome/code-sniffer": "^0.8.0"
     },
     "require-dev": {
         "composer/composer": "^2.0",
         "pestphp/pest": "^1.21",
-        "spatie/ray": "^1.32",
-        "spatie/invade": "^1.0"
+        "spatie/invade": "^1.0",
+        "spatie/ray": "^1.32"
     },
     "autoload": {
         "psr-4": {
@@ -42,6 +43,7 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "pestphp/pest-plugin": true
-        }
+        },
+        "sort-packages": true
     }
 }
