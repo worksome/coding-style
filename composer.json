@@ -46,5 +46,13 @@
             "pestphp/pest-plugin": true
         },
         "sort-packages": true
+    },
+    "scripts": {
+        "test:phpstan": "pest --testsuite phpstan",
+        "test:rector": "pest --testsuite rector",
+        "test": [
+            "@test:phpstan",
+            "@test:rector"
+        ]
     }
 }
