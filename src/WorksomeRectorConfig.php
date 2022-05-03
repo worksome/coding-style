@@ -3,11 +3,12 @@
 namespace Worksome\CodingStyle;
 
 use Rector\Config\RectorConfig;
-use Rector\Core\Configuration\Option;
+use Rector\DeadCode\Rector\ClassMethod\RemoveDeadConstructorRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDelegatingParentCallRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
+use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
@@ -41,8 +42,8 @@ class WorksomeRectorConfig
         $rectorConfig->rule(RemoveUnusedVariableInCatchRector::class);
 
         // DEAD CODE set rules
-        $rectorConfig->rule(\Rector\DeadCode\Rector\FunctionLike\RemoveCodeAfterReturnRector::class);
-        $rectorConfig->rule(\Rector\DeadCode\Rector\ClassMethod\RemoveDeadConstructorRector::class);
+        $rectorConfig->rule(RemoveUnreachableStatementRector::class);
+        $rectorConfig->rule(RemoveDeadConstructorRector::class);
         $rectorConfig->rule(RemoveDelegatingParentCallRector::class);
         $rectorConfig->rule(RemoveUselessParamTagRector::class);
         $rectorConfig->rule(RemoveUselessReturnTagRector::class);
