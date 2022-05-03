@@ -13,4 +13,11 @@ class BaseRuleTestCase extends RuleTestCase
     {
         return $this->rule;
     }
+
+    public static function getAdditionalConfigFiles() : array
+    {
+        return array_merge(parent::getAdditionalConfigFiles(), [
+            __DIR__ . '/../../phpstan-rich-parser.neon',
+        ]);
+    }
 }

@@ -17,7 +17,8 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Remove attributes which are not allowed.', [
+            'Remove attributes which are not allowed.',
+            [
                 new CodeSample(
                     <<<PHP
                     #[NotAllowed]
@@ -52,6 +53,6 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
                 }
             }
             return false;
-        })->whenEmpty(fn() => $this->removeNode($node));
+        })->whenEmpty(fn () => $this->removeNode($node));
     }
 }

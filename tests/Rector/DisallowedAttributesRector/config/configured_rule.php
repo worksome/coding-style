@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 use Worksome\CodingStyle\Rector\Generic\DisallowedAttributesRector;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->set(DisallowedAttributesRector::class)
-        ->configure([
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig
+        ->ruleWithConfiguration(DisallowedAttributesRector::class, [
             JetBrains\PhpStorm\Pure::class,
         ]);
 };

@@ -2,31 +2,22 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 use Worksome\CodingStyle\WorksomeRectorConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    WorksomeRectorConfig::setup($containerConfigurator);
+return static function (RectorConfig $rectorConfig): void {
+    WorksomeRectorConfig::setup($rectorConfig);
 
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-
-    $parameters->set(Option::PATHS, [
+    $rectorConfig->paths([
         __DIR__ . '/app',
         __DIR__ . '/tests',
     ]);
 
-    $parameters->set(Option::ENABLE_CACHE, true);
-
     // Define extra rule sets to be applied
-    $parameters->set(Option::SETS, [
+    $rectorConfig->sets([
         // SetList::DEAD_CODE,
     ]);
 
-    // get services (needed for register a single rule)
-    $services = $containerConfigurator->services();
-
-    // register extra a single rules
-    // $services->set(ClassOnObjectRector::class);
+    // Register extra a single rules
+    // $rectorConfig->rule(ClassOnObjectRector::class);
 };

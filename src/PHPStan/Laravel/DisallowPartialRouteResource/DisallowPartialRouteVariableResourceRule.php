@@ -7,6 +7,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 
 /**
  * @implements Rule<Node\Expr\MethodCall>
@@ -49,14 +50,14 @@ class DisallowPartialRouteVariableResourceRule implements Rule
             return false;
         }
 
-        $parent = $node->getAttribute('parent');
+        $parent = $node->getAttribute(AttributeKey::PARENT_NODE);
 
         while ($parent !== null) {
             if ($parent instanceof Node\Expr\StaticCall) {
                 return $parent->class->toString() === Route::class;
             }
 
-            $parent = $parent->getAttribute('parent');
+            $parent = $parent->getAttribute(AttributeKey::PARENT_NODE);
         }
 
         return false;
