@@ -11,7 +11,7 @@
         "nunomaduro/larastan": "^1.0 || ^2.0",
         "phpstan/phpstan": "^1.6.2",
         "phpstan/phpstan-mockery": "^1.0",
-        "rector/rector": "^0.12.23",
+        "rector/rector": "^0.13.3",
         "worksome/code-sniffer": "^0.8.0"
     },
     "require-dev": {
