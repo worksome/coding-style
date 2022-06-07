@@ -13,6 +13,14 @@ class PhpCsFixerConfig extends Config
                 'align' => 'vertical',
             ],
             'phpdoc_separation' => true,
+            'ordered_imports' => [
+                'imports_order' => [
+                    'class',
+                    'function',
+                    'const',
+                ],
+                'sort_algorithm' => 'alpha',
+            ],
         ],
         '@worksome:risky' => [
             // ...
