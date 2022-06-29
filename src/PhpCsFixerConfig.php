@@ -21,6 +21,9 @@ class PhpCsFixerConfig extends Config
                 ],
                 'sort_algorithm' => 'alpha',
             ],
+            'operator_linebreak' => [
+                'only_booleans' => true,
+            ],
         ],
         '@worksome:risky' => [
             // ...
