@@ -12,7 +12,7 @@
         "phpstan/phpstan": "^1.6.2",
         "phpstan/phpstan-mockery": "^1.0",
         "rector/rector": "^0.13.3",
-        "worksome/code-sniffer": "^0.9.2"
+        "worksome/code-sniffer": "dev-JIRA-6316_add-rule-to-disallow-todos"
     },
     "require-dev": {
         "composer/composer": "^2.0",
