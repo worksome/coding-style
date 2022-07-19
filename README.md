@@ -77,3 +77,9 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 
 #### EnforceKebabCaseArtisanCommandsRule
 This rule will enforce the use of kebab-case for Artisan commands.
+
+## Credits
+
+- [Worksome](https://github.com/worksome)
+- [Kuba Werłos](https://github.com/kubawerlos) for the initial code for [`SpaceInGenericsFixer`](./src/PhpCsFixer/SpaceInGenericsFixer.php)
+- [All Contributors](../../contributors)

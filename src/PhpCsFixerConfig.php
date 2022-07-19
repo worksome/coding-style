@@ -7,7 +7,7 @@ use PhpCsFixer\ConfigInterface;
 
 class PhpCsFixerConfig extends Config
 {
-    const RULE_DEFINITIONS = [
+    public const RULE_DEFINITIONS = [
         '@worksome' => [
             'phpdoc_align' => [
                 'align' => 'vertical',
@@ -24,15 +24,22 @@ class PhpCsFixerConfig extends Config
             'operator_linebreak' => [
                 'only_booleans' => true,
             ],
+            'Worksome/space_in_generics' => true,
         ],
         '@worksome:risky' => [
             // ...
         ],
     ];
 
+    public const CUSTOM_FIXERS = [
+        PhpCsFixer\SpaceInGenericsFixer::class,
+    ];
+
     public function __construct()
     {
         parent::__construct('Worksome');
+
+        $this->registerCustomFixers(self::CUSTOM_FIXERS);
     }
 
     public static function make(): self

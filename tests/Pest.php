@@ -11,9 +11,11 @@
 |
 */
 
+use Worksome\CodingStyle\Tests\PhpCsFixer\BasePhpCsFixerTestCase;
 use Worksome\CodingStyle\Tests\PHPStan\BaseRuleTestCase;
 use Worksome\CodingStyle\Tests\Rector\BaseRectorTestCase;
 
+uses(BasePhpCsFixerTestCase::class)->in('PhpCsFixer');
 uses(BaseRuleTestCase::class)->in('PHPStan');
 uses(BaseRectorTestCase::class)->in('Rector');
 
