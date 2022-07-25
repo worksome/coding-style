@@ -2,8 +2,10 @@
 
 namespace Worksome\CodingStyle;
 
+use Generator;
 use PhpCsFixer\Config;
 use PhpCsFixer\ConfigInterface;
+use PhpCsFixer\Fixer\FixerInterface;
 
 class PhpCsFixerConfig extends Config
 {
@@ -39,7 +41,7 @@ class PhpCsFixerConfig extends Config
     {
         parent::__construct('Worksome');
 
-        $this->registerCustomFixers(self::CUSTOM_FIXERS);
+        $this->registerCustomFixers($this->fixers());
     }
 
     public static function make(): self
@@ -57,5 +59,15 @@ class PhpCsFixerConfig extends Config
         }
 
         return parent::setRules($rules);
+    }
+
+    protected function fixers(): Generator
+    {
+        foreach (self::CUSTOM_FIXERS as $className) {
+            $fixer = new $className();
+            assert($fixer instanceof FixerInterface);
+
+            yield $fixer;
+        }
     }
 }
