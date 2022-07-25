@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         bootstrap="tests/bootstrap.php"
         colors="true"
 >
     <testsuites>
+        <testsuite name="phpcsfixer">
+            <directory>tests/PhpCsFixer</directory>
+        </testsuite>
         <testsuite name="phpstan">
             <directory>tests/PHPStan</directory>
         </testsuite>
