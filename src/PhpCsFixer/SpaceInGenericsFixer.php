@@ -76,7 +76,7 @@ class SpaceInGenericsFixer implements FixerInterface
 
     public function getName(): string
     {
-        return 'space_in_generics';
+        return 'Worksome/space_in_generics';
     }
 
     public function getPriority(): int
