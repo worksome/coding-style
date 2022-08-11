@@ -34,21 +34,46 @@ services:
         class: Vural\LarastanStrictRules\Rules\NoPropertyAccessorRule
         tags:
             - phpstan.rules.rule
-#    -
-#        class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
-#        arguments:
-#            allowedFunctions:
-#                - collect
-#                - data_get
-#                - now
-#                - optional
-#                - tap
-#                - throw_if
-#                - throw_unless
-#                - value
-#                - with
-#        tags:
-#            - phpstan.rules.rule
+    -
+        class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
+        arguments:
+            allowedFunctions:
+                - class_basename
+                - class_uses_recursive
+                - e
+                - env
+                - object_get
+                - preg_replace_array
+                - retry
+                - str
+                - tap
+                - throw_if
+                - throw_unless
+                - trait_uses_recursive
+                - with
+                - collect
+                - data_fill
+                - data_get
+                - data_set
+                - value
+                - config
+                - fake
+                - method_field
+                - now
+                - old
+                - redirect
+                - response
+                - route
+                - trans
+                - trans_choice
+                - __
+                - view
+                - url
+                - secure_url
+                - asset
+                - secure_asset
+        tags:
+            - phpstan.rules.rule
 #    -
 #        class: Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule
 #        tags:
