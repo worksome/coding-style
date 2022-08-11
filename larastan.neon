@@ -69,6 +69,9 @@ services:
                 - __
                 - view
                 - url
+                - secure_url
+                - asset
+                - secure_asset
         tags:
             - phpstan.rules.rule
 #    -
