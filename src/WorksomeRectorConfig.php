@@ -3,7 +3,6 @@
 namespace Worksome\CodingStyle;
 
 use Rector\Config\RectorConfig;
-use Rector\DeadCode\Rector\ClassMethod\RemoveDeadConstructorRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDelegatingParentCallRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
@@ -43,7 +42,6 @@ class WorksomeRectorConfig
 
         // DEAD CODE set rules
         $rectorConfig->rule(RemoveUnreachableStatementRector::class);
-        $rectorConfig->rule(RemoveDeadConstructorRector::class);
         $rectorConfig->rule(RemoveDelegatingParentCallRector::class);
         $rectorConfig->rule(RemoveUselessParamTagRector::class);
         $rectorConfig->rule(RemoveUselessReturnTagRector::class);
