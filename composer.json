@@ -3,7 +3,7 @@
     "description": "Worksomes coding style",
     "type": "composer-plugin",
     "require": {
-        "PHP": "^8.0",
+        "PHP": "^8.1",
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^1.0 || ^2.0",
         "friendsofphp/php-cs-fixer": "^3.8",

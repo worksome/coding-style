@@ -182,10 +182,11 @@ class WorksomeEcsConfig
 
     public static function skips(array $additional = []): array
     {
-        return array_merge([
+        return [
             FunctionDeclarationFixer::class,
             BinaryOperatorSpacesFixer::class,
             UnaryOperatorSpacesFixer::class,
-        ], $additional);
+            ...$additional,
+        ];
     }
 }
