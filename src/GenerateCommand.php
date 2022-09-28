@@ -15,11 +15,10 @@ class GenerateCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("Worksome's Coding style has 3 stub files (phpcs, phpstan and rector)");
+        $output->writeln("Worksome's Coding style has 3 stub files (ecs, phpstan and rector)");
 
         $files = [
-            '.php-cs-fixer.dist.php' => __DIR__ . '/../stubs/php-cs-fixer.dist.php.stub',
-            'phpcs.xml' => __DIR__ . '/../stubs/phpcs.xml.stub',
+            'ecs.php' => __DIR__ . '/../stubs/ecs.php.stub',
             'phpstan.neon' => __DIR__ . '/../stubs/phpstan.neon.stub',
             'rector.php' => __DIR__ . '/../stubs/rector.php.stub',
         ];
@@ -35,15 +34,13 @@ class GenerateCommand extends BaseCommand
             $output->writeln("Generated $newFile.");
         }
 
-        $this->getComposer()->getConfig()->merge([
+        $this->tryComposer()->getConfig()->merge([
             'scripts' => [
-                "phpcs" => "vendor/bin/phpcs",
-                "php-cs-fixer" => "vendor/bin/php-cs-fixer fix --ansi",
-                "php-cs-fixer-ci" => "vendor/bin/php-cs-fixer fix --dry-run --ansi",
-                "phpcbf" => "vendor/bin/phpcbf",
+                "ecs" => "vendor/bin/ecs",
+                "ecs:fix" => "vendor/bin/ecs --fix",
                 "phpstan" => "vendor/bin/phpstan analyse",
-                "rector-ci" => "vendor/bin/rector process --dry-run --ansi",
-                "rector" => "vendor/bin/rector process --ansi",
+                "rector" => "vendor/bin/rector process --dry-run --ansi",
+                "rector:fix" => "vendor/bin/rector process --ansi",
             ]
         ]);
 

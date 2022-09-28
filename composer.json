@@ -12,6 +12,7 @@
         "phpstan/phpstan": "^1.6",
         "phpstan/phpstan-mockery": "^1.0",
         "rector/rector": "^0.14",
+        "symplify/easy-coding-standard": "^11.1",
         "worksome/code-sniffer": "^1.0"
     },
     "require-dev": {
