@@ -76,11 +76,7 @@ class WorksomeEcsConfig
             SetList::PSR_12,
         ]);
 
-        $ecsConfig->skip([
-            FunctionDeclarationFixer::class,
-            BinaryOperatorSpacesFixer::class,
-            UnaryOperatorSpacesFixer::class,
-        ]);
+        $ecsConfig->skip(self::skips());
 
         $ecsConfig->ruleWithConfiguration(RequireMultiLineTernaryOperatorSniff::class, [
             'lineLengthLimit' => 120,
@@ -182,5 +178,14 @@ class WorksomeEcsConfig
             DisallowParamNoTypeOrCommentSniff::class,
             PropertyDollarSignSniff::class,
         ]);
+    }
+
+    public static function skips(array $additional = []): array
+    {
+        return array_merge([
+            FunctionDeclarationFixer::class,
+            BinaryOperatorSpacesFixer::class,
+            UnaryOperatorSpacesFixer::class,
+        ], $additional);
     }
 }
