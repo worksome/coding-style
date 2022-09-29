@@ -57,16 +57,16 @@ use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
-use Worksome\WorksomeSniff\Sniffs\Classes\ExceptionSuffixSniff;
-use Worksome\WorksomeSniff\Sniffs\Comments\DisallowTodoCommentsSniff;
-use Worksome\WorksomeSniff\Sniffs\Functions\DisallowCompactUsageSniff;
-use Worksome\WorksomeSniff\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
-use Worksome\WorksomeSniff\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
-use Worksome\WorksomeSniff\Sniffs\Laravel\DisallowEnvUsageSniff;
-use Worksome\WorksomeSniff\Sniffs\Laravel\DisallowHasFactorySniff;
-use Worksome\WorksomeSniff\Sniffs\Laravel\EventListenerSuffixSniff;
-use Worksome\WorksomeSniff\Sniffs\PhpDoc\DisallowParamNoTypeOrCommentSniff;
-use Worksome\WorksomeSniff\Sniffs\PhpDoc\PropertyDollarSignSniff;
+use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
+use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
+use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
+use Worksome\CodingStyle\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
+use Worksome\CodingStyle\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
+use Worksome\CodingStyle\Sniffs\Laravel\DisallowEnvUsageSniff;
+use Worksome\CodingStyle\Sniffs\Laravel\DisallowHasFactorySniff;
+use Worksome\CodingStyle\Sniffs\Laravel\EventListenerSuffixSniff;
+use Worksome\CodingStyle\Sniffs\PhpDoc\DisallowParamNoTypeOrCommentSniff;
+use Worksome\CodingStyle\Sniffs\PhpDoc\PropertyDollarSignSniff;
 
 class WorksomeEcsConfig
 {

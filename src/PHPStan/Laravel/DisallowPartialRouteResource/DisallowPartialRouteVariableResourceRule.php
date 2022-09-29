@@ -25,6 +25,7 @@ class DisallowPartialRouteVariableResourceRule implements Rule
 
     /**
      * @param Node\Expr\MethodCall $node
+     *
      * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array

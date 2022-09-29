@@ -13,7 +13,9 @@
         "phpstan/phpstan-mockery": "^1.0",
         "rector/rector": "^0.14",
         "symplify/easy-coding-standard": "^11.1",
-        "worksome/code-sniffer": "^1.0"
+        "squizlabs/php_codesniffer": "^3.6.1",
+        "slevomat/coding-standard": "^8.5",
+        "thecodingmachine/safe": "^2.0"
     },
     "require-dev": {
         "composer/composer": "^2.0",
@@ -51,9 +53,13 @@
     "scripts": {
         "test:phpstan": "pest --testsuite phpstan",
         "test:rector": "pest --testsuite rector",
+        "test:phpcsfixer": "pest --testsuite phpcsfixer",
+        "test:phpcs": "pest --testsuite phpcs",
         "test": [
             "@test:phpstan",
-            "@test:rector"
+            "@test:rector",
+            "@test:phpcsfixer",
+            "@test:phpcs"
         ]
     }
 }

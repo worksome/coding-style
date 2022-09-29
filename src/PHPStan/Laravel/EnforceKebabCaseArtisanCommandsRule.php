@@ -4,14 +4,12 @@ namespace Worksome\CodingStyle\PHPStan\Laravel;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\Parser;
+use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Property;
-use PhpParser\Node;
 use PHPStan\Analyser\Scope;
-use PHPStan\Node\ClassPropertyNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\ShouldNotHappenException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -40,7 +38,7 @@ class EnforceKebabCaseArtisanCommandsRule implements Rule
 
         $className = $node->namespacedName->toString();
 
-        if (! $node->extends || !str_contains($node->extends->toString(), Command::class)) {
+        if (! $node->extends || ! str_contains($node->extends->toString(), Command::class)) {
             return [];
         }
 
@@ -80,7 +78,7 @@ class EnforceKebabCaseArtisanCommandsRule implements Rule
 
     public function getCommandNameErrors(string $segment, string $className, Property $signature, array $errors): array
     {
-        if (!preg_match('/^[a-z0-9\-:]+$/', $segment)) {
+        if (! preg_match('/^[a-z0-9\-:]+$/', $segment)) {
             $errors[] = RuleErrorBuilder::message(
                 "Command \"{$className}\" is not using kebab-case for the command name in its signature."
             )->line($signature->getLine())->build();
@@ -89,19 +87,23 @@ class EnforceKebabCaseArtisanCommandsRule implements Rule
         return $errors;
     }
 
-    public function getOptionOrArgumentErrors(array $segment, string $className, Property $signature, array $errors): array
-    {
+    public function getOptionOrArgumentErrors(
+        array $segment,
+        string $className,
+        Property $signature,
+        array $errors,
+    ): array {
         foreach ($segment as $optionOrArgument) {
             $isArgument = $optionOrArgument instanceof InputArgument;
             $isOption = $optionOrArgument instanceof InputOption;
 
-            if (!$isArgument && !$isOption) {
+            if (! $isArgument && ! $isOption) {
                 continue;
             }
 
             $type = $isArgument ? 'argument' : 'option';
 
-            if (!preg_match('/^[a-z0-9\-]+$/', $optionOrArgument->getName())) {
+            if (! preg_match('/^[a-z0-9\-]+$/', $optionOrArgument->getName())) {
                 $errors[] = RuleErrorBuilder::message(
                     "Command \"{$className}\" is not using kebab-case for the \"{$optionOrArgument->getName()}\" {$type} in its signature."
                 )->line($signature->getLine())->build();
