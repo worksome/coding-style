@@ -15,5 +15,8 @@
         <testsuite name="rector">
             <directory>tests/Rector</directory>
         </testsuite>
+        <testsuite name="phpcs">
+            <directory>tests/Sniffs</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

@@ -35,7 +35,7 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
         return [Node\AttributeGroup::class];
     }
 
-    public function configure(array $configuration) : void
+    public function configure(array $configuration): void
     {
         $this->disallowedAttributes = $configuration;
     }

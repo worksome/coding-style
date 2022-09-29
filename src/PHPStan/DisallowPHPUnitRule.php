@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Worksome\CodingStyle\PHPStan;
 
 use PhpParser\Node;
+use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PhpParser\Node\Stmt\Class_;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class DisallowPHPUnitRule implements Rule
 {
-
     public function getNodeType(): string
     {
         return Class_::class;
@@ -45,5 +44,4 @@ final class DisallowPHPUnitRule implements Rule
             )->build()
         ];
     }
-
 }

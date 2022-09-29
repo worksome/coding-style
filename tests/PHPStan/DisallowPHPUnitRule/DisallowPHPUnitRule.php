@@ -2,7 +2,6 @@
 
 namespace Worksome\CodingStyle\Tests\PHPStan\DeclareStrictTypesRule;
 
-use Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule;
 use Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule;
 
 it('checks for declaration of strict types', function (string $path, array ...$errors) {

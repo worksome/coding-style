@@ -18,7 +18,8 @@ class NamespaceBasedSuffixRule implements Rule
      */
     public function __construct(
         private array $namespaceAndSuffix,
-    ) {}
+    ) {
+    }
 
     public function getNodeType(): string
     {

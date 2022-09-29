@@ -25,6 +25,7 @@ class DisallowPartialRouteFacadeResourceRule implements Rule
 
     /**
      * @param Node\Expr\StaticCall $node
+     *
      * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
