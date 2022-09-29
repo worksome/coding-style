@@ -3,7 +3,7 @@
 # Worksomes Coding Style
 This repository contains the coding style followed by Worksome.
 
-It includes configuration for `php-cs-fixer`, `phpcs`, `phpstan` and `rector`.
+It includes configuration for `ecs`,, `phpstan` and `rector`.
 
 ## Setup
 Install this composer package
@@ -20,13 +20,11 @@ composer generate-coding-style-stubs
 Add the following section to your `composer.json` file
 ```json
 "scripts": {
-    "phpcs": "vendor/bin/phpcs",
-    "php-cs-fixer": "vendor/bin/php-cs-fixer fix --ansi",
-    "php-cs-fixer-ci": "vendor/bin/php-cs-fixer fix --dry-run --ansi",
-    "phpcbf": "vendor/bin/phpcbf",
+    "ecs": "vendor/bin/ecs",
+    "ecs:fix": "vendor/bin/ecs --fix",
     "phpstan": "vendor/bin/phpstan analyse",
-    "rector-ci": "vendor/bin/rector process --dry-run --ansi",
-    "rector": "vendor/bin/rector process --ansi"
+    "rector": "vendor/bin/rector process --dry-run --ansi",
+    "rector:fix": "vendor/bin/rector process --ansi"
 },
 ```
 
@@ -34,10 +32,11 @@ Add the following section to your `composer.json` file
 
 For using it simply run one of the scripts added to composer.
 ```
-$ composer phpcs
-$ composer php-cs-fixer
+$ composer ecs
+$ composer ecs:fix
 $ composer phpstan
-$ composer rector-ci
+$ composer rector
+$ composer rector:fix
 ```
 
 ## Custom PhpStan rules
@@ -77,6 +76,60 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 
 #### EnforceKebabCaseArtisanCommandsRule
 This rule will enforce the use of kebab-case for Artisan commands.
+
+
+## Custom sniffs
+List all the custom sniffs created by Worksome.
+
+### Laravel
+All custom sniffs specific to Laravel.
+
+#### Config filename kebab case
+Checks if all config files are written in kebab case.
+
+#### Disallow env usage
+Makes sure that you don't use `env` helper in your code, except for config files.
+
+#### Event listener suffix
+Enforces event listeners to end with a specific suffix, this suffix is defaulted to `Listener`.
+
+| parameters | defaults |
+| --- | ---  |
+| suffix | Listener |
+
+#### Disallow blade outside of the `resources` directory
+Makes sure no `.blade.php` files exist outside of Laravel's `resources` directory.
+
+| parameters | defaults |
+| --- | ---  |
+| resourcesDirectory | {YOUR_PROJECT}/resources |
+
+### PhpDoc
+All custom sniffs which are not specific to Laravel.
+
+#### Property dollar sign
+Makes sure that you always have a dollar sign in your properties defined in phpdoc.
+```php
+/**
+* @property string $name
+ */
+class User {}
+```
+
+### Param tags with no type or comment
+This removes all `@param` tags which has no specified a type or comment
+```php
+/**
+ * @param string $name
+ * @param $type some random type
+ * @param $other // <-- will be removed
+ */
+public function someMethod($name, $type, $other): void
+{}
+```
+
+
+This is mainly because phpstan requires this before it sees the property as valid.
 
 ## Credits
 
