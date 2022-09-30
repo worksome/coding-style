@@ -9,6 +9,7 @@ parametersSchema:
 
 rules:
     - Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule
+    - Worksome\CodingStyle\PHPStan\DisallowTodoCommentsRule
 services:
     -
         class: Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule

@@ -1,6 +1,6 @@
 <?php
 
-namespace Worksome\CodingStyle\Tests\PHPStan\DeclareStrictTypesRule;
+namespace Worksome\CodingStyle\Tests\PHPStan\DisallowPHPUnitRule;
 
 use Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule;
 

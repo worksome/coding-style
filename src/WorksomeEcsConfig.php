@@ -58,7 +58,6 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
 use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
-use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
 use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
 use Worksome\CodingStyle\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
 use Worksome\CodingStyle\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
@@ -168,7 +167,6 @@ class WorksomeEcsConfig
             ClassMemberSpacingSniff::class,
             NoUnusedImportsFixer::class,
             ExceptionSuffixSniff::class,
-            DisallowTodoCommentsSniff::class,
             DisallowCompactUsageSniff::class,
             ConfigFilenameKebabCaseSniff::class,
             DisallowBladeOutsideOfResourcesDirectorySniff::class,
