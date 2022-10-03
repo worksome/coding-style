@@ -57,6 +57,7 @@ use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
+use Worksome\CodingStyle\Sniffs\Classes\ContractSuffixSniff;
 use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
 use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
 use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
@@ -177,6 +178,7 @@ class WorksomeEcsConfig
             EventListenerSuffixSniff::class,
             DisallowParamNoTypeOrCommentSniff::class,
             PropertyDollarSignSniff::class,
+            ContractSuffixSniff::class,
         ]);
     }
 
