@@ -27,34 +27,23 @@ class WorksomeRectorConfig
 
         $rectorConfig->phpstanConfig(getcwd() . '/phpstan.neon');
 
-        // Define what rule sets will be applied
-        // SetList::DEAD_CODE,
-        // SetList::PHP_80,
-
         $rectorConfig->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
         $rectorConfig->import(WorksomeSetList::GENERIC_CODE_QUALITY);
 
-        // Register a single rule
         $rectorConfig->rule(ClassOnObjectRector::class);
         $rectorConfig->rule(StrContainsRector::class);
         $rectorConfig->rule(StrStartsWithRector::class);
         $rectorConfig->rule(StrEndsWithRector::class);
         $rectorConfig->rule(RemoveUnusedVariableInCatchRector::class);
 
-        // DEAD CODE set rules
         $rectorConfig->rule(RemoveUnreachableStatementRector::class);
         $rectorConfig->rule(RemoveDelegatingParentCallRector::class);
         $rectorConfig->rule(RemoveUselessParamTagRector::class);
         $rectorConfig->rule(RemoveUselessReturnTagRector::class);
         $rectorConfig->rule(RemoveNonExistingVarAnnotationRector::class);
 
-        // PHP 8.0 set rules
         $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
 
-        // PHP 8.1 set rules
         $rectorConfig->rule(ReadOnlyPropertyRector::class);
-
-        // Naming set rules
-        // $rectorConfig->rule(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
     }
 }
