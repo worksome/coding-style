@@ -14,6 +14,7 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
@@ -26,31 +27,23 @@ class WorksomeRectorConfig
 
         $rectorConfig->phpstanConfig(getcwd() . '/phpstan.neon');
 
-        // Define what rule sets will be applied
-        // SetList::DEAD_CODE,
-        // SetList::PHP_80,
-
         $rectorConfig->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
         $rectorConfig->import(WorksomeSetList::GENERIC_CODE_QUALITY);
 
-        // Register a single rule
         $rectorConfig->rule(ClassOnObjectRector::class);
         $rectorConfig->rule(StrContainsRector::class);
         $rectorConfig->rule(StrStartsWithRector::class);
         $rectorConfig->rule(StrEndsWithRector::class);
         $rectorConfig->rule(RemoveUnusedVariableInCatchRector::class);
 
-        // DEAD CODE set rules
         $rectorConfig->rule(RemoveUnreachableStatementRector::class);
         $rectorConfig->rule(RemoveDelegatingParentCallRector::class);
         $rectorConfig->rule(RemoveUselessParamTagRector::class);
         $rectorConfig->rule(RemoveUselessReturnTagRector::class);
         $rectorConfig->rule(RemoveNonExistingVarAnnotationRector::class);
 
-        // PHP 8.0 set rules
         $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
 
-        // Naming set rules
-        // $rectorConfig->rule(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
+        $rectorConfig->rule(ReadOnlyPropertyRector::class);
     }
 }
