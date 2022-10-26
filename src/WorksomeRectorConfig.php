@@ -15,6 +15,7 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
+use Rector\Php81\Rector\FunctionLike\IntersectionTypesRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Worksome\CodingStyle\Rector\WorksomeSetList;
 
@@ -48,5 +49,6 @@ class WorksomeRectorConfig
         $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
 
         $rectorConfig->rule(ReadOnlyPropertyRector::class);
+        $rectorConfig->rule(IntersectionTypesRector::class);
     }
 }
