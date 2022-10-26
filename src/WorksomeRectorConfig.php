@@ -8,6 +8,7 @@ use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
 use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
+use Rector\Php74\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
@@ -41,6 +42,8 @@ class WorksomeRectorConfig
         $rectorConfig->rule(RemoveUselessParamTagRector::class);
         $rectorConfig->rule(RemoveUselessReturnTagRector::class);
         $rectorConfig->rule(RemoveNonExistingVarAnnotationRector::class);
+
+        $rectorConfig->rule(ArraySpreadInsteadOfArrayMergeRector::class);
 
         $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
 
