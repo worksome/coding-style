@@ -60,6 +60,7 @@ use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
 use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
 use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
+use Worksome\CodingStyle\Sniffs\Enums\PascalCasingEnumCasesSniff;
 use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
 use Worksome\CodingStyle\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
 use Worksome\CodingStyle\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
@@ -128,6 +129,12 @@ class WorksomeEcsConfig
             LineLengthFixer::INLINE_SHORT_LINES => false,
         ]);
 
+        $ecsConfig->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, [
+            'operators' => [
+                '=>' => null,
+            ],
+        ]);
+
         $ecsConfig->rules([
             RequireMultiLineConditionSniff::class,
             RequireShortTernaryOperatorSniff::class,
@@ -179,6 +186,7 @@ class WorksomeEcsConfig
             DisallowParamNoTypeOrCommentSniff::class,
             PropertyDollarSignSniff::class,
             TypesSpacesFixer::class,
+            PascalCasingEnumCasesSniff::class,
         ]);
     }
 
@@ -186,7 +194,6 @@ class WorksomeEcsConfig
     {
         return [
             FunctionDeclarationFixer::class,
-            BinaryOperatorSpacesFixer::class,
             UnaryOperatorSpacesFixer::class,
             ...$additional,
         ];
