@@ -14,6 +14,7 @@ use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php80\Rector\Identical\StrEndsWithRector;
 use Rector\Php80\Rector\Identical\StrStartsWithRector;
 use Rector\Php80\Rector\NotIdentical\StrContainsRector;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
@@ -49,6 +50,9 @@ class WorksomeRectorConfig
 
         // PHP 8.0 set rules
         $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
+
+        // PHP 8.1 set rules
+        $rectorConfig->rule(ReadOnlyPropertyRector::class);
 
         // Naming set rules
         // $rectorConfig->rule(\Rector\Naming\Rector\Property\UnderscoreToCamelCasePropertyNameRector::class);
