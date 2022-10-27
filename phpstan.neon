@@ -7,6 +7,8 @@ parameters:
     disallowedMethodCalls:
         - method: 'Pest\PendingObjects\TestCall::only()'
           message: 'calls to Pest''s "only()" method should not be pushed to development.'
+    stubFiles:
+        - stubs/phpstan/pest.stub
 
 parametersSchema:
     namespaceAndSuffix: arrayOf(string(), string())
