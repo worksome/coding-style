@@ -10,8 +10,12 @@ parameters:
         App\Listener: Listener
         App\Policies: Policy
         App\Jobs: Job
+    disallowedFunctionCalls:
+        - function: 'app()'
+          message: 'Usage of app helper is disallowed. Use dependency injection instead.'
+        - function: 'resolve()'
+          message: 'Usage of resolve helper is disallowed. Use dependency injection instead.'
 rules:
-	- Worksome\CodingStyle\PHPStan\Laravel\DisallowAppHelperUsageRule
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule

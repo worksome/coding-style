@@ -12,9 +12,10 @@
         "phpstan/phpstan": "^1.6",
         "phpstan/phpstan-mockery": "^1.0",
         "rector/rector": "^0.14",
-        "symplify/easy-coding-standard": "^11.1",
-        "squizlabs/php_codesniffer": "^3.6.1",
         "slevomat/coding-standard": "^8.5",
+        "spaze/phpstan-disallowed-calls": "^2.8",
+        "squizlabs/php_codesniffer": "^3.6.1",
+        "symplify/easy-coding-standard": "^11.1",
         "thecodingmachine/safe": "^2.0"
     },
     "require-dev": {

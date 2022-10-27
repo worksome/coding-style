@@ -1,8 +1,12 @@
 includes:
     - ../../phpstan/phpstan-mockery/extension.neon
+    - ../../spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
     namespaceAndSuffix: []
+    disallowedMethodCalls:
+        - method: 'Pest\PendingObjects\TestCall::only()'
+          message: 'calls to Pest''s "only()" method should not be pushed to development.'
 
 parametersSchema:
     namespaceAndSuffix: arrayOf(string(), string())
