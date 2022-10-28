@@ -10,11 +10,6 @@ parameters:
         App\Listener: Listener
         App\Policies: Policy
         App\Jobs: Job
-    disallowedFunctionCalls:
-        - function:
-            - 'app()'
-            - 'resolve()'
-          message: 'use dependency injection instead.'
 rules:
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
