@@ -1,0 +1,13 @@
+<?php
+
+use Pest\PendingObjects\TestCall;
+use PHPUnit\Framework\TestCase;
+
+/** @phpstan-return ($description is null ? TestCase|mixed : TestCall) */
+function test(string $description = null, Closure $closure = null): TestCall|TestCase|mixed
+{
+}
+
+function it(string $description, Closure $closure = null): TestCall
+{
+}
