@@ -3,12 +3,12 @@
     "description": "Worksomes coding style",
     "type": "composer-plugin",
     "require": {
-        "PHP": "^8.1",
+        "php": "^8.2",
         "composer-plugin-api": "^2.0",
-        "canvural/larastan-strict-rules": "^1.0 || ^2.0",
+        "canvural/larastan-strict-rules": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.8",
         "jetbrains/phpstorm-attributes": "^1.0",
-        "nunomaduro/larastan": "^1.0 || ^2.0",
+        "nunomaduro/larastan": "^2.3.4",
         "phpstan/phpstan": "^1.6",
         "phpstan/phpstan-mockery": "^1.0",
         "rector/rector": "^0.15",
@@ -19,8 +19,8 @@
         "thecodingmachine/safe": "^2.0"
     },
     "require-dev": {
-        "composer/composer": "^2.0",
-        "pestphp/pest": "^1.21",
+        "composer/composer": "^2.5",
+        "pestphp/pest": "^1.22",
         "spatie/invade": "^1.0",
         "spatie/ray": "^1.32"
     },
