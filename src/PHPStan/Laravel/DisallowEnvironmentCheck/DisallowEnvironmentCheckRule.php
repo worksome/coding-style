@@ -33,6 +33,10 @@ final class DisallowEnvironmentCheckRule implements Rule
             return [];
         }
 
+        if (! $node->name instanceof Node\Identifier) {
+            return [];
+        }
+
         if ($node->name->toLowerString() !== self::METHOD_NAME) {
             return [];
         }
