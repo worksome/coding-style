@@ -74,6 +74,8 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 #### EnforceKebabCaseArtisanCommandsRule
 This rule will enforce the use of kebab-case for Artisan commands.
 
+#### DisallowEnvironmentCheckRule
+This rule will prevent checking the application environment, instead preferring that a driver based approach is used.
 
 ## Custom sniffs
 List all the custom sniffs created by Worksome.
