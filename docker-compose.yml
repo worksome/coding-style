@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  test:
+    build:
+      context: docker
+    volumes:
+      - .:/app
+    entrypoint: composer test
+  composer:
+    build:
+      context: docker
+    volumes:
+      - .:/app
+    entrypoint: composer

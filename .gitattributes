@@ -4,3 +4,5 @@ phpunit.xml.dist export-ignore
 .gitignore export-ignore
 /testResources export-ignore
 ecs.php export-ignore
+/docker export-ignore
+docker-compose.yml export-ignore

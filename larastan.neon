@@ -14,6 +14,7 @@ rules:
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
 	- Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
+    - Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule
 services:
     -
         class: Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\PartialRouteResourceInspector
