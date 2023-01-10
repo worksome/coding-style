@@ -23,6 +23,10 @@ services:
         tags:
             - phpstan.rules.rule
     -
+        class: Vural\LarastanStrictRules\Rules\NoFacadeRule
+        tags:
+            - phpstan.rules.rule
+    -
         class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
         tags:
             - phpstan.rules.rule
