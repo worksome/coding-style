@@ -21,7 +21,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
             return;
         }
 
-        $value = $phpcsFile->getTokensAsString($stackPtr+2, 1);
+        $value = $phpcsFile->getTokensAsString($stackPtr + 2, 1);
 
         // Check if param tag with no type or comment
         $regex = '/^\$\w+\s*$/m';
@@ -38,7 +38,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
 
         foreach (range(-4, 2) as $pointer) {
             $phpcsFile->fixer->replaceToken(
-                $stackPtr+$pointer,
+                $stackPtr + $pointer,
                 ""
             );
         }

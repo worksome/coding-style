@@ -24,7 +24,7 @@ class ExceptionSuffixSniff implements Sniff
         while (Str::endsWith($phpcsFile->getTokensAsString($stackPtr + 2, $baseClassNameLength + 1), '\\')) {
             $baseClassNameLength += 2;
         }
-        $baseClassName = $phpcsFile->getTokensAsString($stackPtr +2, max($baseClassNameLength, 1));
+        $baseClassName = $phpcsFile->getTokensAsString($stackPtr + 2, max($baseClassNameLength, 1));
 
         if (! Str::endsWith($baseClassName, $this->suffix) || ! Str::contains($baseClassName, 'Exception')) {
             return;
