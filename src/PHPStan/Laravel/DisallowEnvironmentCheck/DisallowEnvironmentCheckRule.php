@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Expr\CallLike;
 use PHPStan\Type\ObjectType;
 
 final class DisallowEnvironmentCheckRule implements Rule
@@ -25,6 +25,7 @@ final class DisallowEnvironmentCheckRule implements Rule
 
     /**
      * @param CallLike $node
+     *
      * @return array<RuleError>
      */
     public function processNode(Node $node, Scope $scope): array
@@ -41,7 +42,7 @@ final class DisallowEnvironmentCheckRule implements Rule
             return [];
         }
 
-        return match($node::class) {
+        return match ($node::class) {
             Node\Expr\MethodCall::class => $this->checkMethodCall($node->var, $scope),
             Node\Expr\StaticCall::class => $this->checkFacade($node->class),
             default => [],

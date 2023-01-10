@@ -34,9 +34,9 @@ class DisallowCompactUsageSniff implements Sniff
         $phpCode = $this->generatePhpArray($variables);
 
         // Remove all the old code after the `compact` string.
-        foreach (range(1, $lastTokenPointer-1) as $currentPointer) {
+        foreach (range(1, $lastTokenPointer - 1) as $currentPointer) {
             $phpcsFile->fixer->replaceToken(
-                $stackPtr+$currentPointer,
+                $stackPtr + $currentPointer,
                 ""
             );
         }
