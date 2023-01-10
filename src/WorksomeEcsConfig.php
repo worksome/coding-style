@@ -132,6 +132,7 @@ class WorksomeEcsConfig
         $ecsConfig->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, [
             'operators' => [
                 '=>' => null,
+                '|' => 'no_space',
             ],
         ]);
 
