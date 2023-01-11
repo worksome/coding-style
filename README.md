@@ -47,6 +47,95 @@ $ composer rector
 $ composer rector:fix
 ```
 
+## ECS Rules
+
+The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/psr/psr-12).
+
+### Excluded / Skipped Rules
+
+- [`FunctionDeclarationFixer`](https://cs.symfony.com/doc/rules/function_notation/function_declaration.html)
+- [`UnaryOperatorSpacesFixer`](https://cs.symfony.com/doc/rules/operator/unary_operator_spaces.html)
+
+### Additional / Customised Rules
+
+> **Note:** Customised rules have a ⚙️ icon.
+
+#### [PhpCsFixer](https://cs.symfony.com)
+
+- [`ArraySyntaxFixer`](https://cs.symfony.com/doc/rules/array_notation/array_syntax.html)
+- [`BinaryOperatorSpacesFixer` ⚙️](https://cs.symfony.com/doc/rules/operator/binary_operator_spaces.html)
+- [`ClassDefinitionFixer`](https://cs.symfony.com/doc/rules/class_notation/class_definition.html)
+- [`LineEndingFixer`](https://cs.symfony.com/doc/rules/whitespace/line_ending.html)
+- [`ListSyntaxFixer`](https://cs.symfony.com/doc/rules/list_notation/list_syntax.html)
+- [`NoEmptyCommentFixer`](https://cs.symfony.com/doc/rules/comment/no_empty_comment.html)
+- [`NoEmptyPhpdocFixer`](https://cs.symfony.com/doc/rules/phpdoc/no_empty_phpdoc.html)
+- [`OperatorLinebreakFixer` ⚙️](https://cs.symfony.com/doc/rules/operator/operator_linebreak.html)
+- [`OrderedImportsFixer` ⚙️](https://cs.symfony.com/doc/rules/import/ordered_imports.html)
+- [`PhpdocAlignFixer` ⚙️](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_align.html)
+- [`PhpdocSeparationFixer`](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_separation.html)
+- [`SingleTraitInsertPerStatementFixer`](https://cs.symfony.com/doc/rules/class_notation/single_trait_insert_per_statement.html)
+- [`ShortScalarCastFixer`](https://cs.symfony.com/doc/rules/cast_notation/short_scalar_cast.html)
+- [`NoEmptyStatementFixer`](https://cs.symfony.com/doc/rules/semicolon/no_empty_statement.html)
+- [`NoUnneededImportAliasFixer`](https://cs.symfony.com/doc/rules/import/no_unneeded_import_alias.html)
+- [`NoUnusedImportsFixer`](https://cs.symfony.com/doc/rules/import/no_unused_imports.html)
+- [`TypesSpacesFixer`](https://cs.symfony.com/doc/rules/whitespace/types_spaces.html)
+
+#### [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+
+- [`CommentedOutCodeSniff` ⚙️](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties#squizphpcommentedoutcode)
+- [`ForbiddenFunctionsSniff` ⚙️](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties#genericphpforbiddenfunctions)
+- [`SpaceAfterNotSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Generic/Sniffs/Formatting/SpaceAfterNotSniff.php)
+- [`EndFileNewlineSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/PSR2/Sniffs/Files/EndFileNewlineSniff.php)
+- [`MethodDeclarationSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/PSR2/Sniffs/Methods/MethodDeclarationSniff.php)
+- [`SpaceAfterCastSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Generic/Sniffs/Formatting/SpaceAfterCastSniff.php)
+- [`LowercaseDeclarationSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Squiz/Sniffs/ControlStructures/LowercaseDeclarationSniff.php)
+- [`InlineControlStructureSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Generic/Sniffs/ControlStructures/InlineControlStructureSniff.php)
+- [`LowerCaseKeywordSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Generic/Sniffs/PHP/LowerCaseKeywordSniff.php)
+- [`LanguageConstructSpacingSniff`](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Squiz/Sniffs/WhiteSpace/LanguageConstructSpacingSniff.php)
+
+#### [Slevomat Coding Standard](https://github.com/slevomat/coding-standard)
+
+- [`ClassConstantVisibilitySniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesclassconstantvisibility-)
+- [`ClassMemberSpacingSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesclassmemberspacing-)
+- [`DisallowGroupUseSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/namespaces.md#slevomatcodingstandardnamespacesdisallowgroupuse)
+- [`EmptyLinesAroundClassBracesSniff` ⚙️](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesemptylinesaroundclassbraces-)
+- [`ForbiddenAnnotationsSniff` ⚙️](https://github.com/slevomat/coding-standard/blob/master/doc/commenting.md#slevomatcodingstandardcommentingforbiddenannotations-)
+- [`MethodSpacingSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesmethodspacing-)
+- [`ModernClassNameReferenceSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesmodernclassnamereference-)
+- [`NamespaceDeclarationSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/namespaces.md#slevomatcodingstandardnamespacesnamespacedeclaration-)
+- [`ParameterTypeHintSpacingSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/type-hints.md#slevomatcodingstandardtypehintsparametertypehintspacing-)
+- [`PropertyDeclarationSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassespropertydeclaration-)
+- [`PropertySpacingSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassespropertyspacing-)
+- [`RequireMultiLineCallSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/functions.md#slevomatcodingstandardfunctionsrequiremultilinecall-)
+- [`RequireMultiLineConditionSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/control-structures.md#slevomatcodingstandardcontrolstructuresrequiremultilinecondition-)
+- [`RequireMultiLineMethodSignatureSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/classes.md#slevomatcodingstandardclassesrequiremultilinemethodsignature-)
+- [`RequireMultiLineTernaryOperatorSniff` ⚙️](https://github.com/slevomat/coding-standard/blob/master/doc/control-structures.md#slevomatcodingstandardcontrolstructuresrequiremultilineternaryoperator-)
+- [`RequireOneNamespaceInFileSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/namespaces.md#slevomatcodingstandardnamespacesrequireonenamespaceinfile)
+- [`RequireShortTernaryOperatorSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/control-structures.md#slevomatcodingstandardcontrolstructuresrequireshortternaryoperator-)
+- [`RequireTrailingCommaInDeclarationSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/functions.md#slevomatcodingstandardfunctionsrequiretrailingcommaindeclaration-)
+- [`ReturnTypeHintSpacingSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/type-hints.md#slevomatcodingstandardtypehintsreturntypehintspacing-)
+- [`UselessConstantTypeHintSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/type-hints.md#slevomatcodingstandardtypehintsuselessconstanttypehint-)
+- [`UselessInheritDocCommentSniff`](https://github.com/slevomat/coding-standard/blob/master/doc/commenting.md#slevomatcodingstandardcommentinguselessinheritdoccomment-)
+
+#### [Symplify Coding Standard](https://github.com/symplify/coding-standard)
+
+- [`LineLengthFixer` ⚙️](https://github.com/symplify/coding-standard/blob/main/docs/rules_overview.md#linelengthfixer)
+
+#### [Worksome](src)
+
+- [`ConfigFilenameKebabCaseSniff`](#config-filename-kebab-case)
+- [`DisallowBladeOutsideOfResourcesDirectorySniff`](#disallow-blade-outside-the-resources-directory)
+- [`DisallowCompactUsageSniff`](#disallow-compact-usage)
+- [`DisallowEnvUsageSniff`](#disallow-env-usage)
+- [`DisallowHasFactorySniff`](#disallow-hasfactory-usage)
+- [`DisallowParamNoTypeOrCommentSniff`](#param-tags-with-no-type-or-comment)
+- [`DisallowTodoCommentsSniff`](#disallow-todo-comments)
+- [`EventListenerSuffixSniff`](#event-listener-suffix)
+- [`ExceptionSuffixSniff`](#exception-suffix)
+- [`PropertyDollarSignSniff`](#property-dollar-sign)
+- [`PascalCasingEnumCasesSniff`](#pascal-casing-enum-cases)
+- [`SpaceInGenericsFixer`](#space-in-generics)
+
 ## Custom PHPStan rules
 
 This section will list all the custom PHPStan rules this package adds.
@@ -99,6 +188,12 @@ This rule will prevent checking the application environment, instead preferring 
 
 List all the custom sniffs created by Worksome.
 
+### Generic
+
+#### [Pascal-casing enum cases](src/Sniffs/Enums/PascalCasingEnumCasesSniff.php)
+
+This ensures that all enum cases use pascal-casing (e.g. `Case::PascalCase`).
+
 ### Laravel
 
 All custom sniffs specific to Laravel.
@@ -107,9 +202,17 @@ All custom sniffs specific to Laravel.
 
 Checks if all config files are written in kebab case.
 
-#### [Disallow env usage](src/Sniffs/Laravel/DisallowEnvUsageSniff.php)
+#### [Disallow `compact` usage](src/Sniffs/Functions/DisallowCompactUsageSniff.php)
+
+Makes sure that `compact()` isn't used in code.
+
+#### [Disallow `env` usage](src/Sniffs/Laravel/DisallowEnvUsageSniff.php)
 
 Makes sure that you don't use `env` helper in your code, except for config files.
+
+#### [Disallow `HasFactory` usage](src/Sniffs/Laravel/DisallowHasFactorySniff.php)
+
+Ensures that the `HasFactory` trait is not used on models, this ensures that the factory class is called directly.
 
 #### [Event listener suffix](src/Sniffs/Laravel/EventListenerSuffixSniff.php)
 
@@ -127,6 +230,10 @@ Makes sure no `.blade.php` files exist outside of Laravel's `resources` director
 |--------------------|----------------------------|
 | resourcesDirectory | `{YOUR_PROJECT}/resources` |
 
+#### [Exception suffix](src/Sniffs/Classes/ExceptionSuffixSniff.php)
+
+This ensures that all `Exception` classes should have a suffix of `Exception`.
+
 ### PhpDoc
 
 All custom sniffs which are not specific to Laravel.
@@ -141,7 +248,7 @@ Makes sure that you always have a dollar sign in your properties defined in phpd
 class User {}
 ```
 
-### [Param tags with no type or comment](src/Sniffs/PhpDoc/DisallowParamNoTypeOrCommentSniff.php)
+#### [Param tags with no type or comment](src/Sniffs/PhpDoc/DisallowParamNoTypeOrCommentSniff.php)
 
 This removes all `@param` tags which has not specified a type or comment.
 
@@ -156,6 +263,14 @@ public function someMethod($name, $type, $other): void
 ```
 
 This is mainly because PHPStan requires this before it sees the property as valid.
+
+#### [Disallow `TODO` comments](src/Sniffs/Comments/DisallowTodoCommentsSniff.php)
+
+This ensures that all to-do comments are blocked from use. Jira should be used instead.
+
+#### [Space in generics](src/PhpCsFixer/SpaceInGenericsFixer.php)
+
+This ensures that generics types in PHPDoc comments contain a single space after the comma.
 
 ## Credits
 
