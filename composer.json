@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "composer/composer": "^2.5",
-        "pestphp/pest": "^1.22",
+        "pestphp/pest": "^2.0",
         "spatie/invade": "^1.0",
         "spatie/ray": "^1.32"
     },
