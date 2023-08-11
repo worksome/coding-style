@@ -5,24 +5,24 @@
     "require": {
         "php": "^8.2",
         "composer-plugin-api": "^2.0",
-        "canvural/larastan-strict-rules": "^2.0",
-        "friendsofphp/php-cs-fixer": "^3.8",
+        "canvural/larastan-strict-rules": "^2.1.8",
+        "friendsofphp/php-cs-fixer": "^3.22",
         "jetbrains/phpstorm-attributes": "^1.0",
-        "nunomaduro/larastan": "^2.3.4",
-        "phpstan/phpstan": "^1.6",
-        "phpstan/phpstan-mockery": "^1.0",
+        "nunomaduro/larastan": "^2.6.4",
+        "phpstan/phpstan": "^1.10.28",
+        "phpstan/phpstan-mockery": "^1.1.1",
         "rector/rector": "^0.16",
-        "slevomat/coding-standard": "^8.5",
-        "spaze/phpstan-disallowed-calls": "^2.8",
-        "squizlabs/php_codesniffer": "^3.6.1",
-        "symplify/easy-coding-standard": "^11.1",
-        "thecodingmachine/safe": "^2.0"
+        "slevomat/coding-standard": "^8.13.4",
+        "spaze/phpstan-disallowed-calls": "^2.16",
+        "squizlabs/php_codesniffer": "^3.7.2",
+        "symplify/easy-coding-standard": "^11.5",
+        "thecodingmachine/safe": "^2.5"
     },
     "require-dev": {
         "composer/composer": "^2.5",
-        "pestphp/pest": "^2.0",
-        "spatie/invade": "^1.0",
-        "spatie/ray": "^1.32"
+        "pestphp/pest": "^2.13",
+        "spatie/invade": "^1.1.1",
+        "spatie/ray": "^1.37.2"
     },
     "autoload": {
         "psr-4": {
