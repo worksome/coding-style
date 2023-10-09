@@ -1,9 +1,9 @@
+# Worksome Coding Style
+
 [![Latest Stable Version](https://img.shields.io/packagist/v/worksome/coding-style?style=flat-square)](https://packagist.org/packages/worksome/coding-style)
 [![Total Downloads](https://img.shields.io/packagist/dt/worksome/coding-style?style=flat-square)](https://packagist.org/packages/worksome/coding-style)
 [![Latest Unstable Version](https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square)](https://packagist.org/packages/worksome/coding-style#dev-main)
 [![License](https://img.shields.io/packagist/l/worksome/coding-style?style=flat-square)](https://packagist.org/packages/worksome/coding-style)
-
-# Worksomes Coding Style
 
 This repository contains the coding style followed by Worksome.
 
@@ -138,7 +138,7 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 
 ## Custom PHPStan rules
 
-This section will list all the custom PHPStan rules this package adds.
+The Worksome code style includes the following custom PHPStan rules.
 
 ### Generic
 
@@ -184,9 +184,9 @@ This rule will enforce the use of kebab-case for Artisan commands.
 
 This rule will prevent checking the application environment, instead preferring that a driver based approach is used.
 
-## Custom sniffs
+## Custom PHP_CodeSniffer sniffs
 
-List all the custom sniffs created by Worksome.
+The Worksome code style includes various custom PHP_CodeSniffer sniffs where auto-fixers via PHP CS Fixer are not possible.
 
 ### Generic
 
@@ -271,6 +271,17 @@ This ensures that all to-do comments are blocked from use. Jira should be used i
 #### [Space in generics](src/PhpCsFixer/SpaceInGenericsFixer.php)
 
 This ensures that generics types in PHPDoc comments contain a single space after the comma.
+
+## Custom Rector rules
+
+The Worksome code style includes custom Rector rules for automatically refactoring code.
+
+### Generic
+
+#### [Disallowed Attributes](src/Rector/Generic/DisallowedAttributesRector.php)
+
+This ensures that specified [PHP attributes](https://www.php.net/manual/en/language.attributes.php) are automatically
+removed when they are not allowed.
 
 ## Credits
 
