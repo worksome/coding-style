@@ -2,8 +2,8 @@
 
 namespace Worksome\CodingStyle\Rector\Generic;
 
-use Illuminate\Support\Collection;
 use PhpParser\Node;
+use PhpParser\NodeTraverser;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -11,7 +11,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 class DisallowedAttributesRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    /** @var array<class-string>  */
+    /** @var array<class-string> */
     private array $disallowedAttributes = [];
 
     public function getRuleDefinition(): RuleDefinition
@@ -30,29 +30,33 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
         );
     }
 
+    /** {@inheritdoc} */
     public function getNodeTypes(): array
     {
         return [Node\AttributeGroup::class];
     }
 
+    /** {@inheritdoc} */
     public function configure(array $configuration): void
     {
         $this->disallowedAttributes = $configuration;
     }
 
-    /**
-     * @param Node\AttributeGroup $node
-     */
+    /** @param Node\AttributeGroup $node */
     public function refactor(Node $node)
     {
-        Collection::make($node->attrs)->reject(function (Node\Attribute $node) {
-            foreach ($this->disallowedAttributes as $disallowedAttribute) {
-                if ($this->isName($node, $disallowedAttribute)) {
-                    $this->removeNode($node);
-                    return true;
-                }
+        foreach ($node->attrs as $key => $attribute) {
+            if (! $this->isNames($attribute, $this->disallowedAttributes)) {
+                continue;
             }
-            return false;
-        })->whenEmpty(fn () => $this->removeNode($node));
+
+            unset($node->attrs[$key]);
+        }
+
+        if ($node->attrs === []) {
+            return NodeTraverser::REMOVE_NODE;
+        }
+
+        return null;
     }
 }
