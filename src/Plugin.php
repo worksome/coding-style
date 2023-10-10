@@ -25,7 +25,7 @@ class Plugin implements PluginInterface, Capable
     public function getCapabilities(): array
     {
         return [
-          CommandProvider::class => CodingStyleCommandProvider::class,
+            CommandProvider::class => CodingStyleCommandProvider::class,
         ];
     }
 }

@@ -29,4 +29,4 @@ jobs:
         uses: ramsey/composer-install@v2
 
       - name: Test php code
-        run: vendor/bin/pest --testsuite ${{ matrix.test-suite }}
+        run: vendor/bin/pest -p --testsuite ${{ matrix.test-suite }}

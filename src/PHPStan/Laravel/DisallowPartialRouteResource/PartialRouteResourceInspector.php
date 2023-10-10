@@ -5,7 +5,7 @@ namespace Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource;
 use PhpParser\Node;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Rector\NodeTypeResolver\Node\AttributeKey;
+use Worksome\CodingStyle\Enums\AttributeKey;
 
 final class PartialRouteResourceInspector
 {
@@ -48,14 +48,14 @@ final class PartialRouteResourceInspector
 
     public function inspect(Node $node): array
     {
-        $next = $node->getAttribute(AttributeKey::NEXT_NODE);
+        $next = $node->getAttribute(AttributeKey::Next->value);
 
         while ($next !== null) {
             if (in_array($next->name, $this->partialMethods)) {
                 return [$this->errorFor($next->name)];
             }
 
-            $next = $next->getAttribute(AttributeKey::PARENT_NODE)->getAttribute(AttributeKey::NEXT_NODE);
+            $next = $next->getAttribute(AttributeKey::Parent->value)->getAttribute(AttributeKey::Next->value);
         }
 
         return [];
