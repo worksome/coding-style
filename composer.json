@@ -6,23 +6,23 @@
         "php": "^8.2",
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^2.1.8",
-        "friendsofphp/php-cs-fixer": "^3.34.1",
         "jetbrains/phpstorm-attributes": "^1.0",
         "nunomaduro/larastan": "^2.6.4",
-        "phpstan/phpstan": "^1.10.38",
+        "phpstan/phpstan": "^1.10.46",
         "phpstan/phpstan-mockery": "^1.1.1",
-        "rector/rector": "^0.18.5",
+        "rector/rector": "^0.18.11",
         "slevomat/coding-standard": "^8.14.1",
         "spaze/phpstan-disallowed-calls": "^2.16",
-        "squizlabs/php_codesniffer": "^3.7.2",
-        "symplify/easy-coding-standard": "^11.5",
+        "symplify/easy-coding-standard": "^12.0.9",
         "thecodingmachine/safe": "^2.5"
     },
     "require-dev": {
         "composer/composer": "^2.6.5",
-        "pestphp/pest": "^2.21",
+        "friendsofphp/php-cs-fixer": "^3.40",
+        "pestphp/pest": "^2.26",
         "spatie/invade": "^1.1.1",
-        "spatie/ray": "^1.39"
+        "spatie/ray": "^1.39",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
