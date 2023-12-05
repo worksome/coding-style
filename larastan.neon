@@ -1,7 +1,7 @@
 includes:
     - ./phpstan.neon
     - ./phpstan-rich-parser.neon
-    - ../../nunomaduro/larastan/extension.neon
+    - ../../larastan/larastan/extension.neon
 
 parameters:
     checkMissingIterableValueType: false

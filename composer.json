@@ -7,7 +7,7 @@
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^2.1.9",
         "jetbrains/phpstorm-attributes": "^1.0",
-        "nunomaduro/larastan": "^2.7",
+        "larastan/larastan": "^2.7",
         "phpstan/phpstan": "^1.10.46",
         "phpstan/phpstan-mockery": "^1.1.1",
         "rector/rector": "^0.18.11",
