@@ -5,23 +5,22 @@
     "require": {
         "php": "^8.2",
         "composer-plugin-api": "^2.0",
-        "canvural/larastan-strict-rules": "^2.1.9",
+        "canvural/larastan-strict-rules": "^2.1.10",
         "jetbrains/phpstorm-attributes": "^1.0",
         "larastan/larastan": "^2.7",
-        "phpstan/phpstan": "^1.10.46",
+        "phpstan/phpstan": "^1.10.47",
         "phpstan/phpstan-mockery": "^1.1.1",
-        "rector/rector": "^0.18.11",
+        "rector/rector": "^0.18.12",
         "slevomat/coding-standard": "^8.14.1",
         "spaze/phpstan-disallowed-calls": "^2.16",
-        "symplify/easy-coding-standard": "^12.0.9",
+        "symplify/easy-coding-standard": "^12.0.12",
         "thecodingmachine/safe": "^2.5"
     },
     "require-dev": {
         "composer/composer": "^2.6.5",
         "friendsofphp/php-cs-fixer": "^3.40",
-        "pestphp/pest": "^2.26",
+        "pestphp/pest": "^2.28",
         "spatie/invade": "^1.1.1",
-        "spatie/ray": "^1.39",
         "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
