@@ -13,7 +13,7 @@ class GenerateCommand extends BaseCommand
         $this->setName("generate-coding-style-stubs");
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln("Worksome's Coding style has 3 stub files (ecs, phpstan and rector)");
 
@@ -44,6 +44,6 @@ class GenerateCommand extends BaseCommand
             ]
         ]);
 
-        return 0;
+        return BaseCommand::SUCCESS;
     }
 }
