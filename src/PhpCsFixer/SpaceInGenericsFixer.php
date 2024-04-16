@@ -50,8 +50,12 @@ class SpaceInGenericsFixer implements FixerInterface
                     continue;
                 }
 
-                $type = $annotation->getTypeExpression()->toString();
-                $type = $this->fixType($type);
+                $typeExpression = $annotation->getTypeExpression();
+                if ($typeExpression === null) {
+                    continue;
+                }
+
+                $type = $this->fixType($typeExpression->toString());
                 $annotation->setTypes([$type]);
             }
 
