@@ -81,7 +81,10 @@ class EnforceKebabCaseArtisanCommandsRule implements Rule
         if (! preg_match('/^[a-z0-9\-:]+$/', $segment)) {
             $errors[] = RuleErrorBuilder::message(
                 "Command \"{$className}\" is not using kebab-case for the command name in its signature."
-            )->line($signature->getLine())->build();
+            )
+                ->line($signature->getLine())
+                ->identifier('worksome.laravel.kebabCaseArtisanCommands')
+                ->build();
         }
 
         return $errors;

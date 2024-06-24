@@ -49,7 +49,9 @@ class NamespaceBasedSuffixRule implements Rule
             return [
                 RuleErrorBuilder::message(
                     "Classes in namespace $nameSpace should always be suffixed with $suffix."
-                )->build(),
+                )
+                    ->identifier('worksome.namespaceBasedSuffix')
+                    ->build(),
             ];
         }
 
