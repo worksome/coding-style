@@ -146,13 +146,19 @@ Rules that are applied to all projects.
 
 #### [`DeclareStrictTypes`](src/PHPStan/DeclareStrictTypesRule.php)
 
+**Identifier:** `worksome.declareStrictTypes`
+
 This rule is used to ensure that all PHP files include with the `declare(strict_types=1)` statement.
 
 #### [`DisallowPHPUnit`](src/PHPStan/DisallowPHPUnitRule.php)
 
+**Identifier:** `worksome.disallowPhpunit`
+
 This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `TestCase` classes.
 
 #### [`NamespaceBasedSuffix`](src/PHPStan/NamespaceBasedSuffixRule.php)
+
+**Identifier:** `worksome.namespaceBasedSuffix`
 
 Sets up configuration for suffixing the following namespaces
 
@@ -167,22 +173,30 @@ This makes sures events, listeners, policies and jobs has the same suffix.
 
 Rules that are only applied in a Laravel context.
 
+#### [`DisallowEnvironmentCheckRule`](src/PHPStan/Laravel/DisallowEnvironmentCheck/DisallowEnvironmentCheckRule.php)
+
+**Identifier:** `worksome.laravel.disallowEnvironmentCheck`
+
+This rule will prevent checking the application environment, instead preferring that a driver based approach is used.
+
 #### [`DisallowPartialRouteFacadeResource`](src/PHPStan/Laravel/DisallowPartialRouteResource/DisallowPartialRouteFacadeResourceRule.php)
+
+**Identifier:** `worksome.laravel.disallowPartialRouteResource`
 
 This rule disallows the usage of the `Route::resource` method when combined with `only` or `except`. Instead, 
 partial route resources should be split into multiple routes.
 
 #### [`DisallowPartialRouteVariableResourceRule`](src/PHPStan/Laravel/DisallowPartialRouteResource/DisallowPartialRouteVariableResourceRule.php)
 
+**Identifier:** `worksome.laravel.disallowPartialRouteResource`
+
 Similar to `DisallowPartialRouteVariableResourceRule`, but prevents partial resource usage when used in a route group.
 
 #### [`EnforceKebabCaseArtisanCommandsRule`](src/PHPStan/Laravel/EnforceKebabCaseArtisanCommandsRule.php)
 
+**Identifier:** `worksome.laravel.kebabCaseArtisanCommands`
+
 This rule will enforce the use of kebab-case for Artisan commands.
-
-#### [`DisallowEnvironmentCheckRule`](src/PHPStan/Laravel/DisallowEnvironmentCheck/DisallowEnvironmentCheckRule.php)
-
-This rule will prevent checking the application environment, instead preferring that a driver based approach is used.
 
 ## Custom PHP_CodeSniffer sniffs
 
