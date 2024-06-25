@@ -40,8 +40,10 @@ final class DisallowPHPUnitRule implements Rule
 
         return [
             RuleErrorBuilder::message(
-                "PHPUnit tests are not allowed. Please use Pest PHP instead. If this is a TestCase, make it abstract to pass validation."
-            )->build()
+                'PHPUnit tests are not allowed. Please use Pest PHP instead. If this is a TestCase, make it abstract to pass validation.'
+            )
+                ->identifier('worksome.disallowPhpunit')
+                ->build()
         ];
     }
 }

@@ -6,6 +6,7 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 
 /**
  * @implements Rule<FileNode>
@@ -43,7 +44,9 @@ class DeclareStrictTypesRule implements Rule
         }
 
         return [
-            'PHP files should declare strict types.',
+            RuleErrorBuilder::message('PHP files should declare strict types.')
+                ->identifier('worksome.declareStrictTypes')
+                ->build(),
         ];
     }
 }

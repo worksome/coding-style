@@ -101,8 +101,8 @@ final class DisallowEnvironmentCheckRule implements Rule
 
     private function error(): RuleError
     {
-        return RuleErrorBuilder
-            ::message('Environment checks are disallowed. Please use the driver pattern instead.')
+        return RuleErrorBuilder::message('Environment checks are disallowed. Please use the driver pattern instead.')
+            ->identifier('worksome.laravel.disallowEnvironmentCheck')
             ->build();
     }
 }

@@ -65,6 +65,8 @@ final class PartialRouteResourceInspector
     {
         return RuleErrorBuilder::message(
             "Usage of [{$method}] method on route resource is disallowed. Please split the resource into multiple routes."
-        )->build();
+        )
+            ->identifier('worksome.laravel.disallowPartialRouteResource')
+            ->build();
     }
 }
