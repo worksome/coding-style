@@ -17,12 +17,14 @@ use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSn
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
+use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\Import\NoUnneededImportAliasFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\LanguageConstruct\NullableTypeDeclarationFixer;
 use PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\OperatorLinebreakFixer;
@@ -135,6 +137,16 @@ class WorksomeEcsConfig
                 '|' => 'no_space',
             ],
         ]);
+
+        $ecsConfig->ruleWithConfiguration(
+            NullableTypeDeclarationFixer::class,
+            ['syntax' => 'union']
+        );
+
+        $ecsConfig->ruleWithConfiguration(
+            OrderedTypesFixer::class,
+            ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none']
+        );
 
         $ecsConfig->rules([
             RequireMultiLineConditionSniff::class,
