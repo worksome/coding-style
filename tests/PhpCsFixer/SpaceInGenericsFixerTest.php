@@ -11,7 +11,7 @@ it('is not a risky test', function () {
 });
 
 /** @link https://github.com/kubawerlos/php-cs-fixer-custom-fixers Modified from "PhpdocTypesCommaSpacesFixerTest" */
-it('works as expected', function (string $expected, ?string $input = null) {
+it('works as expected', function (string $expected, string|null $input = null) {
     $this->doTest($expected, $input);
 })->with(function () {
     yield ['<?php /** @var int $commaCount Number of "," in text. */'];
