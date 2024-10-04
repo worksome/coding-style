@@ -22,7 +22,7 @@ class BasePhpCsFixerTestCase extends TestCase
         return $this;
     }
 
-    final protected function doTest(string $expected, ?string $input = null, ?array $configuration = null): void
+    final protected function doTest(string $expected, string|null $input = null, array|null $configuration = null): void
     {
         if ($this->fixer instanceof ConfigurableFixerInterface) {
             $this->fixer->configure($configuration ?? []);

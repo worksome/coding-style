@@ -10,7 +10,7 @@ class DisallowHasFactorySniff implements Sniff
 {
     private const HAS_FACTORY_FQCN = "Illuminate\\Database\\Eloquent\\Factories\\HasFactory";
 
-    private ?string $partial = null;
+    private string|null $partial = null;
 
     public function register(): array
     {
