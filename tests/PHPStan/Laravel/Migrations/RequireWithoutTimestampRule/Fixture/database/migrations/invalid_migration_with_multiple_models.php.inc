@@ -16,6 +16,10 @@ return new class extends Migration
                 ->nullable();
         });
 
+        Client::withTrashed()->update([
+            'test' => 'test',
+        ]);
+
         User::withoutTimestamps(function(){
             User::withTrashed()->update([
                 'test' => 'test',

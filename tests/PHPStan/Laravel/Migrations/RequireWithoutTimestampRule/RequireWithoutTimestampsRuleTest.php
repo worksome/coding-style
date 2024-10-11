@@ -5,7 +5,8 @@ namespace Worksome\CodingStyle\Tests\PHPStan\Laravel\EnforceKebabCaseArtisanComm
 use Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule;
 
 it('checks withoutTimestamps in migration rule', function (string $path, array ...$errors) {
-    $this->rule = new RequireWithoutTimestampsRule();
+    $this->rule = new RequireWithoutTimestampsRule($path);
+
 
     expect($path)->toHaveRuleErrors($errors);
 })->with([
@@ -15,8 +16,15 @@ it('checks withoutTimestamps in migration rule', function (string $path, array .
     'invalid migration' => [
         __DIR__ . '/Fixture/database/migrations/invalid_migration.php.inc',
         [
-            "invalid_migration file uses 'update' or 'create' action without 'withoutTimestamps()' protection.",
-            7,
+            "Line 19: The 'update()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            19,
+        ],
+    ],
+    'invalid migration with multiple models' => [
+        __DIR__ . '/Fixture/database/migrations/invalid_migration.php.inc',
+        [
+            "Line 19: The 'update()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            19,
         ],
     ],
 ]);

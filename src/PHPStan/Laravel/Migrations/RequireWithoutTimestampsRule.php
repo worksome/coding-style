@@ -5,51 +5,45 @@ declare(strict_types=1);
 namespace Worksome\CodingStyle\PHPStan\Laravel\Migrations;
 
 use PhpParser\Node;
+use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleErrorBuilder;
-use Illuminate\Support\Str;
 
 /**
  * Custom PHPStan rule to check if migration files using 'update' or 'insert'
  * methods include 'withoutTimestamps' somewhere in the file.
  */
-class RequireWithoutTimestampsRule implements Rule
+readonly class RequireWithoutTimestampsRule implements Rule
 {
+    public function __construct(private string $migrationsPath = 'database/migrations')
+    {
+    }
+
     public function getNodeType(): string
     {
-        return Node\Stmt\Class_::class;
+        return FileNode::class;
     }
 
     /**
-     * @param Node\Stmt\Class_ $node
-     * @param Scope $scope
+     * @param FileNode $node
+     * @param Scope    $scope
+     *
+     * @return string[] Errors
      */
     public function processNode(Node $node, Scope $scope): array
     {
         $filePath = $scope->getFile();
 
-        if (! Str::contains($filePath, 'database/migrations')) {
+        if (! str_contains($filePath, $this->migrationsPath)) {
             return [];
         }
 
-        $fileContent = file_get_contents($filePath);
+        $traverser = new NodeTraverser();
+        $visitor = new WithoutTimestampsVisitor();
+        $traverser->addVisitor($visitor);
+        $traverser->traverse($node->getNodes());
 
-        if (preg_match('/\b(update|insert|save|saveQuietly|create)\s*\(/', $fileContent)) {
-            if (!str_contains($fileContent, 'withoutTimestamps')) {
-                $filenameWithExtension = basename($filePath);
-                $filename = Str::before($filenameWithExtension, '.');
-
-                return [
-                    RuleErrorBuilder::message(
-                        "$filename file uses 'update' or 'create' action without 'withoutTimestamps()' protection."
-                    )
-                        ->identifier('worksome.requireWithoutTimestamps')
-                        ->build(),
-                ];
-            }
-        }
-
-        return [];
+        return $visitor->errors;
     }
 }
