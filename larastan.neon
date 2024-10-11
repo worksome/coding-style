@@ -81,6 +81,10 @@ services:
                 - secure_asset
         tags:
             - phpstan.rules.rule
+     -
+        class: Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
+        tags:
+            - phpstan.rules.rule
 #    -
 #        class: Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule
 #        tags:
