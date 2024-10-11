@@ -31,7 +31,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
         }
 
         $phpcsFile->addFixableError(
-            "@param tags with no type or comment are disallowed",
+            '@param tags with no type or comment are disallowed',
             $stackPtr,
             self::class
         );
@@ -39,7 +39,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
         foreach (range(-4, 2) as $pointer) {
             $phpcsFile->fixer->replaceToken(
                 $stackPtr + $pointer,
-                ""
+                ''
             );
         }
     }

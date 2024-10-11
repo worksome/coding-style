@@ -30,7 +30,7 @@ class DisallowEnvUsageSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Usage of env in non-config file is disallowed.",
+            'Usage of env in non-config file is disallowed.',
             $stackPtr,
             self::class
         );

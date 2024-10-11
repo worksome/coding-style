@@ -12,6 +12,6 @@ abstract class BaseRectorTestCase extends AbstractRectorTestCase
 {
     public function provideConfigFilePath(): string
     {
-        return Str::beforeLast(invade($this)->__filename, "/") . '/config/configured_rule.php';
+        return Str::beforeLast(invade($this)->__filename, '/') . '/config/configured_rule.php';
     }
 }

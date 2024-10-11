@@ -27,7 +27,7 @@ class PascalCasingEnumCasesSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Enum cases MUST be PascalCase",
+            'Enum cases MUST be PascalCase',
             $nameRef,
             self::class
         );

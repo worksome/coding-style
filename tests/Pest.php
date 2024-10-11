@@ -53,7 +53,7 @@ expect()->extend('toHaveNoSniffErrors', function () {
 
     Assert::assertEmpty(
         $value->getErrors(),
-        "The following errors were found: " . PHP_EOL . json_encode($value->getErrors())
+        'The following errors were found: ' . PHP_EOL . json_encode($value->getErrors())
     );
 
     return $this;
@@ -144,7 +144,7 @@ function getSniffName(string $sniffClassName): string
 {
     $dotted = preg_replace(
         [
-            "~\\\\~",
+            '~\\\\~',
             '~\.Sniffs~',
             '~Sniff$~',
         ],

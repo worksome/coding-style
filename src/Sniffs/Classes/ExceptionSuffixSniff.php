@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ExceptionSuffixSniff implements Sniff
 {
-    public string $suffix = "Exception";
+    public string $suffix = 'Exception';
 
     public function register(): array
     {
@@ -40,7 +40,7 @@ class ExceptionSuffixSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Exceptions should have `Exception` suffix.",
+            'Exceptions should have `Exception` suffix.',
             $classNamePointer,
             self::class,
         );

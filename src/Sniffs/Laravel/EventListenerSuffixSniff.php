@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class EventListenerSuffixSniff implements Sniff
 {
-    public string $suffix = "Listener";
+    public string $suffix = 'Listener';
 
     public function register(): array
     {
@@ -35,7 +35,7 @@ class EventListenerSuffixSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Listeners should have `Listener` suffix.",
+            'Listeners should have `Listener` suffix.',
             $classNamePointer,
             self::class,
         );

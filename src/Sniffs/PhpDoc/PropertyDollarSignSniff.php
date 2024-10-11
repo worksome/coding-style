@@ -29,7 +29,7 @@ class PropertyDollarSignSniff implements Sniff
         }
 
         $phpcsFile->addFixableError(
-            "All @property variables should start with a dollar symbol.",
+            'All @property variables should start with a dollar symbol.',
             $stackPtr,
             self::class
         );

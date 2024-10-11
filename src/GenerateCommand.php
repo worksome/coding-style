@@ -10,7 +10,7 @@ class GenerateCommand extends BaseCommand
 {
     protected function configure()
     {
-        $this->setName("generate-coding-style-stubs");
+        $this->setName('generate-coding-style-stubs');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -24,7 +24,7 @@ class GenerateCommand extends BaseCommand
         ];
 
         foreach ($files as $newFile => $oldFile) {
-            $path = sprintf("%s/%s", getcwd(), $newFile);
+            $path = sprintf('%s/%s', getcwd(), $newFile);
             if (file_exists($path)) {
                 $output->writeln("$newFile already exist. Skipping...");
                 continue;
@@ -36,11 +36,11 @@ class GenerateCommand extends BaseCommand
 
         $this->tryComposer()->getConfig()->merge([
             'scripts' => [
-                "ecs" => "vendor/bin/ecs",
-                "ecs:fix" => "vendor/bin/ecs --fix",
-                "phpstan" => "vendor/bin/phpstan analyse",
-                "rector" => "vendor/bin/rector process --dry-run --ansi",
-                "rector:fix" => "vendor/bin/rector process --ansi",
+                'ecs' => 'vendor/bin/ecs',
+                'ecs:fix' => 'vendor/bin/ecs --fix',
+                'phpstan' => 'vendor/bin/phpstan analyse',
+                'rector' => 'vendor/bin/rector process --dry-run --ansi',
+                'rector:fix' => 'vendor/bin/rector process --ansi',
             ]
         ]);
 

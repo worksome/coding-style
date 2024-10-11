@@ -32,7 +32,7 @@ class ConfigFilenameKebabCaseSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Config files should be named with kebab-case.",
+            'Config files should be named with kebab-case.',
             0,
             self::class,
         );
