@@ -12,7 +12,7 @@ it('checks for environment checks made using the app helper', function () {
         $lineNumber,
     ], [4, 5, 6]);
 
-    expect(__DIR__ . "/Fixture/app_helper_environment_checks.php.inc")->toHaveRuleErrors($errors);
+    expect(__DIR__ . '/Fixture/app_helper_environment_checks.php.inc')->toHaveRuleErrors($errors);
 });
 
 it('checks for environment checks made using the app facade', function () {
@@ -23,7 +23,7 @@ it('checks for environment checks made using the app facade', function () {
         $lineNumber,
     ], [4, 5, 6, 9, 10, 11]);
 
-    expect(__DIR__ . "/Fixture/app_facade_environment_checks.php.inc")->toHaveRuleErrors($errors);
+    expect(__DIR__ . '/Fixture/app_facade_environment_checks.php.inc')->toHaveRuleErrors($errors);
 });
 
 it('checks for environment checks made using an imported app facade', function () {
@@ -34,7 +34,7 @@ it('checks for environment checks made using an imported app facade', function (
         $lineNumber,
     ], [6, 7, 8]);
 
-    expect(__DIR__ . "/Fixture/imported_app_facade_environment_checks.php.inc")->toHaveRuleErrors($errors);
+    expect(__DIR__ . '/Fixture/imported_app_facade_environment_checks.php.inc')->toHaveRuleErrors($errors);
 });
 
 it('checks for environment checks made using the application contract', function () {
@@ -45,5 +45,5 @@ it('checks for environment checks made using the application contract', function
         $lineNumber,
     ], [6, 10]);
 
-    expect(__DIR__ . "/Fixture/application_class_environment_checks.php.inc")->toHaveRuleErrors($errors);
+    expect(__DIR__ . '/Fixture/application_class_environment_checks.php.inc')->toHaveRuleErrors($errors);
 });

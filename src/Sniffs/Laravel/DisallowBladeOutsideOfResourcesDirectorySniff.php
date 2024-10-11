@@ -33,7 +33,7 @@ class DisallowBladeOutsideOfResourcesDirectorySniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Blade files must be placed in the resources directory.",
+            'Blade files must be placed in the resources directory.',
             $stackPtr,
             self::class
         );

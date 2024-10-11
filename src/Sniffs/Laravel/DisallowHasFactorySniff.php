@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DisallowHasFactorySniff implements Sniff
 {
-    private const HAS_FACTORY_FQCN = "Illuminate\\Database\\Eloquent\\Factories\\HasFactory";
+    private const HAS_FACTORY_FQCN = 'Illuminate\\Database\\Eloquent\\Factories\\HasFactory';
 
     private string|null $partial = null;
 
@@ -34,7 +34,7 @@ class DisallowHasFactorySniff implements Sniff
     private function isHasFactoryNamespace(string $givenNamespace): bool
     {
         if ($this->partial !== null && strlen($this->partial) > 0) {
-            $givenNamespace = $this->partial . Str::after($givenNamespace, Str::afterLast($this->partial, "\\"));
+            $givenNamespace = $this->partial . Str::after($givenNamespace, Str::afterLast($this->partial, '\\'));
         }
 
         if ($givenNamespace !== self::HAS_FACTORY_FQCN) {
@@ -47,7 +47,7 @@ class DisallowHasFactorySniff implements Sniff
     private function trackRelevantPartialNamespace(string $givenNamespace): void
     {
         Str::of(self::HAS_FACTORY_FQCN)
-            ->explode("\\")
+            ->explode('\\')
             ->skip(1)
             ->reduce(function (string $carry, string $item) use ($givenNamespace) {
                 $updatedNamespacePartial = "{$carry}\\{$item}";
@@ -63,7 +63,7 @@ class DisallowHasFactorySniff implements Sniff
     private function addError(File $phpcsFile, int $line): void
     {
         $phpcsFile->addError(
-            "Models should not use the `HasFactory` trait.",
+            'Models should not use the `HasFactory` trait.',
             $line,
             self::class,
         );

@@ -24,7 +24,7 @@ class DisallowCompactUsageSniff implements Sniff
         }
 
         $phpcsFile->addFixableError(
-            "Usage of compact function is disallowed.",
+            'Usage of compact function is disallowed.',
             $stackPtr,
             self::class
         );
@@ -37,7 +37,7 @@ class DisallowCompactUsageSniff implements Sniff
         foreach (range(1, $lastTokenPointer - 1) as $currentPointer) {
             $phpcsFile->fixer->replaceToken(
                 $stackPtr + $currentPointer,
-                ""
+                ''
             );
         }
 
@@ -58,7 +58,7 @@ class DisallowCompactUsageSniff implements Sniff
         // Remove the trailing `, ` from the array.
         $phpCode = substr($phpCode, 0, -2);
         // Close the array
-        $phpCode .= "]";
+        $phpCode .= ']';
 
         return $phpCode;
     }

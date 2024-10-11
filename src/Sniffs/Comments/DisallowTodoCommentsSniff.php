@@ -24,7 +24,7 @@ class DisallowTodoCommentsSniff implements Sniff
         }
 
         $phpcsFile->addError(
-            "Comments with TODO are disallowed",
+            'Comments with TODO are disallowed',
             $stackPtr,
             self::class
         );
