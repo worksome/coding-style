@@ -34,6 +34,7 @@ use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
+use PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\TypesSpacesFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ClassConstantVisibilitySniff;
@@ -202,6 +203,7 @@ class WorksomeEcsConfig
             TypesSpacesFixer::class,
             PascalCasingEnumCasesSniff::class,
             SingleQuoteFixer::class,
+            BlankLineBeforeStatementFixer::class,
         ]);
     }
 
