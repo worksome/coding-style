@@ -170,6 +170,7 @@ function hasError(array $errorsOnLine, string $sniffCode): bool
 
             if ($errorSource === $sniffCode) {
                 $hasError = true;
+
                 break;
             }
         }

@@ -27,6 +27,7 @@ class GenerateCommand extends BaseCommand
             $path = sprintf('%s/%s', getcwd(), $newFile);
             if (file_exists($path)) {
                 $output->writeln("$newFile already exist. Skipping...");
+
                 continue;
             }
 
