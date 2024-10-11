@@ -33,6 +33,7 @@ use PhpCsFixer\Fixer\Operator\OperatorLinebreakFixer;
 use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocNoUselessInheritdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
@@ -208,6 +209,7 @@ class WorksomeEcsConfig
             BlankLineBeforeStatementFixer::class,
             TrailingCommaInMultilineFixer::class,
             ClassAttributesSeparationFixer::class,
+            PhpdocNoUselessInheritdocFixer::class,
         ]);
     }
 
