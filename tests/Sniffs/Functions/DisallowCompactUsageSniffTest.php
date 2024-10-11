@@ -25,6 +25,6 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'has compact call' => [
         __DIR__ . '/../../../testResources/Sniffs/Functions/DisallowCompactUsageSniff/CompactCall.php',
-        13
+        13,
     ],
 ]);

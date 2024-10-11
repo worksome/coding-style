@@ -25,6 +25,6 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'missing type' => [
         __DIR__ . '/../../../testResources/Sniffs/PhpDoc/DisallowParamNoTypeOrCommentSniff/ParamNoTypeOrComment.php',
-        11
+        11,
     ],
 ]);

@@ -33,6 +33,6 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'is outside resources directory' => [
         __DIR__ . '/../../../testResources/Sniffs/Laravel/DisallowBladeOutsideOfResourcesDirectorySniff/invalid.blade.php',
-        1
+        1,
     ],
 ]);

@@ -13,7 +13,7 @@ class ExceptionSuffixSniff implements Sniff
     public function register(): array
     {
         return [
-            T_EXTENDS
+            T_EXTENDS,
         ];
     }
 

@@ -25,10 +25,10 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'not all cases pascal casing' => [
         __DIR__ . '/../../../testResources/Sniffs/Enums/PascalCasingEnumCasesSniff/NotPascalCased.php',
-        11
+        11,
     ],
     'not all cases pascal casing with backed enum' => [
         __DIR__ . '/../../../testResources/Sniffs/Enums/PascalCasingEnumCasesSniff/NotPascalCasedBacked.php',
-        11
+        11,
     ],
 ]);

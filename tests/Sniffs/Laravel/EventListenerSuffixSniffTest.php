@@ -25,7 +25,7 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'has compact call' => [
         __DIR__ . '/../../../testResources/Sniffs/Laravel/EventListenerSuffixSniff/app/Listeners/WrongListenerName.php',
-        5
+        5,
     ],
 ]);
 

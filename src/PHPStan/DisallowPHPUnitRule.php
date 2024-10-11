@@ -43,7 +43,7 @@ final class DisallowPHPUnitRule implements Rule
                 'PHPUnit tests are not allowed. Please use Pest PHP instead. If this is a TestCase, make it abstract to pass validation.'
             )
                 ->identifier('worksome.disallowPhpunit')
-                ->build()
+                ->build(),
         ];
     }
 }

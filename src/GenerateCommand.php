@@ -42,7 +42,7 @@ class GenerateCommand extends BaseCommand
                 'phpstan' => 'vendor/bin/phpstan analyse',
                 'rector' => 'vendor/bin/rector process --dry-run --ansi',
                 'rector:fix' => 'vendor/bin/rector process --ansi',
-            ]
+            ],
         ]);
 
         return BaseCommand::SUCCESS;

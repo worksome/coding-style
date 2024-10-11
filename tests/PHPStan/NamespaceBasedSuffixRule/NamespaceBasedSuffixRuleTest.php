@@ -26,5 +26,5 @@ it('checks app helper rule', function (string $path, array ...$errors) {
     ],
     'has namespace, but is anonymous class' => [
         __DIR__ . '/Fixture/skip_annonymous_class_in_namespace.php.inc',
-    ]
+    ],
 ]);

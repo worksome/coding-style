@@ -20,6 +20,7 @@ use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
+use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\Import\NoUnneededImportAliasFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
@@ -112,7 +113,7 @@ class WorksomeEcsConfig
                 'var_dump' => null,
                 'ddd' => null,
                 'ray' => null,
-            ]
+            ],
         ]);
         $ecsConfig->ruleWithConfiguration(EmptyLinesAroundClassBracesSniff::class, [
             'linesCountAfterOpeningBrace' => 0,
@@ -127,7 +128,7 @@ class WorksomeEcsConfig
                 '@copyright',
                 '@license',
                 '@inheritDoc',
-            ]
+            ],
         ]);
         $ecsConfig->ruleWithConfiguration(LineLengthFixer::class, [
             LineLengthFixer::INLINE_SHORT_LINES => false,
@@ -204,6 +205,7 @@ class WorksomeEcsConfig
             PascalCasingEnumCasesSniff::class,
             SingleQuoteFixer::class,
             BlankLineBeforeStatementFixer::class,
+            TrailingCommaInMultilineFixer::class,
         ]);
     }
 
