@@ -41,7 +41,7 @@ uses(BaseSniffTestCase::class)->in('Sniffs');
 expect()->extend('toHaveRuleErrors', function (array $errors) {
     test()->analyse(
         [
-            $this->value
+            $this->value,
         ],
         $errors,
     );

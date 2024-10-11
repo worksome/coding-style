@@ -25,22 +25,22 @@ it('has errors', function (string $path, int $line) {
 })->with([
     'comment with todo upper' => [
         __DIR__ . '/../../../testResources/Sniffs/Comments/DisallowTodoCommentsSniff/CommentWithTodoUpper.php',
-        9
+        9,
     ],
     'comment with todo lower' => [
         __DIR__ . '/../../../testResources/Sniffs/Comments/DisallowTodoCommentsSniff/CommentWithTodoLower.php',
-        9
+        9,
     ],
     'comment with todo mixed' => [
         __DIR__ . '/../../../testResources/Sniffs/Comments/DisallowTodoCommentsSniff/CommentWithTodoMixed.php',
-        9
+        9,
     ],
     'phpdoc with todo tag' => [
         __DIR__ . '/../../../testResources/Sniffs/Comments/DisallowTodoCommentsSniff/PhpdocWithTodoTag.php',
-        8
+        8,
     ],
     'phpdoc with todo' => [
         __DIR__ . '/../../../testResources/Sniffs/Comments/DisallowTodoCommentsSniff/PhpdocWithTodo.php',
-        8
+        8,
     ],
 ]);

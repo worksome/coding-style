@@ -11,7 +11,7 @@ class ConfigFilenameKebabCaseSniff implements Sniff
     public function register(): array
     {
         return [
-            T_OPEN_TAG
+            T_OPEN_TAG,
         ];
     }
 

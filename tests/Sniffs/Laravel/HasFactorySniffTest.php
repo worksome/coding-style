@@ -37,5 +37,5 @@ it('has errors', function (string $path, array $lines) {
     'via mixed import' => [
         __DIR__ . '/../../../testResources/Sniffs/Laravel/DisallowHasFactorySniff/app/Models/WithHasFactoryMixed.php',
         [10],
-    ]
+    ],
 ]);

@@ -25,7 +25,7 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
                     class MyClass {}
                     PHP,
                     'class MyClass {}',
-                )
+                ),
             ]
         );
     }

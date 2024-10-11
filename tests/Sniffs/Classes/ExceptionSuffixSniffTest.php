@@ -45,5 +45,5 @@ it('has errors', function (string $path, int $line) {
     'one liner class' => [
         __DIR__ . '/../../../testResources/Sniffs/Classes/ExceptionSuffixSniff/WrongExceptionNameOneLinerClass.php',
         5,
-    ]
+    ],
 ]);
