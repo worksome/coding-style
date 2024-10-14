@@ -29,6 +29,7 @@ use PhpCsFixer\Fixer\LanguageConstruct\NullableTypeDeclarationFixer;
 use PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\OperatorLinebreakFixer;
+use PhpCsFixer\Fixer\Operator\StandardizeNotEqualsFixer;
 use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
@@ -211,6 +212,7 @@ class WorksomeEcsConfig
             ClassAttributesSeparationFixer::class,
             PhpdocNoUselessInheritdocFixer::class,
             PhpdocTrimFixer::class,
+            StandardizeNotEqualsFixer::class,
         ]);
     }
 
