@@ -53,7 +53,6 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 
 ### Excluded / Skipped Rules
 
-- [`FunctionDeclarationFixer`](https://cs.symfony.com/doc/rules/function_notation/function_declaration.html)
 - [`UnaryOperatorSpacesFixer`](https://cs.symfony.com/doc/rules/operator/unary_operator_spaces.html)
 
 ### Additional / Customised Rules
@@ -64,6 +63,8 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 
 - [`ArraySyntaxFixer`](https://cs.symfony.com/doc/rules/array_notation/array_syntax.html)
 - [`BinaryOperatorSpacesFixer` ⚙️](https://cs.symfony.com/doc/rules/operator/binary_operator_spaces.html)
+- [`BlankLineBeforeStatementFixer` ⚙️](https://cs.symfony.com/doc/rules/whitespace/blank_line_before_statement.html)
+- [`ClassAttributesSeparationFixer`](https://cs.symfony.com/doc/rules/class_notation/class_attributes_separation.html)
 - [`ClassDefinitionFixer`](https://cs.symfony.com/doc/rules/class_notation/class_definition.html)
 - [`LineEndingFixer`](https://cs.symfony.com/doc/rules/whitespace/line_ending.html)
 - [`ListSyntaxFixer`](https://cs.symfony.com/doc/rules/list_notation/list_syntax.html)
@@ -72,12 +73,16 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 - [`OperatorLinebreakFixer` ⚙️](https://cs.symfony.com/doc/rules/operator/operator_linebreak.html)
 - [`OrderedImportsFixer` ⚙️](https://cs.symfony.com/doc/rules/import/ordered_imports.html)
 - [`PhpdocAlignFixer` ⚙️](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_align.html)
+- [`PhpdocNoUselessInheritdocFixer`](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_no_useless_inheritdoc.html)
 - [`PhpdocSeparationFixer`](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_separation.html)
+- [`PhpdocTrimFixer`](https://cs.symfony.com/doc/rules/phpdoc/phpdoc_trim.html)
+- [`SingleQuoteFixer`](https://cs.symfony.com/doc/rules/string_notation/single_quote.html)
 - [`SingleTraitInsertPerStatementFixer`](https://cs.symfony.com/doc/rules/class_notation/single_trait_insert_per_statement.html)
 - [`ShortScalarCastFixer`](https://cs.symfony.com/doc/rules/cast_notation/short_scalar_cast.html)
 - [`NoEmptyStatementFixer`](https://cs.symfony.com/doc/rules/semicolon/no_empty_statement.html)
 - [`NoUnneededImportAliasFixer`](https://cs.symfony.com/doc/rules/import/no_unneeded_import_alias.html)
 - [`NoUnusedImportsFixer`](https://cs.symfony.com/doc/rules/import/no_unused_imports.html)
+- [`TrailingCommaInMultilineFixer`](https://cs.symfony.com/doc/rules/control_structure/trailing_comma_in_multiline.html)
 - [`TypesSpacesFixer`](https://cs.symfony.com/doc/rules/whitespace/types_spaces.html)
 
 #### [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)

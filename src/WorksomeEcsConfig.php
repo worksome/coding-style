@@ -22,7 +22,6 @@ use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
-use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\Import\NoUnneededImportAliasFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
@@ -218,7 +217,6 @@ class WorksomeEcsConfig
     public static function skips(array $additional = []): array
     {
         return [
-            FunctionDeclarationFixer::class,
             UnaryOperatorSpacesFixer::class,
             ...$additional,
         ];
