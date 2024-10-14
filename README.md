@@ -79,6 +79,7 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 - [`SingleQuoteFixer`](https://cs.symfony.com/doc/rules/string_notation/single_quote.html)
 - [`SingleTraitInsertPerStatementFixer`](https://cs.symfony.com/doc/rules/class_notation/single_trait_insert_per_statement.html)
 - [`ShortScalarCastFixer`](https://cs.symfony.com/doc/rules/cast_notation/short_scalar_cast.html)
+- [`StandardizeNotEqualsFixer`](https://cs.symfony.com/doc/rules/operator/standardize_not_equals.html)
 - [`NoEmptyStatementFixer`](https://cs.symfony.com/doc/rules/semicolon/no_empty_statement.html)
 - [`NoUnneededImportAliasFixer`](https://cs.symfony.com/doc/rules/import/no_unneeded_import_alias.html)
 - [`NoUnusedImportsFixer`](https://cs.symfony.com/doc/rules/import/no_unused_imports.html)
