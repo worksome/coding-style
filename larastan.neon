@@ -18,6 +18,8 @@ rules:
     - Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
     - Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
     - Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule
+    - Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
+
 services:
     -
         class: Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\PartialRouteResourceInspector
@@ -81,6 +83,7 @@ services:
                 - secure_asset
         tags:
             - phpstan.rules.rule
+
 #    -
 #        class: Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule
 #        tags:
