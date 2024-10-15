@@ -204,6 +204,12 @@ Similar to `DisallowPartialRouteVariableResourceRule`, but prevents partial reso
 
 This rule will enforce the use of kebab-case for Artisan commands.
 
+#### [`RequireWithoutTimestampsRule`](src/PHPStan/Laravel/Migrations/RequireWithoutTimestampsRule.php)
+
+**Identifier:** `worksome.laravel.requireWithoutTimestamps`
+
+This rule enforces that all `create`, `update()`, `insert()`, `save()`, `saveQuietly` method calls within Laravel migration files are properly enclosed in a `withoutTimestamps()` context.
+
 ## Custom PHP_CodeSniffer sniffs
 
 The Worksome code style includes various custom PHP_CodeSniffer sniffs where auto-fixers via PHP CS Fixer are not possible.
