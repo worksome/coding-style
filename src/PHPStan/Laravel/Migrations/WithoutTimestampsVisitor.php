@@ -33,7 +33,9 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
                         $node->getLine(),
                         $node->name->name
                     )
-                )->line($node->getLine())->build();
+                )->line($node->getLine())
+                    ->identifier('worksome.laravel.requireWithoutTimestamps')
+                    ->build();
             }
         }
     }
