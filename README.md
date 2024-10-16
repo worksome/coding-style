@@ -208,7 +208,7 @@ This rule will enforce the use of kebab-case for Artisan commands.
 
 **Identifier:** `worksome.laravel.requireWithoutTimestamps`
 
-This rule enforces that all `create`, `update()`, `insert()`, `save()`, `saveQuietly` method calls within Laravel migration files are properly enclosed in a `withoutTimestamps()` context.
+This rule enforces that all `update`, `insert`, `save`, `saveQuietly`, `delete`, `restore`, method calls within Laravel migration files are properly enclosed in a `withoutTimestamps()` context.
 
 ## Custom PHP_CodeSniffer sniffs
 

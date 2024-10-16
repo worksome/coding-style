@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 
 /**
@@ -16,6 +17,15 @@ use PHPStan\Rules\Rule;
  */
 readonly class RequireWithoutTimestampsRule implements Rule
 {
+    public const TIMESTAMP_MODIFYING_METHODS = [
+        'update',
+        'insert',
+        'save',
+        'saveQuietly',
+        'delete',
+        'restore',
+    ];
+
     public function __construct(private string $migrationsPath = 'database/migrations')
     {
     }
@@ -40,7 +50,7 @@ readonly class RequireWithoutTimestampsRule implements Rule
         }
 
         $traverser = new NodeTraverser();
-        $visitor = new WithoutTimestampsVisitor();
+        $visitor = new WithoutTimestampsVisitor($scope);
         $traverser->addVisitor($visitor);
         $traverser->traverse($node->getNodes());
 
