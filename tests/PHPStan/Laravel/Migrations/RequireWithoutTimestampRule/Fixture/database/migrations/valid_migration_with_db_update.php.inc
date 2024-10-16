@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Worksome\CodingStyle\Tests\PHPStan\Laravel\Migrations\RequireWithoutTimestampRule\Fixture\Models\TestUser;
 
 return new class extends Migration
 {
@@ -17,10 +17,8 @@ return new class extends Migration
                 ->nullable();
         });
 
-        TestUser::withoutTimestamps(function(){
-            TestUser::withTrashed()->update([
-                'test' => 'test',
-            ]);
-        });
+        DB::table('users')->update([
+            'test' => 'test'
+        ]);
     }
 };
