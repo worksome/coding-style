@@ -4,6 +4,6 @@ namespace Worksome\CodingStyle\Tests\PHPStan\Laravel\Migrations\RequireWithoutTi
 
 use Illuminate\Database\Eloquent\Model;
 
-class TestUser extends Model {
-
+class TestUser extends Model
+{
 }

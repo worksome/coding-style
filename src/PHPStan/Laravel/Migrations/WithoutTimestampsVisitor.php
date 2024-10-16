@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle\PHPStan\Laravel\Migrations;
 
+use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
-use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\StaticCall;
+use PhpParser\NodeVisitorAbstract;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Illuminate\Database\Eloquent\Model;
 
 class WithoutTimestampsVisitor extends NodeVisitorAbstract
 {
+    private const WITHOUT_TIMESTAMPS_METHOD = 'withoutTimestamps';
+
     private array $contextStack = [];
 
     public array $errors = [];
@@ -28,25 +30,29 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node): void
     {
-        if ($this->isWithoutTimestampsCall($node)) {
-            $this->contextStack[] = 'withoutTimestamps';
-        } else {
-            $this->contextStack[] = null;
+        $this->contextStack[] = $this->isWithoutTimestampsCall($node) ? self::WITHOUT_TIMESTAMPS_METHOD : null;
+
+        if (! $this->isUpdateOrInsertCall($node)) {
+            return;
         }
 
-        if ($this->isUpdateOrInsertCall($node) && $this->isModelCall($node)) {
-            if (! $this->isWithinWithoutTimestampsContext() && ! $this->hasWithoutTimestampsChain($node)) {
-                $this->errors[] = RuleErrorBuilder::message(
-                    sprintf(
-                        "Line %d: The '%s()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
-                        $node->getLine(),
-                        $node->name->name
-                    )
-                )->line($node->getLine())
-                    ->identifier('worksome.laravel.requireWithoutTimestamps')
-                    ->build();
-            }
+        if (! $this->isModelCall($node)) {
+            return;
         }
+
+        if ($this->isWithinWithoutTimestampsContext() || $this->hasWithoutTimestampsChain($node)) {
+            return;
+        }
+
+        $this->errors[] = RuleErrorBuilder::message(
+            sprintf(
+                "Line %d: The '%s()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+                $node->getLine(),
+                $node->name->name
+            )
+        )->line($node->getLine())
+            ->identifier('worksome.laravel.requireWithoutTimestamps')
+            ->build();
     }
 
     public function leaveNode(Node $node): void
@@ -58,7 +64,7 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
     {
         return ($node instanceof MethodCall || $node instanceof StaticCall)
             && $node->name instanceof Node\Identifier
-            && $node->name->name === 'withoutTimestamps';
+            && $node->name->name === self::WITHOUT_TIMESTAMPS_METHOD;
     }
 
     private function isUpdateOrInsertCall(Node $node): bool
@@ -74,7 +80,7 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
 
     private function isWithinWithoutTimestampsContext(): bool
     {
-        return in_array('withoutTimestamps', $this->contextStack);
+        return in_array(self::WITHOUT_TIMESTAMPS_METHOD, $this->contextStack);
     }
 
     private function hasWithoutTimestampsChain(Node $node): bool
@@ -83,7 +89,7 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
 
         while ($currentNode instanceof MethodCall || $currentNode instanceof StaticCall) {
             if ($currentNode->name instanceof Node\Identifier
-                && $currentNode->name->name === 'withoutTimestamps') {
+                && $currentNode->name->name === self::WITHOUT_TIMESTAMPS_METHOD) {
                 return true;
             }
 
@@ -97,29 +103,31 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
 
     private function isModelCall(Node $node): bool
     {
+        if (! $node instanceof MethodCall && ! $node instanceof StaticCall) {
+            return false;
+        }
+
         if ($node instanceof MethodCall) {
             $varType = $this->scope->getType($node->var);
 
             $modelType = new ObjectType(Model::class);
 
-            if ($varType->isSuperTypeOf($modelType)->yes()) {
-                return true;
-            }
-        } elseif ($node instanceof StaticCall) {
-            if ($node->class instanceof Node\Name) {
-                $className = $this->scope->resolveName($node->class);
-
-                if ($className) {
-                    $modelType = new ObjectType(Model::class);
-                    $classType = new ObjectType($className);
-
-                    if ($classType->isSubclassOf($modelType)->yes()) {
-                        return true;
-                    }
-                }
-            }
+            return $varType->isSuperTypeOf($modelType)->yes();
         }
 
-        return false;
+        if (! $node instanceof StaticCall || ! $node->class instanceof Node\Name) {
+            return false;
+        }
+
+        $className = $this->scope->resolveName($node->class);
+
+        if (! $className) {
+            return false;
+        }
+
+        $modelType = new ObjectType(Model::class);
+        $classType = new ObjectType($className);
+
+        return $classType->isSubclassOf($modelType)->yes();
     }
 }
