@@ -33,20 +33,20 @@ it('checks withoutTimestamps in migration rule', function (string $path, array .
             24,
         ],
         [
-            "Line 29: The 'save()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
-            29,
+            "Line 28: The 'save()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            28,
         ],
         [
-            "Line 32: The 'saveQuietly()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            "Line 30: The 'saveQuietly()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            30,
+        ],
+        [
+            "Line 32: The 'delete()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
             32,
         ],
         [
-            "Line 34: The 'delete()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
-            34,
-        ],
-        [
-            "Line 37: The 'restore()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
-            37,
+            "Line 35: The 'restore()' method call should be within 'withoutTimestamps()' context to prevent unintended timestamp updates.",
+            35,
         ],
     ],
     'invalid migration with multiple models' => [

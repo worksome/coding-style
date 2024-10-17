@@ -18,7 +18,7 @@ return new class extends Migration
                 ->nullable();
         });
 
-        TestClient::withTrashed()->update([
+        TestClient::update([
             'test' => 'test',
         ]);
 
