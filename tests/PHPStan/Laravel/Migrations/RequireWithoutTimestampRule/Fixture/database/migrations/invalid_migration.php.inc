@@ -25,11 +25,9 @@ return new class extends Migration
             'test' => 'test',
         ]);
 
-        $testUser = TestUser::make(['test' => 'test']);
-        $testUser->save();
+        TestUser::make(['test' => 'test'])->save();
 
-        $testUser2 = TestUser::make(['test' => 'test']);
-        $testUser2->saveQuietly();
+        TestUser::make(['test' => 'test'])->saveQuietly();
 
         TestUser::where('test', 'test')
             ->delete();

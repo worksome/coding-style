@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle\PHPStan\Laravel\Migrations;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -107,27 +108,40 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
             return false;
         }
 
-        if ($node instanceof MethodCall) {
-            $varType = $this->scope->getType($node->var);
+        if ($node instanceof StaticCall) {
+            if (! $node->class instanceof Node\Name) {
+                return false;
+            }
+
+            $className = $this->scope->resolveName($node->class);
+
+            if (! $className) {
+                return false;
+            }
 
             $modelType = new ObjectType(Model::class);
+            $classType = new ObjectType($className);
 
-            return $varType->isSuperTypeOf($modelType)->yes();
+            return $modelType->isSuperTypeOf($classType)->yes();
         }
 
-        if (! $node instanceof StaticCall || ! $node->class instanceof Node\Name) {
-            return false;
-        }
-
-        $className = $this->scope->resolveName($node->class);
-
-        if (! $className) {
-            return false;
-        }
+        $classType = $this->scope->getType($node->var);
 
         $modelType = new ObjectType(Model::class);
-        $classType = new ObjectType($className);
+        $builderType = new ObjectType(Builder::class);
 
-        return $classType->isSubclassOf($modelType)->yes();
+        if ($modelType->isSuperTypeOf($classType)->yes()) {
+            return true;
+        }
+
+        if (! $builderType->isSuperTypeOf($classType)->yes()) {
+            return false;
+        }
+
+        if (! isset($classType->getTypes()[0])) {
+            return false;
+        }
+
+        return $modelType->isSuperTypeOf($classType->getTypes()[0])->yes();
     }
 }
