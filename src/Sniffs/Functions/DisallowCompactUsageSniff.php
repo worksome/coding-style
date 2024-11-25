@@ -4,6 +4,7 @@ namespace Worksome\CodingStyle\Sniffs\Functions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use Worksome\CodingStyle\Utility;
 
 class DisallowCompactUsageSniff implements Sniff
 {
@@ -72,7 +73,7 @@ class DisallowCompactUsageSniff implements Sniff
             $token = $phpcsFile->getTokensAsString($stackPtr + $pointer, 1);
             $pointer++;
 
-            if (! \Safe\preg_match("/['\"](.*?)['\"]/", $token, $matches)) {
+            if (! Utility::preg_match("/['\"](.*?)['\"]/", $token, $matches)) {
                 continue;
             }
 
