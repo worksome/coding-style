@@ -4,6 +4,7 @@ namespace Worksome\CodingStyle\Sniffs\PhpDoc;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use Worksome\CodingStyle\Utility;
 
 class DisallowParamNoTypeOrCommentSniff implements Sniff
 {
@@ -26,7 +27,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
         // Check if param tag with no type or comment
         $regex = '/^\$\w+\s*$/m';
 
-        if (! \Safe\preg_match($regex, $value, $matches)) {
+        if (! Utility::preg_match($regex, $value, $matches)) {
             return;
         }
 

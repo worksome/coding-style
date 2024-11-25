@@ -13,8 +13,7 @@
         "rector/rector": "^1.2",
         "slevomat/coding-standard": "^8.15",
         "spaze/phpstan-disallowed-calls": "^4.0.1",
-        "symplify/easy-coding-standard": "^12.3.6",
-        "thecodingmachine/safe": "^2.5"
+        "symplify/easy-coding-standard": "^12.3.6"
     },
     "require-dev": {
         "composer/composer": "^2.7",

@@ -6,7 +6,7 @@ namespace Worksome\CodingStyle\Sniffs\Support;
 
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use function Safe\preg_match;
+use Worksome\CodingStyle\Utility;
 
 final readonly class PropertyDoc
 {
@@ -27,7 +27,8 @@ final readonly class PropertyDoc
         [$scope, $detail] = explode(' ', $content, 2);
 
         $typeMatches = [];
-        preg_match(self::regexForTypes(), $detail, $typeMatches);
+
+        Utility::preg_match(self::regexForTypes(), $detail, $typeMatches);
 
         $types = $typeMatches[0];
         $remainderAfterType = Str::of($detail)->after($types)->trim();
