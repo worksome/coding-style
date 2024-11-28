@@ -3,24 +3,37 @@ includes:
     - ../../spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
-    namespaceAndSuffix: []
     disallowedMethodCalls:
         - method: 'Pest\PendingObjects\TestCall::only()'
           message: 'calls to Pest''s "only()" method should not be pushed to development.'
+    namespaceAndSuffix: []
+    worksome:
+        declareStrictTypes: true
+        disallowPhpunit: true
+        namespaceBasedSuffix: true
 
 parametersSchema:
     namespaceAndSuffix: arrayOf(string(), string())
+    worksome: structure([
+        declareStrictTypes: bool()
+        disallowPhpunit: bool()
+        namespaceBasedSuffix: bool()
+    ])
 
-rules:
-    - Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule
 services:
     -
+        class: Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule
+    -
         class: Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule
-        tags:
-            - phpstan.rules.rule
     -
         class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
         arguments:
             namespaceAndSuffix: %namespaceAndSuffix%
-        tags:
-            - phpstan.rules.rule
+
+conditionalTags:
+    Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule:
+        phpstan.rules.rule: %worksome.declareStrictTypes%
+    Worksome\CodingStyle\PHPStan\DisallowPHPUnitRule:
+        phpstan.rules.rule: %worksome.disallowPhpunit%
+    Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule:
+        phpstan.rules.rule: %worksome.namespaceBasedSuffix%
