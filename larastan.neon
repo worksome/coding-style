@@ -3,6 +3,10 @@ includes:
     - ../../larastan/larastan/extension.neon
 
 parameters:
+    worksomeLaravel:
+        disallowEnvironmentChecks: true
+        enforceKebabCaseArtisanCommands: true
+        requireWithoutTimestamps: true
     namespaceAndSuffix:
         App\Events: Event
         App\Listener: Listener
@@ -20,12 +24,20 @@ parameters:
             identifier: missingType.iterableValue
             reportUnmatched: false
 
-rules:
-    - Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
-    - Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule
-    - Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
+parametersSchema:
+    worksomeLaravel: structure([
+        disallowEnvironmentChecks: bool()
+        enforceKebabCaseArtisanCommands: bool()
+        requireWithoutTimestamps: bool()
+    ])
 
 services:
+    -
+        class: Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule
+    -
+        class: Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
+    -
+        class: Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
     -
         class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
         tags:
@@ -87,7 +99,10 @@ services:
         tags:
             - phpstan.rules.rule
 
-#    -
-#        class: Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule
-#        tags:
-#            - phpstan.rules.rule
+conditionalTags:
+    Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule:
+        phpstan.rules.rule: %worksomeLaravel.disallowEnvironmentChecks%
+    Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule:
+        phpstan.rules.rule: %worksomeLaravel.enforceKebabCaseArtisanCommands%
+    Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule:
+        phpstan.rules.rule: %worksomeLaravel.requireWithoutTimestamps%
