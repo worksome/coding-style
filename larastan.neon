@@ -1,6 +1,5 @@
 includes:
     - ./phpstan.neon
-    - ./phpstan-rich-parser.neon
     - ../../larastan/larastan/extension.neon
 
 parameters:
@@ -9,20 +8,24 @@ parameters:
         App\Listener: Listener
         App\Policies: Policy
         App\Jobs: Job
+    disallowedMethodCalls:
+        -
+            method: 'Illuminate\Routing\Router::resource()'
+            message: 'usage of [resource] method for routes is disallowed. Please split the resource into multiple routes.'
+        -
+            method: 'Illuminate\Routing\Router::apiResource()'
+            message: 'usage of [apiResource] method for routes is disallowed. Please split the resource into multiple routes.'
     ignoreErrors:
         -
             identifier: missingType.iterableValue
             reportUnmatched: false
+
 rules:
-    - Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteFacadeResourceRule
-    - Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\DisallowPartialRouteVariableResourceRule
     - Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
     - Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule
     - Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
 
 services:
-    -
-        class: Worksome\CodingStyle\PHPStan\Laravel\DisallowPartialRouteResource\PartialRouteResourceInspector
     -
         class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
         tags:

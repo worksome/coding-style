@@ -185,19 +185,6 @@ Rules that are only applied in a Laravel context.
 
 This rule will prevent checking the application environment, instead preferring that a driver based approach is used.
 
-#### [`DisallowPartialRouteFacadeResource`](src/PHPStan/Laravel/DisallowPartialRouteResource/DisallowPartialRouteFacadeResourceRule.php)
-
-**Identifier:** `worksome.laravel.disallowPartialRouteResource`
-
-This rule disallows the usage of the `Route::resource` method when combined with `only` or `except`. Instead, 
-partial route resources should be split into multiple routes.
-
-#### [`DisallowPartialRouteVariableResourceRule`](src/PHPStan/Laravel/DisallowPartialRouteResource/DisallowPartialRouteVariableResourceRule.php)
-
-**Identifier:** `worksome.laravel.disallowPartialRouteResource`
-
-Similar to `DisallowPartialRouteVariableResourceRule`, but prevents partial resource usage when used in a route group.
-
 #### [`EnforceKebabCaseArtisanCommandsRule`](src/PHPStan/Laravel/EnforceKebabCaseArtisanCommandsRule.php)
 
 **Identifier:** `worksome.laravel.kebabCaseArtisanCommands`

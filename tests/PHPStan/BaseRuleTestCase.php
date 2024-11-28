@@ -28,7 +28,6 @@ class BaseRuleTestCase extends RuleTestCase
     {
         return [
             ... parent::getAdditionalConfigFiles(),
-            __DIR__ . '/../../phpstan-rich-parser.neon',
             __DIR__ . '/../../vendor/larastan/larastan/extension.neon',
         ];
     }
