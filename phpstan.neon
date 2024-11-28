@@ -3,6 +3,9 @@ includes:
     - ../../spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
+    disallowedNamespaces:
+        - namespace: 'JetBrains\PhpStorm\*'
+          message: 'use native PHPDoc comments instead.'
     disallowedMethodCalls:
         - method: 'Pest\PendingObjects\TestCall::only()'
           message: 'calls to Pest''s "only()" method should not be pushed to development.'

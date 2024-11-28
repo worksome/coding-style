@@ -6,7 +6,6 @@
         "php": "^8.2",
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^2.1.10",
-        "jetbrains/phpstorm-attributes": "^1.2",
         "larastan/larastan": "^2.9.11",
         "phpstan/phpstan": "^1.12.11",
         "phpstan/phpstan-mockery": "^1.1.3",

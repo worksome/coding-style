@@ -8,6 +8,6 @@ use Worksome\CodingStyle\Rector\Generic\DisallowedAttributesRector;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig
         ->ruleWithConfiguration(DisallowedAttributesRector::class, [
-            JetBrains\PhpStorm\Pure::class,
+            'JetBrains\PhpStorm\Pure',
         ]);
 };
