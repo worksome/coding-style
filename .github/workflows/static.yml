@@ -1,6 +1,7 @@
 name: Static Analysis
 
-on: [push]
+on:
+  push:
 
 jobs:
   ecs:
@@ -17,9 +18,11 @@ jobs:
         with:
           php-version: 8.3
           coverage: none
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Dependencies
-        run: composer update --prefer-dist --no-interaction --no-progress --ansi
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
 
       - name: Style
         run: composer test:lint
