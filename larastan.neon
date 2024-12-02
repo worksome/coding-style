@@ -4,9 +4,10 @@ includes:
 
 parameters:
     worksomeLaravel:
-        disallowEnvironmentChecks: true
-        enforceKebabCaseArtisanCommands: true
-        requireWithoutTimestamps: true
+        allRules: true
+        disallowEnvironmentChecks: %worksomeLaravel.allRules%
+        enforceKebabCaseArtisanCommands: %worksomeLaravel.allRules%
+        requireWithoutTimestamps: %worksomeLaravel.allRules%
     namespaceAndSuffix:
         App\Events: Event
         App\Listener: Listener
@@ -26,9 +27,10 @@ parameters:
 
 parametersSchema:
     worksomeLaravel: structure([
-        disallowEnvironmentChecks: bool()
-        enforceKebabCaseArtisanCommands: bool()
-        requireWithoutTimestamps: bool()
+        allRules: anyOf(bool(), arrayOf(bool())),
+        disallowEnvironmentChecks: anyOf(bool(), arrayOf(bool())),
+        enforceKebabCaseArtisanCommands: anyOf(bool(), arrayOf(bool())),
+        requireWithoutTimestamps: anyOf(bool(), arrayOf(bool())),
     ])
 
 services:

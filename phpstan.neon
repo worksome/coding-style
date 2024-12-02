@@ -11,16 +11,18 @@ parameters:
           message: 'calls to Pest''s "only()" method should not be pushed to development.'
     namespaceAndSuffix: []
     worksome:
-        declareStrictTypes: true
-        disallowPhpunit: true
-        namespaceBasedSuffix: true
+        allRules: true
+        declareStrictTypes: %worksome.allRules%
+        disallowPhpunit: %worksome.allRules%
+        namespaceBasedSuffix: %worksome.allRules%
 
 parametersSchema:
     namespaceAndSuffix: arrayOf(string(), string())
     worksome: structure([
-        declareStrictTypes: bool()
-        disallowPhpunit: bool()
-        namespaceBasedSuffix: bool()
+        allRules: anyOf(bool(), arrayOf(bool())),
+        declareStrictTypes: anyOf(bool(), arrayOf(bool())),
+        disallowPhpunit: anyOf(bool(), arrayOf(bool())),
+        namespaceBasedSuffix: anyOf(bool(), arrayOf(bool())),
     ])
 
 services:
