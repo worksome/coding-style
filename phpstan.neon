@@ -1,4 +1,5 @@
 includes:
+    - ../../phpstan/phpstan-deprecation-rules/rules.neon
     - ../../phpstan/phpstan-mockery/extension.neon
     - ../../spaze/phpstan-disallowed-calls/extension.neon
 
