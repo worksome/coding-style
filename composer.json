@@ -8,11 +8,12 @@
         "canvural/larastan-strict-rules": "^3.0",
         "larastan/larastan": "^3.0",
         "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
         "rector/rector": "^2.0",
         "slevomat/coding-standard": "^8.15",
         "spaze/phpstan-disallowed-calls": "^4.0.1",
-        "symplify/easy-coding-standard": "^12.3.6"
+        "symplify/easy-coding-standard": "^12.4"
     },
     "require-dev": {
         "composer/composer": "^2.7",
