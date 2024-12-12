@@ -5,11 +5,11 @@
     "require": {
         "php": "^8.2",
         "composer-plugin-api": "^2.0",
-        "canvural/larastan-strict-rules": "^2.1.10",
-        "larastan/larastan": "^2.9.11",
-        "phpstan/phpstan": "^1.12.11",
-        "phpstan/phpstan-mockery": "^1.1.3",
-        "rector/rector": "^1.2",
+        "canvural/larastan-strict-rules": "^3.0",
+        "larastan/larastan": "^3.0",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-mockery": "^2.0",
+        "rector/rector": "^2.0",
         "slevomat/coding-standard": "^8.15",
         "spaze/phpstan-disallowed-calls": "^4.0.1",
         "symplify/easy-coding-standard": "^12.3.6"
@@ -41,6 +41,10 @@
         {
             "name": "Owen Voke",
             "email": "owen.voke@worksome.com"
+        },
+        {
+            "name": "Odinn Adalsteinsson",
+            "email": "odinn.adalsteinsson@worksome.com"
         }
     ],
     "extra": {
@@ -66,5 +70,7 @@
             "@test:phpcsfixer",
             "@test:phpcs"
         ]
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

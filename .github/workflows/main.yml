@@ -7,10 +7,9 @@ jobs:
   setup:
     timeout-minutes: 30
     runs-on: ubuntu-latest
-    name: Pest ${{ matrix.test-suite }} on PHP ${{ matrix.php }}
+    name: Pest ${{ matrix.test-suite }}
     strategy:
       matrix:
-        php: ['8.3']
         test-suite: ['phpcsfixer', 'phpstan', 'rector', 'phpcs']
 
     steps:
@@ -20,10 +19,10 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
+          php-version: 8.3
           coverage: none
-          php-version: ${{ matrix.php }}
         env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
