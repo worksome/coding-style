@@ -1,8 +1,51 @@
 includes:
     - ./phpstan.neon
     - ../../larastan/larastan/extension.neon
+    - ../../canvural/larastan-strict-rules/rules.neon
 
 parameters:
+    larastanStrictRules:
+        allRules: false
+        noFacade: true
+        noValidationInController: true
+        scopeShouldReturnQueryBuilder: true
+        noPropertyAccessor: true
+        noGlobalLaravelFunction: true
+    allowedGlobalFunctions:
+        - class_basename
+        - class_uses_recursive
+        - e
+        - env
+        - object_get
+        - preg_replace_array
+        - retry
+        - str
+        - tap
+        - throw_if
+        - throw_unless
+        - trait_uses_recursive
+        - with
+        - collect
+        - data_fill
+        - data_get
+        - data_set
+        - value
+        - config
+        - fake
+        - method_field
+        - now
+        - old
+        - redirect
+        - response
+        - route
+        - trans
+        - trans_choice
+        - __
+        - view
+        - url
+        - secure_url
+        - asset
+        - secure_asset
     worksomeLaravel:
         allRules: true
         disallowEnvironmentChecks: %worksomeLaravel.allRules%
@@ -40,66 +83,6 @@ services:
         class: Worksome\CodingStyle\PHPStan\Laravel\EnforceKebabCaseArtisanCommandsRule
     -
         class: Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoFacadeRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoPropertyAccessorRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
-        arguments:
-            allowedFunctions:
-                - class_basename
-                - class_uses_recursive
-                - e
-                - env
-                - object_get
-                - preg_replace_array
-                - retry
-                - str
-                - tap
-                - throw_if
-                - throw_unless
-                - trait_uses_recursive
-                - with
-                - collect
-                - data_fill
-                - data_get
-                - data_set
-                - value
-                - config
-                - fake
-                - method_field
-                - now
-                - old
-                - redirect
-                - response
-                - route
-                - trans
-                - trans_choice
-                - __
-                - view
-                - url
-                - secure_url
-                - asset
-                - secure_asset
-        tags:
-            - phpstan.rules.rule
 
 conditionalTags:
     Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule:
