@@ -60,7 +60,7 @@
     },
     "scripts": {
         "lint": "ecs --fix",
-        "test:lint": "ecs",
+        "test:style": "ecs",
         "test:phpstan": "pest --testsuite phpstan",
         "test:rector": "pest --testsuite rector",
         "test:phpcsfixer": "pest --testsuite phpcsfixer",
