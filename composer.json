@@ -3,7 +3,7 @@
     "description": "Worksomes coding style",
     "type": "composer-plugin",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^3.0",
         "larastan/larastan": "^3.1",
