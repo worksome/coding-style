@@ -19,7 +19,7 @@
         "composer/composer": "^2.8",
         "friendsofphp/php-cs-fixer": "^3.70",
         "orchestra/testbench": "^9.11",
-        "pestphp/pest": "^3.7",
+        "pestphp/pest": "^4.1",
         "spatie/invade": "^1.1.1",
         "squizlabs/php_codesniffer": "^3.11"
     },
