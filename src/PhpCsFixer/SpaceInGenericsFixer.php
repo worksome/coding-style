@@ -9,6 +9,7 @@ use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
+use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
@@ -27,13 +28,7 @@ class SpaceInGenericsFixer implements FixerInterface
 
     protected function fixType(string $type): string
     {
-        $newType = preg_replace('/\h*,\s*/', ', ', $type);
-
-        if ($newType === $type) {
-            return $type;
-        }
-
-        return $this->fixType($newType);
+        return Preg::replace('/,(?!\\R)\\s*/', ', ', Preg::replace('/\\h*,/', ',', $type));
     }
 
     public function fix(SplFileInfo $file, Tokens $tokens): void
@@ -50,13 +45,14 @@ class SpaceInGenericsFixer implements FixerInterface
                     continue;
                 }
 
-                $typeExpression = $annotation->getTypeExpression();
-                if ($typeExpression === null) {
+                $types = $annotation->getTypes();
+                if ($types === []) {
                     continue;
                 }
 
-                $type = $this->fixType($typeExpression->toString());
-                $annotation->setTypes([$type]);
+                $types = \array_map(fn (string $x): string => $this->fixType($x), $types);
+
+                $annotation->setTypes($types);
             }
 
             $newContent = $docBlock->getContent();
