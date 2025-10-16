@@ -83,4 +83,31 @@ it('works as expected', function (string $expected, string|null $input = null) {
                     * @return array<string,Foo> Description having "," should not be touched
                     */',
     ];
+
+    yield [
+        '<?php /**
+                    * Multi-line array shapes are supported.
+                    *
+                    * @param  array{
+                    *     extensions?: array<int, class-string<ExtensionInterface>|ExtensionInterface>,
+                    *     renderers?: array{
+                    *         fenced?: array<int, class-string<NodeRendererInterface>|NodeRendererInterface>,
+                    *         indented?: array<int, class-string<NodeRendererInterface>|NodeRendererInterface>
+                    *     },
+                    *     languages?: array<int, array{name: string, path: string, overwrite?: bool}>
+                    * }
+                    */',
+        '<?php /**
+                    * Multi-line array shapes are supported.
+                    *
+                    * @param  array{
+                    *     extensions?: array<int,class-string<ExtensionInterface>|ExtensionInterface>,
+                    *     renderers?: array{
+                    *         fenced?: array<int,class-string<NodeRendererInterface>|NodeRendererInterface>,
+                    *         indented?: array<int,class-string<NodeRendererInterface>|NodeRendererInterface>
+                    *     },
+                    *     languages?: array<int,array{name: string, path: string, overwrite?: bool}>
+                    * }
+                    */',
+    ];
 });

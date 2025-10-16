@@ -13,7 +13,7 @@
         "rector/rector": "^2.0",
         "slevomat/coding-standard": "^8.16",
         "spaze/phpstan-disallowed-calls": "^4.4",
-        "symplify/easy-coding-standard": "^12.5"
+        "symplify/easy-coding-standard": "^12.6"
     },
     "require-dev": {
         "composer/composer": "^2.8",
