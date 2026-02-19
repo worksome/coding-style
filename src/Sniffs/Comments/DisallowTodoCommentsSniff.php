@@ -16,7 +16,7 @@ class DisallowTodoCommentsSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Check if a to do string
         if (stripos($phpcsFile->getTokensAsString($stackPtr, 1), 'TODO') === false) {

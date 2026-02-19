@@ -15,7 +15,7 @@ class DisallowParamNoTypeOrCommentSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Check if @param
         if (! str_contains($phpcsFile->getTokensAsString($stackPtr, 1), '@param')) {

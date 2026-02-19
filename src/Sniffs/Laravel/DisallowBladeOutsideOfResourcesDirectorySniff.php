@@ -18,7 +18,7 @@ class DisallowBladeOutsideOfResourcesDirectorySniff implements Sniff
         return [T_INLINE_HTML];
     }
 
-    public function process(File $phpcsFile, $stackPtr): void
+    public function process(File $phpcsFile, int $stackPtr): void
     {
         if (! str_ends_with($phpcsFile->getFilename(), '.blade.php')) {
             return;

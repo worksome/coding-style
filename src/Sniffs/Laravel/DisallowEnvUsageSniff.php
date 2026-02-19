@@ -14,7 +14,7 @@ class DisallowEnvUsageSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $string = $phpcsFile->getTokensAsString($stackPtr, 1);
         $path = $phpcsFile->getFilename();

@@ -19,7 +19,7 @@ class DisallowHasFactorySniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $traitNamePointer = $stackPtr + 2;
         $className = Str::before($phpcsFile->getTokensAsString($traitNamePointer, 10), ';');

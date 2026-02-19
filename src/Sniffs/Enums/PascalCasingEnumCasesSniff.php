@@ -17,7 +17,7 @@ class PascalCasingEnumCasesSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $nameRef = $stackPtr + 2;
         $caseName = $phpcsFile->getTokensAsString($nameRef, 1);
