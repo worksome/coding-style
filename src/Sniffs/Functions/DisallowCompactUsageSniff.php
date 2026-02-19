@@ -15,7 +15,7 @@ class DisallowCompactUsageSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $methodName = $phpcsFile->getTokensAsString($stackPtr, 1);
 

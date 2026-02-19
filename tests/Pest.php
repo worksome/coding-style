@@ -124,6 +124,11 @@ function checkFile(string $filePath, array $sniffProperties = []): LocalFile
     $codeSniffer->init();
 
     if (count($sniffProperties) > 0) {
+        $sniffProperties = array_map(
+            fn (mixed $property) => ['scope' => 'sniff', 'value' => $property],
+            $sniffProperties
+        );
+
         $codeSniffer->ruleset->ruleset[getSniffName($sniffClassName)]['properties'] = $sniffProperties;
     }
 
@@ -178,7 +183,6 @@ function hasError(array $errorsOnLine, string $sniffCode): bool
 
     return $hasError;
 }
-
 
 function getFormattedErrors(array $errors): string
 {
