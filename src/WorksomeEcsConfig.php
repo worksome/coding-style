@@ -64,7 +64,7 @@ use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSpacingSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
-use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
+use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
 use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
 use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
@@ -80,147 +80,132 @@ use Worksome\CodingStyle\Sniffs\PhpDoc\PropertyDollarSignSniff;
 
 class WorksomeEcsConfig
 {
-    public static function setup(ECSConfig $ecsConfig): void
+    public static function configure(): ECSConfigBuilder
     {
-        $ecsConfig->sets([
-            SetList::PSR_12,
-        ]);
-
-        $ecsConfig->skip(self::skips());
-
-        $ecsConfig->ruleWithConfiguration(RequireMultiLineTernaryOperatorSniff::class, [
-            'lineLengthLimit' => 120,
-        ]);
-        $ecsConfig->ruleWithConfiguration(CommentedOutCodeSniff::class, [
-            'maxPercentage' => 70,
-        ]);
-        $ecsConfig->ruleWithConfiguration(PhpdocAlignFixer::class, [
-            'align' => PhpdocAlignFixer::ALIGN_VERTICAL,
-        ]);
-
-        $ecsConfig->ruleWithConfiguration(OrderedImportsFixer::class, [
-            'imports_order' => [
-                OrderedImportsFixer::IMPORT_TYPE_CLASS,
-                OrderedImportsFixer::IMPORT_TYPE_FUNCTION,
-                OrderedImportsFixer::IMPORT_TYPE_CONST,
-            ],
-            'sort_algorithm' => OrderedImportsFixer::SORT_ALPHA,
-        ]);
-        $ecsConfig->ruleWithConfiguration(OperatorLinebreakFixer::class, [
-            'only_booleans' => true,
-        ]);
-        $ecsConfig->ruleWithConfiguration(ForbiddenFunctionsSniff::class, [
-            'forbiddenFunctions' => [
-                'dd' => null,
-                'dump' => null,
-                'var_dump' => null,
-                'ddd' => null,
-                'ray' => null,
-            ],
-        ]);
-        $ecsConfig->ruleWithConfiguration(EmptyLinesAroundClassBracesSniff::class, [
-            'linesCountAfterOpeningBrace' => 0,
-            'linesCountBeforeClosingBrace' => 0,
-        ]);
-        $ecsConfig->ruleWithConfiguration(ForbiddenAnnotationsSniff::class, [
-            'forbiddenAnnotations' => [
-                '@package',
-                '@author',
-                '@created',
-                '@version',
-                '@copyright',
-                '@license',
-                '@inheritDoc',
-            ],
-        ]);
-        $ecsConfig->ruleWithConfiguration(LineLengthFixer::class, [
-            LineLengthFixer::INLINE_SHORT_LINES => false,
-        ]);
-
-        $ecsConfig->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, [
-            'operators' => [
-                '=>' => null,
-                '|' => 'no_space',
-            ],
-        ]);
-
-        $ecsConfig->ruleWithConfiguration(
-            NullableTypeDeclarationFixer::class,
-            ['syntax' => 'union']
-        );
-
-        $ecsConfig->ruleWithConfiguration(
-            OrderedTypesFixer::class,
-            ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none']
-        );
-
-        $ecsConfig->rules([
-            RequireMultiLineConditionSniff::class,
-            RequireShortTernaryOperatorSniff::class,
-            ReturnTypeHintSpacingSniff::class,
-            RequireMultiLineCallSniff::class,
-            SpaceAfterNotSniff::class,
-            RequireMultiLineMethodSignatureSniff::class,
-            RequireTrailingCommaInDeclarationSniff::class,
-            SpaceInGenericsFixer::class,
-            PhpdocSeparationFixer::class,
-            RequireOneNamespaceInFileSniff::class,
-            ArraySyntaxFixer::class,
-            ListSyntaxFixer::class,
-            NoEmptyCommentFixer::class,
-            NoEmptyPhpdocFixer::class,
-            EndFileNewlineSniff::class,
-            NamespaceDeclarationSniff::class,
-            MethodDeclarationSniff::class,
-            LineEndingFixer::class,
-            SingleTraitInsertPerStatementFixer::class,
-            ShortScalarCastFixer::class,
-            UselessConstantTypeHintSniff::class,
-            NoUnneededImportAliasFixer::class,
-            NoEmptyStatementFixer::class,
-            ModernClassNameReferenceSniff::class,
-            ClassConstantVisibilitySniff::class,
-            PropertyDeclarationSniff::class,
-            ParameterTypeHintSpacingSniff::class,
-            DisallowGroupUseSniff::class,
-            UselessInheritDocCommentSniff::class,
-            SpaceAfterCastSniff::class,
-            ClassDefinitionFixer::class,
-            LowercaseDeclarationSniff::class,
-            InlineControlStructureSniff::class,
-            LowerCaseKeywordSniff::class,
-            LanguageConstructSpacingSniff::class,
-            MethodSpacingSniff::class,
-            PropertySpacingSniff::class,
-            ClassMemberSpacingSniff::class,
-            NoUnusedImportsFixer::class,
-            ExceptionSuffixSniff::class,
-            DisallowTodoCommentsSniff::class,
-            DisallowCompactUsageSniff::class,
-            ConfigFilenameKebabCaseSniff::class,
-            DisallowBladeOutsideOfResourcesDirectorySniff::class,
-            DisallowEnvUsageSniff::class,
-            DisallowHasFactorySniff::class,
-            EventListenerSuffixSniff::class,
-            DisallowParamNoTypeOrCommentSniff::class,
-            PropertyDollarSignSniff::class,
-            TypesSpacesFixer::class,
-            PascalCasingEnumCasesSniff::class,
-            SingleQuoteFixer::class,
-            BlankLineBeforeStatementFixer::class,
-            TrailingCommaInMultilineFixer::class,
-            ClassAttributesSeparationFixer::class,
-            PhpdocNoUselessInheritdocFixer::class,
-            PhpdocTrimFixer::class,
-            StandardizeNotEqualsFixer::class,
-        ]);
-    }
-
-    public static function skips(array $additional = []): array
-    {
-        return [
-            UnaryOperatorSpacesFixer::class,
-            ...$additional,
-        ];
+        return ECSConfig::configure()
+            ->withPreparedSets(psr12: true)
+            ->withConfiguredRule(RequireMultiLineTernaryOperatorSniff::class, [
+                'lineLengthLimit' => 120,
+            ])
+            ->withConfiguredRule(CommentedOutCodeSniff::class, [
+                'maxPercentage' => 70,
+            ])
+            ->withConfiguredRule(PhpdocAlignFixer::class, [
+                'align' => PhpdocAlignFixer::ALIGN_VERTICAL,
+            ])
+            ->withConfiguredRule(OrderedImportsFixer::class, [
+                'imports_order' => [
+                    OrderedImportsFixer::IMPORT_TYPE_CLASS,
+                    OrderedImportsFixer::IMPORT_TYPE_FUNCTION,
+                    OrderedImportsFixer::IMPORT_TYPE_CONST,
+                ],
+                'sort_algorithm' => OrderedImportsFixer::SORT_ALPHA,
+            ])
+            ->withConfiguredRule(OperatorLinebreakFixer::class, [
+                'only_booleans' => true,
+            ])
+            ->withConfiguredRule(ForbiddenFunctionsSniff::class, [
+                'forbiddenFunctions' => [
+                    'dd' => null,
+                    'dump' => null,
+                    'var_dump' => null,
+                    'ddd' => null,
+                    'ray' => null,
+                ],
+            ])
+            ->withConfiguredRule(EmptyLinesAroundClassBracesSniff::class, [
+                'linesCountAfterOpeningBrace' => 0,
+                'linesCountBeforeClosingBrace' => 0,
+            ])
+            ->withConfiguredRule(ForbiddenAnnotationsSniff::class, [
+                'forbiddenAnnotations' => [
+                    '@package',
+                    '@author',
+                    '@created',
+                    '@version',
+                    '@copyright',
+                    '@license',
+                    '@inheritDoc',
+                ],
+            ])
+            ->withConfiguredRule(LineLengthFixer::class, [
+                LineLengthFixer::INLINE_SHORT_LINES => false,
+            ])
+            ->withConfiguredRule(BinaryOperatorSpacesFixer::class, [
+                'operators' => [
+                    '=>' => null,
+                    '|' => 'no_space',
+                ],
+            ])
+            ->withConfiguredRule(NullableTypeDeclarationFixer::class, [
+                'syntax' => 'union',
+            ])
+            ->withConfiguredRule(OrderedTypesFixer::class, [
+                'null_adjustment' => 'always_last',
+                'sort_algorithm' => 'none',
+            ])
+            ->withConfiguredRule(UnaryOperatorSpacesFixer::class, [
+                'only_dec_inc' => true,
+            ])
+            ->withRules([
+                RequireMultiLineConditionSniff::class,
+                RequireShortTernaryOperatorSniff::class,
+                ReturnTypeHintSpacingSniff::class,
+                RequireMultiLineCallSniff::class,
+                SpaceAfterNotSniff::class,
+                RequireMultiLineMethodSignatureSniff::class,
+                RequireTrailingCommaInDeclarationSniff::class,
+                SpaceInGenericsFixer::class,
+                PhpdocSeparationFixer::class,
+                RequireOneNamespaceInFileSniff::class,
+                ArraySyntaxFixer::class,
+                ListSyntaxFixer::class,
+                NoEmptyCommentFixer::class,
+                NoEmptyPhpdocFixer::class,
+                EndFileNewlineSniff::class,
+                NamespaceDeclarationSniff::class,
+                MethodDeclarationSniff::class,
+                LineEndingFixer::class,
+                SingleTraitInsertPerStatementFixer::class,
+                ShortScalarCastFixer::class,
+                UselessConstantTypeHintSniff::class,
+                NoUnneededImportAliasFixer::class,
+                NoEmptyStatementFixer::class,
+                ModernClassNameReferenceSniff::class,
+                ClassConstantVisibilitySniff::class,
+                PropertyDeclarationSniff::class,
+                ParameterTypeHintSpacingSniff::class,
+                DisallowGroupUseSniff::class,
+                UselessInheritDocCommentSniff::class,
+                SpaceAfterCastSniff::class,
+                ClassDefinitionFixer::class,
+                LowercaseDeclarationSniff::class,
+                InlineControlStructureSniff::class,
+                LowerCaseKeywordSniff::class,
+                LanguageConstructSpacingSniff::class,
+                MethodSpacingSniff::class,
+                PropertySpacingSniff::class,
+                ClassMemberSpacingSniff::class,
+                NoUnusedImportsFixer::class,
+                ExceptionSuffixSniff::class,
+                DisallowTodoCommentsSniff::class,
+                DisallowCompactUsageSniff::class,
+                ConfigFilenameKebabCaseSniff::class,
+                DisallowBladeOutsideOfResourcesDirectorySniff::class,
+                DisallowEnvUsageSniff::class,
+                DisallowHasFactorySniff::class,
+                EventListenerSuffixSniff::class,
+                DisallowParamNoTypeOrCommentSniff::class,
+                PropertyDollarSignSniff::class,
+                TypesSpacesFixer::class,
+                PascalCasingEnumCasesSniff::class,
+                SingleQuoteFixer::class,
+                BlankLineBeforeStatementFixer::class,
+                TrailingCommaInMultilineFixer::class,
+                ClassAttributesSeparationFixer::class,
+                PhpdocNoUselessInheritdocFixer::class,
+                PhpdocTrimFixer::class,
+                StandardizeNotEqualsFixer::class,
+            ]);
     }
 }

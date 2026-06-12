@@ -7,7 +7,7 @@
 
 This repository contains the coding style followed by Worksome.
 
-It includes configuration for [ECS](https://github.com/symplify/easy-coding-standard), [PHPStan](https://phpstan.org), and [Rector](https://getrector.org).
+It includes configuration for [ECS](https://github.com/ecsphp/ecs), [PHPStan](https://phpstan.org), and [Rector](https://getrector.org).
 
 ## Setup
 
@@ -51,10 +51,6 @@ $ composer rector:fix
 
 The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/psr/psr-12).
 
-### Excluded / Skipped Rules
-
-- [`UnaryOperatorSpacesFixer`](https://cs.symfony.com/doc/rules/operator/unary_operator_spaces.html)
-
 ### Additional / Customised Rules
 
 > **Note:** Customised rules have a ⚙️ icon.
@@ -85,6 +81,7 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 - [`NoUnusedImportsFixer`](https://cs.symfony.com/doc/rules/import/no_unused_imports.html)
 - [`TrailingCommaInMultilineFixer`](https://cs.symfony.com/doc/rules/control_structure/trailing_comma_in_multiline.html)
 - [`TypesSpacesFixer`](https://cs.symfony.com/doc/rules/whitespace/types_spaces.html)
+- [`UnaryOperatorSpacesFixer`](https://cs.symfony.com/doc/rules/operator/unary_operator_spaces.html)
 
 #### [PHP CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer)
 

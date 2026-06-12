@@ -6,20 +6,20 @@
         "php": "^8.4",
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^3.0",
-        "larastan/larastan": "^3.9",
-        "phpstan/phpstan": "^2.1",
+        "larastan/larastan": "^3.10",
+        "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
-        "rector/rector": "^2.3",
-        "slevomat/coding-standard": "^8.27.1",
+        "rector/rector": "^2.4",
+        "slevomat/coding-standard": "^8.29",
         "spaze/phpstan-disallowed-calls": "^4.8",
-        "symplify/easy-coding-standard": "^13.0"
+        "symplify/easy-coding-standard": "^13.2.1"
     },
     "require-dev": {
-        "composer/composer": "^2.9",
-        "friendsofphp/php-cs-fixer": "^3.94",
-        "orchestra/testbench": "^9.16",
-        "pestphp/pest": "^4.4",
+        "composer/composer": "^2.10",
+        "friendsofphp/php-cs-fixer": "^3.95.5",
+        "orchestra/testbench": "^10.11",
+        "pestphp/pest": "^4.7",
         "spatie/invade": "^1.1.1",
         "squizlabs/php_codesniffer": "^4.0.1"
     },
@@ -44,7 +44,7 @@
         },
         {
             "name": "Owen Voke",
-            "email": "owen.voke@worksome.com"
+            "email": "owen@worksome.com"
         },
         {
             "name": "Odinn Adalsteinsson",
