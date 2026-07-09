@@ -3,19 +3,22 @@
 namespace Worksome\CodingStyle;
 
 use Composer\Command\BaseCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateCommand extends BaseCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
-        $this->setName('generate-coding-style-stubs');
+        $this
+            ->setName('generate-coding-style-stubs')
+            ->setDescription('Generates the stubs for the Worksome Coding Style.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln("Worksome's Coding style has 3 stub files (ecs, phpstan and rector)");
+        $output->writeln("Worksome's Coding style has 3 stub files (ECS, PHPStan and Rector)");
 
         $files = [
             'ecs.php' => __DIR__ . '/../stubs/ecs.php.stub',
@@ -45,6 +48,6 @@ class GenerateCommand extends BaseCommand
             ],
         ]);
 
-        return BaseCommand::SUCCESS;
+        return Command::SUCCESS;
     }
 }
