@@ -18,8 +18,8 @@
     "require-dev": {
         "composer/composer": "^2.10",
         "friendsofphp/php-cs-fixer": "^3.95.5",
-        "orchestra/testbench": "^10.11",
-        "pestphp/pest": "^4.7",
+        "orchestra/testbench": "^11.1",
+        "pestphp/pest": "^5.0",
         "spatie/invade": "^1.1.1",
         "squizlabs/php_codesniffer": "^4.0.1"
     },
