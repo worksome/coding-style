@@ -20,7 +20,7 @@
         "friendsofphp/php-cs-fixer": "^3.95.5",
         "orchestra/testbench": "^10.11",
         "pestphp/pest": "^4.7",
-        "spatie/invade": "^1.1.1",
+        "spatie/invade": "^2.1.0",
         "squizlabs/php_codesniffer": "^4.0.1"
     },
     "conflict": {
