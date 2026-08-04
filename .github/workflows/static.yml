@@ -2,8 +2,15 @@ name: Static Analysis
 
 on:
   push:
+    paths:
+      - '**.php'
+      - 'phpstan.neon.dist'
+      - '.github/workflows/static.yml'
+  pull_request:
+    branches: [main]
 
 jobs:
+
   ecs:
     name: ECS
 
@@ -11,18 +18,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
-          php-version: 8.4
+          php-version: '8.4'
           coverage: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+      - name: Install composer dependencies
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
-      - name: Style
+      - name: Run ECS
         run: composer test:style
