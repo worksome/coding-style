@@ -17,7 +17,7 @@ class NamespaceBasedSuffixRule implements Rule
      * @param array<string, string> $namespaceAndSuffix
      */
     public function __construct(
-        private array $namespaceAndSuffix,
+        private readonly array $namespaceAndSuffix,
     ) {
     }
 

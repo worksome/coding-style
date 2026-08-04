@@ -6,7 +6,6 @@ use Worksome\CodingStyle\WorksomeRectorConfig;
 
 return WorksomeRectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/app',
-        __DIR__ . '/config',
+        __DIR__ . '/src',
         __DIR__ . '/tests',
     ]);
