@@ -7,6 +7,6 @@ use Worksome\CodingStyle\WorksomeEcsConfig;
 return WorksomeEcsConfig::configure()
     ->withPaths([
         __DIR__ . '/app',
-        __DIR__ . '/tests',
         __DIR__ . '/config',
+        __DIR__ . '/tests',
     ]);

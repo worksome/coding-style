@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class EnforceKebabCaseArtisanCommandsRule implements Rule
 {
-    public function __construct(private array $excludedCommandClasses = [])
+    public function __construct(private readonly array $excludedCommandClasses = [])
     {
     }
 

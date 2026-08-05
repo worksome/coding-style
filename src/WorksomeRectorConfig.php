@@ -2,8 +2,8 @@
 
 namespace Worksome\CodingStyle;
 
-use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
+use Rector\Configuration\RectorConfigBuilder;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
@@ -19,32 +19,44 @@ use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
 {
-    public static function setup(RectorConfig $rectorConfig): void
+    public static function configure(): RectorConfigBuilder
     {
-        $rectorConfig->bootstrapFiles([
-            getcwd() . '/vendor/larastan/larastan/bootstrap.php',
-        ]);
+        $phpstanConfig = getcwd() . '/phpstan.neon';
+        $larastanBootstrap = getcwd() . '/vendor/larastan/larastan/bootstrap.php';
+        $larastanExtension = getcwd() . '/vendor/larastan/larastan/extension.neon';
 
-        $rectorConfig->phpstanConfig(getcwd() . '/phpstan.neon');
-
-        $rectorConfig->import(WorksomeSetList::LARAVEL_CODE_QUALITY);
-        $rectorConfig->import(WorksomeSetList::GENERIC_CODE_QUALITY);
-
-        $rectorConfig->rule(ClassOnObjectRector::class);
-        $rectorConfig->rule(StrContainsRector::class);
-        $rectorConfig->rule(StrStartsWithRector::class);
-        $rectorConfig->rule(StrEndsWithRector::class);
-        $rectorConfig->rule(RemoveUnusedVariableInCatchRector::class);
-
-        $rectorConfig->rule(RemoveUnreachableStatementRector::class);
-        $rectorConfig->rule(RemoveUselessParamTagRector::class);
-        $rectorConfig->rule(RemoveUselessReturnTagRector::class);
-        $rectorConfig->rule(RemoveNonExistingVarAnnotationRector::class);
-
-        $rectorConfig->rule(ArraySpreadInsteadOfArrayMergeRector::class);
-
-        $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
-
-        $rectorConfig->rule(ReadOnlyPropertyRector::class);
+        return RectorConfig::configure()
+            ->withPHPStanConfigs(match (true) {
+                /*
+                 * A project config takes precedence, as it is expected to pull in Larastan itself
+                 * (the larastan.neon shipped with this package does). PHPStan treats including the
+                 * same file twice as fatal, so Larastan must not be added alongside it.
+                 */
+                file_exists($phpstanConfig) => [$phpstanConfig],
+                file_exists($larastanExtension) => [$larastanExtension],
+                default => [],
+            })
+            ->withBootstrapFiles(
+                file_exists($larastanBootstrap)
+                    ? [$larastanBootstrap]
+                    : []
+            )
+            ->withSets([
+                WorksomeSetList::GENERIC_CODE_QUALITY,
+                WorksomeSetList::LARAVEL_CODE_QUALITY,
+            ])
+            ->withRules([
+                ClassOnObjectRector::class,
+                ClassPropertyAssignToConstructorPromotionRector::class,
+                ReadOnlyPropertyRector::class,
+                RemoveNonExistingVarAnnotationRector::class,
+                RemoveUnreachableStatementRector::class,
+                RemoveUnusedVariableInCatchRector::class,
+                RemoveUselessParamTagRector::class,
+                RemoveUselessReturnTagRector::class,
+                StrContainsRector::class,
+                StrEndsWithRector::class,
+                StrStartsWithRector::class,
+            ]);
     }
 }

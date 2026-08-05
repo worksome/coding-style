@@ -36,7 +36,6 @@ readonly class RequireWithoutTimestampsRule implements Rule
 
     /**
      * @param FileNode $node
-     * @param Scope    $scope
      *
      * @return string[] Errors
      */

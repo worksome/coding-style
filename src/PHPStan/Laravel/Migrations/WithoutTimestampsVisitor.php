@@ -22,11 +22,8 @@ class WithoutTimestampsVisitor extends NodeVisitorAbstract
 
     public array $errors = [];
 
-    private Scope $scope;
-
-    public function __construct(Scope $scope)
+    public function __construct(private readonly Scope $scope)
     {
-        $this->scope = $scope;
     }
 
     public function enterNode(Node $node): void
