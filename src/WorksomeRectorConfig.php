@@ -19,27 +19,18 @@ use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
 {
-    public static function configure(): RectorConfigBuilder
+    public static function configure(bool $larastan = true): RectorConfigBuilder
     {
         $phpstanConfig = getcwd() . '/phpstan.neon';
-        $larastanBootstrap = getcwd() . '/vendor/larastan/larastan/bootstrap.php';
-        $larastanExtension = getcwd() . '/vendor/larastan/larastan/extension.neon';
 
         return RectorConfig::configure()
             ->withPHPStanConfigs(match (true) {
-                /*
-                 * A project config takes precedence, as it is expected to pull in Larastan itself
-                 * (the larastan.neon shipped with this package does). PHPStan treats including the
-                 * same file twice as fatal, so Larastan must not be added alongside it.
-                 */
-                file_exists($phpstanConfig) => [$phpstanConfig],
-                file_exists($larastanExtension) => [$larastanExtension],
+                file_exists($phpstanConfig) => [getcwd() . '/phpstan.neon'],
+                $larastan => [getcwd() . '/vendor/larastan/larastan/extension.neon'],
                 default => [],
             })
             ->withBootstrapFiles(
-                file_exists($larastanBootstrap)
-                    ? [$larastanBootstrap]
-                    : []
+                $larastan ? [getcwd() . '/vendor/larastan/larastan/bootstrap.php'] : []
             )
             ->withSets([
                 WorksomeSetList::GENERIC_CODE_QUALITY,
