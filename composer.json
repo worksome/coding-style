@@ -7,6 +7,7 @@
         "composer-plugin-api": "^2.0",
         "canvural/larastan-strict-rules": "^3.0",
         "larastan/larastan": "^3.10",
+        "laravel/pao": "^1.1",
         "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
