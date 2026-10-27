@@ -35,6 +35,34 @@ Add the following section to your `composer.json` file:
 },
 ```
 
+### PHPStan
+
+PHPStan extensions are registered via [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer), which is installed
+alongside this package. Allow the plugin when prompted by Composer, or add it to your `composer.json` file:
+
+```json
+"config": {
+    "allow-plugins": {
+        "phpstan/extension-installer": true
+    }
+}
+```
+
+The Worksome rules, along with the PHPStan extensions this package depends on, are then loaded automatically.
+
+Laravel projects should also install Larastan and the Larastan strict rules:
+
+```
+composer require --dev larastan/larastan canvural/larastan-strict-rules
+```
+
+The Laravel rules (and Larastan within the Rector config) are only loaded when Larastan is installed, and the strict
+rules are only loaded when both packages are installed. Packages listed in the extension installer's `ignore` option
+are treated as not installed.
+
+> **Note:** Do not include the configuration files of any PHPStan extension that is registered with the extension installer (e.g. `vendor/larastan/larastan/extension.neon`
+> or `vendor/worksome/coding-style/larastan.neon`) in your `phpstan.neon` file. PHPStan will fail if a file is included more than once.
+
 ## Usage
 
 To use it, simply run one of the scripts added to composer.

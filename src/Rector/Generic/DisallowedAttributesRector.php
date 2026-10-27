@@ -45,18 +45,27 @@ class DisallowedAttributesRector extends AbstractRector implements ConfigurableR
     /** @param Node\AttributeGroup $node */
     public function refactor(Node $node)
     {
+        $hasChanged = false;
+
         foreach ($node->attrs as $key => $attribute) {
             if (! $this->isNames($attribute, $this->disallowedAttributes)) {
                 continue;
             }
 
             unset($node->attrs[$key]);
+            $hasChanged = true;
+        }
+
+        if (! $hasChanged) {
+            return null;
         }
 
         if ($node->attrs === []) {
             return NodeTraverser::REMOVE_NODE;
         }
 
-        return null;
+        $node->attrs = array_values($node->attrs);
+
+        return $node;
     }
 }

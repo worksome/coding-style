@@ -2,6 +2,7 @@
 
 namespace Worksome\CodingStyle;
 
+use PHPStan\ExtensionInstaller\GeneratedConfig;
 use Rector\Config\RectorConfig;
 use Rector\Configuration\RectorConfigBuilder;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
@@ -19,18 +20,18 @@ use Worksome\CodingStyle\Rector\WorksomeSetList;
 
 class WorksomeRectorConfig
 {
-    public static function configure(bool $larastan = true): RectorConfigBuilder
+    public static function configure(): RectorConfigBuilder
     {
-        $phpstanConfig = getcwd() . '/phpstan.neon';
+        $larastan = class_exists(
+            GeneratedConfig::class
+        )
+            ? GeneratedConfig::EXTENSIONS['larastan/larastan'] ?? null
+            : null;
 
         return RectorConfig::configure()
-            ->withPHPStanConfigs(match (true) {
-                file_exists($phpstanConfig) => [getcwd() . '/phpstan.neon'],
-                $larastan => [getcwd() . '/vendor/larastan/larastan/extension.neon'],
-                default => [],
-            })
+            ->withPHPStanConfigs(self::phpstanExtensionConfigs())
             ->withBootstrapFiles(
-                $larastan ? [getcwd() . '/vendor/larastan/larastan/bootstrap.php'] : []
+                $larastan !== null ? [$larastan['install_path'] . '/bootstrap.php'] : []
             )
             ->withSets([
                 WorksomeSetList::GENERIC_CODE_QUALITY,
@@ -49,5 +50,27 @@ class WorksomeRectorConfig
                 StrEndsWithRector::class,
                 StrStartsWithRector::class,
             ]);
+    }
+
+    /**
+     * Rector does not load extensions registered by phpstan/extension-installer, so they are passed explicitly.
+     *
+     * @return list<string>
+     */
+    private static function phpstanExtensionConfigs(): array
+    {
+        if (! class_exists(GeneratedConfig::class)) {
+            return [];
+        }
+
+        $configs = [];
+
+        foreach (GeneratedConfig::EXTENSIONS as $extension) {
+            foreach ($extension['extra']['includes'] ?? [] as $include) {
+                $configs[] = $extension['install_path'] . '/' . $include;
+            }
+        }
+
+        return $configs;
     }
 }
