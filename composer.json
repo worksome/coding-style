@@ -5,9 +5,8 @@
     "require": {
         "php": "^8.4",
         "composer-plugin-api": "^2.0",
-        "canvural/larastan-strict-rules": "^3.0",
-        "larastan/larastan": "^3.10",
         "laravel/pao": "^1.1",
+        "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
@@ -17,13 +16,21 @@
         "symplify/easy-coding-standard": "^13.2.1"
     },
     "require-dev": {
+        "canvural/larastan-strict-rules": "^3.0",
         "composer/composer": "^2.10",
         "friendsofphp/php-cs-fixer": "^3.95.5",
+        "larastan/larastan": "^3.10",
         "orchestra/testbench": "^11.1",
         "pestphp/pest": "^5.0",
         "squizlabs/php_codesniffer": "^4.0.1"
     },
+    "suggest": {
+        "canvural/larastan-strict-rules": "Required for the Larastan strict rules in Laravel projects.",
+        "larastan/larastan": "Required for the Laravel PHPStan rules in Laravel projects."
+    },
     "conflict": {
+        "canvural/larastan-strict-rules": "<3.0",
+        "larastan/larastan": "<3.10",
         "squizlabs/php_codesniffer": ">= 5"
     },
     "autoload": {
@@ -52,12 +59,24 @@
         }
     ],
     "extra": {
-        "class": "Worksome\\CodingStyle\\Plugin"
+        "class": "Worksome\\CodingStyle\\Plugin",
+        "phpstan": {
+            "includes": [
+                "extension.php"
+            ]
+        },
+        "phpstan/extension-installer": {
+            "ignore": [
+                "canvural/larastan-strict-rules",
+                "larastan/larastan"
+            ]
+        }
     },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },

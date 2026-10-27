@@ -5,36 +5,34 @@ declare(strict_types=1);
 namespace Worksome\CodingStyle\PHPStan;
 
 use PhpParser\Node;
-use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @implements Rule<Class_>
+ * @implements Rule<InClassNode>
  */
 final class DisallowPHPUnitRule implements Rule
 {
     public function getNodeType(): string
     {
-        return Class_::class;
+        return InClassNode::class;
     }
 
     /**
-     * @param Class_ $node
+     * @param InClassNode $node
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if ($node->isAbstract()) {
+        $classReflection = $node->getClassReflection();
+
+        if ($classReflection->isAbstract() || $classReflection->isAnonymous()) {
             return [];
         }
 
-        if ($node->namespacedName === null) {
-            return [];
-        }
-
-        if (! is_subclass_of($node->namespacedName->toString(), TestCase::class)) {
+        if (! $classReflection->isSubclassOf(TestCase::class)) {
             return [];
         }
 
