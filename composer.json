@@ -1,6 +1,7 @@
 {
     "name": "worksome/coding-style",
     "description": "Worksomes coding style",
+    "keywords": ["dev"],
     "type": "composer-plugin",
     "require": {
         "php": "^8.4",
