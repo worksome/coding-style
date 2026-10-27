@@ -2,7 +2,6 @@
 
 namespace Worksome\CodingStyle\Sniffs\Laravel;
 
-use Illuminate\Support\Str;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
@@ -30,7 +29,7 @@ class EventListenerSuffixSniff implements Sniff
         $className = $phpcsFile->getTokensAsString($classNamePointer, 1);
 
         // Check if class is named with Listener suffix.
-        if (Str::endsWith($className, $this->suffix)) {
+        if (str_ends_with($className, $this->suffix)) {
             return;
         }
 

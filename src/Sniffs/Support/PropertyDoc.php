@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle\Sniffs\Support;
 
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Worksome\CodingStyle\Utility;
 
@@ -31,11 +30,10 @@ final readonly class PropertyDoc
         Utility::preg_match(self::regexForTypes(), $detail, $typeMatches);
 
         $types = $typeMatches[0];
-        $remainderAfterType = Str::of($detail)->after($types)->trim();
+        $remainderAfterType = trim(explode($types, $detail, 2)[1] ?? $detail);
 
-        if ($remainderAfterType->isNotEmpty()) {
-            $variable = $remainderAfterType->before(' ')->__toString();
-            $description = $remainderAfterType->after(' ')->__toString();
+        if ($remainderAfterType !== '') {
+            [$variable, $description] = explode(' ', $remainderAfterType, 2) + [1 => $remainderAfterType];
         } else {
             $types = null;
             $variable = $typeMatches[0];
@@ -66,7 +64,7 @@ final readonly class PropertyDoc
         return join(' ', array_filter([
             $this->scope,
             $this->types,
-            Str::start($this->variableName, '$'),
+            '$' . ltrim($this->variableName, '$'),
             $this->description,
         ]));
     }

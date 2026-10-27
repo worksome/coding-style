@@ -2,9 +2,9 @@
 
 namespace Worksome\CodingStyle\Sniffs\Laravel;
 
-use Illuminate\Support\Str;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use Worksome\CodingStyle\Utility;
 
 class ConfigFilenameKebabCaseSniff implements Sniff
 {
@@ -25,9 +25,9 @@ class ConfigFilenameKebabCaseSniff implements Sniff
         }
 
         $filenameWithExtension = basename($path);
-        $filename = Str::before($filenameWithExtension, '.');
+        $filename = explode('.', $filenameWithExtension, 2)[0];
 
-        if (Str::kebab($filename) === $filename) {
+        if (Utility::kebab($filename) === $filename) {
             return;
         }
 

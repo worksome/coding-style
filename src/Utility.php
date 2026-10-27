@@ -26,6 +26,24 @@ class Utility
         return $safeResult;
     }
 
+    public static function studly(string $value): string
+    {
+        $words = preg_split('/\s+/u', str_replace(['-', '_'], ' ', $value), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        return implode('', array_map(ucfirst(...), $words));
+    }
+
+    public static function kebab(string $value): string
+    {
+        if (ctype_lower($value)) {
+            return $value;
+        }
+
+        $value = (string) preg_replace('/\s+/u', '', ucwords($value));
+
+        return strtolower((string) preg_replace('/(.)(?=[A-Z])/u', '$1-', $value));
+    }
+
     private static function getPcreException(): RuntimeException
     {
         return new RuntimeException(match ($lastError = preg_last_error()) {

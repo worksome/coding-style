@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle\Sniffs\Enums;
 
-use Illuminate\Support\Str;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use Worksome\CodingStyle\Utility;
 
 class PascalCasingEnumCasesSniff implements Sniff
 {
@@ -22,7 +22,7 @@ class PascalCasingEnumCasesSniff implements Sniff
         $nameRef = $stackPtr + 2;
         $caseName = $phpcsFile->getTokensAsString($nameRef, 1);
 
-        if ($caseName === Str::studly($caseName)) {
+        if ($caseName === Utility::studly($caseName)) {
             return;
         }
 
