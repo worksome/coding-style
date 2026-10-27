@@ -7,22 +7,22 @@
         "composer-plugin-api": "^2.0",
         "laravel/pao": "^1.1",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^2.2",
+        "phpstan/phpstan": "^2.3",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
-        "rector/rector": "^2.4",
-        "slevomat/coding-standard": "^8.29",
-        "spaze/phpstan-disallowed-calls": "^4.8",
-        "symplify/easy-coding-standard": "^13.2.1"
+        "rector/rector": "^2.8.1",
+        "slevomat/coding-standard": "^8.31",
+        "spaze/phpstan-disallowed-calls": "^4.15",
+        "symplify/easy-coding-standard": "^13.3"
     },
     "require-dev": {
         "canvural/larastan-strict-rules": "^3.0",
         "composer/composer": "^2.10",
-        "friendsofphp/php-cs-fixer": "^3.95.5",
+        "friendsofphp/php-cs-fixer": "^3.95.27",
         "larastan/larastan": "^3.10",
-        "orchestra/testbench": "^11.1",
-        "pestphp/pest": "^5.0",
-        "squizlabs/php_codesniffer": "^4.0.1"
+        "orchestra/testbench": "^11.3",
+        "pestphp/pest": "^5.3",
+        "squizlabs/php_codesniffer": "^4.0.4"
     },
     "suggest": {
         "canvural/larastan-strict-rules": "Required for the Larastan strict rules in Laravel projects.",
