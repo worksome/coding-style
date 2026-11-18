@@ -185,6 +185,27 @@ class Punctuation {}
 class MultilineWithBlankLine {}
 ',
     ];
+
+    yield 'types continuing on an unstarred line are untouched' => [
+        '<?php
+/**
+ * @property Foo
+       |Bar $value
+ */
+class UnstarredContinuation {}
+',
+    ];
+
+    yield 'types continuing after an unstarred blank line are untouched' => [
+        '<?php
+/**
+ * @property Foo
+   ' . '
+ *     |Bar $value
+ */
+class UnstarredBlankLine {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

@@ -91,7 +91,7 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
         for ($index = $annotationEnd + 1; isset($lines[$index]); $index++) {
             $content = rtrim($lines[$index]->getContent(), "\r\n");
 
-            if (Preg::match('/^\h*\*\h*$/', $content)) {
+            if (Preg::match('/^\h*\*?\h*$/', $content)) {
                 continue;
             }
 

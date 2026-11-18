@@ -185,6 +185,24 @@ it('removes `@param` tags with no type or comment', function (string $expected, 
     function someMethod($path): void {}
 ',
     ];
+
+    yield 'tags followed by an unstarred blank line and another tag are removed' => [
+        '<?php
+    /**
+     ' . '
+     * @return void
+     */
+    function someMethod($path): void {}
+',
+        '<?php
+    /**
+     * @param $path
+     ' . '
+     * @return void
+     */
+    function someMethod($path): void {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {
