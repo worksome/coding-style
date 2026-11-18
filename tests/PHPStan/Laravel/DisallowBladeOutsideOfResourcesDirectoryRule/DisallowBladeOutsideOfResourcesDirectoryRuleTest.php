@@ -19,7 +19,19 @@ it('disallows Blade files outside of the resources directory', function (string 
     'Blade file nested in resources' => [
         __DIR__ . '/Fixture/resources/nested/valid.blade.php',
     ],
+    'Blade file in a similarly named directory' => [
+        __DIR__ . '/Fixture/resources-old/sibling.blade.php',
+        ['Blade files must be placed in the resources directory.', 1],
+    ],
     'non-Blade file' => [
         __DIR__ . '/Fixture/not_a_blade_file.php.inc',
     ],
 ]);
+
+it('normalises the configured resources directory', function () {
+    $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule(
+        str_replace('/', '\\', __DIR__ . '/Fixture/resources/'),
+    );
+
+    expect(__DIR__ . '/Fixture/resources/valid.blade.php')->toHaveRuleErrors([]);
+});

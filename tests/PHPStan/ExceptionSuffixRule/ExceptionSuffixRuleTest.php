@@ -20,6 +20,10 @@ it('checks exceptions have the `Exception` suffix', function (string $path, arra
         __DIR__ . '/Fixture/wrong_exception_name_indirect.php.inc',
         ['Exceptions should have `Exception` suffix.', 5],
     ],
+    'exception without suffix with an attribute' => [
+        __DIR__ . '/Fixture/wrong_exception_name_with_attribute.php.inc',
+        ['Exceptions should have `Exception` suffix.', 6],
+    ],
     'error without suffix' => [
         __DIR__ . '/Fixture/wrong_error_name.php.inc',
         ['Exceptions should have `Exception` suffix.', 5],

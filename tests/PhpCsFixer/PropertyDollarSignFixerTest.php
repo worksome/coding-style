@@ -67,6 +67,77 @@ class InvalidProperties {}
 class InvalidProperties {}
 ',
     ];
+
+    yield 'single-line docblocks are fixed' => [
+        '<?php
+/** @property string $foo */
+class SingleLine {}
+',
+        '<?php
+/** @property string foo */
+class SingleLine {}
+',
+    ];
+
+    yield 'tab-separated properties are fixed' => [
+        "<?php
+/**
+ * @property\tstring\t\$foo
+ */
+class Tabs {}
+",
+        "<?php
+/**
+ * @property\tstring\tfoo
+ */
+class Tabs {}
+",
+    ];
+
+    yield 'callable types are not mistaken for the name' => [
+        '<?php
+/**
+ * @property callable(string): bool $handler
+ * @property \Closure(int, string): void $other
+ */
+class Callables {}
+',
+        '<?php
+/**
+ * @property callable(string): bool handler
+ * @property \Closure(int, string): void other
+ */
+class Callables {}
+',
+    ];
+
+    yield 'unparseable properties are untouched' => [
+        '<?php
+/**
+ * @property ...
+ * @property array<int,
+ * @property string $valid
+ */
+class Unparseable {}
+',
+        '<?php
+/**
+ * @property ...
+ * @property array<int,
+ * @property string valid
+ */
+class Unparseable {}
+',
+    ];
+
+    yield 'already valid callable properties are untouched' => [
+        '<?php
+/**
+ * @property callable(string): bool $handler
+ */
+class ValidCallable {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

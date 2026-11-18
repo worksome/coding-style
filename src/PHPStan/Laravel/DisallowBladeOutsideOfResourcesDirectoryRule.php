@@ -30,13 +30,13 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $file = $scope->getFile();
+        $file = $this->normalisePath($scope->getFile());
 
         if (! str_ends_with($file, '.blade.php')) {
             return [];
         }
 
-        if (str_starts_with($file, rtrim($this->resourcesDirectory, '/\\') . DIRECTORY_SEPARATOR)) {
+        if (str_starts_with($file, rtrim($this->normalisePath($this->resourcesDirectory), '/') . '/')) {
             return [];
         }
 
@@ -46,5 +46,10 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
                 ->line(1)
                 ->build(),
         ];
+    }
+
+    private function normalisePath(string $path): string
+    {
+        return str_replace('\\', '/', $path);
     }
 }

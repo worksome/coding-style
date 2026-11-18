@@ -9,7 +9,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Worksome\CodingStyle\Utility;
 
 /**
  * @implements Rule<FileNode>
@@ -26,15 +25,15 @@ class ConfigFilenameKebabCaseRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $path = str_replace(DIRECTORY_SEPARATOR, '/', $scope->getFile());
+        $path = str_replace('\\', '/', $scope->getFile());
 
-        if (! str_contains($path, 'config/')) {
+        if (! str_contains('/' . dirname($path) . '/', '/config/')) {
             return [];
         }
 
-        $filename = explode('.', basename($path), 2)[0];
+        $filename = basename($path, '.php');
 
-        if (Utility::kebab($filename) === $filename) {
+        if (preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $filename) === 1) {
             return [];
         }
 

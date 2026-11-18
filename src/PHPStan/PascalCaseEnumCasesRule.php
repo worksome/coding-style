@@ -35,6 +35,7 @@ class PascalCaseEnumCasesRule implements Rule
         return [
             RuleErrorBuilder::message("Enum case [{$caseName}] must be PascalCase.")
                 ->identifier('worksome.pascalCaseEnumCases')
+                ->line($node->name->getStartLine())
                 ->build(),
         ];
     }

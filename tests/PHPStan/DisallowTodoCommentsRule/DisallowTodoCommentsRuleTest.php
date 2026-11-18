@@ -20,6 +20,18 @@ it('disallows TODO comments', function (string $path, array ...$errors) {
     'comments without TODO' => [
         __DIR__ . '/Fixture/skip_no_todo_comments.php.inc',
     ],
+    'TODO inside `yield from`' => [
+        __DIR__ . '/Fixture/yield_from.php.inc',
+        ['Comments with TODO are disallowed.', 7],
+    ],
+    'carriage return line endings' => [
+        __DIR__ . '/Fixture/carriage_returns.php.inc',
+        ['Comments with TODO are disallowed.', 7],
+        ['Comments with TODO are disallowed.', 8],
+    ],
+    'rule identifier in an ignore comment' => [
+        __DIR__ . '/Fixture/skip_ignore_identifier.php.inc',
+    ],
     'file without TODO anywhere' => [
         __DIR__ . '/Fixture/skip_no_matching_text.php.inc',
     ],

@@ -176,7 +176,7 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 
 **Identifier:** `worksome.exceptionSuffix`
 
-This rule ensures that all classes implementing `Throwable` have an `Exception` suffix.
+This rule ensures that all named classes implementing `Throwable` have an `Exception` suffix. Anonymous classes are not checked, and the suffix is not configurable.
 
 #### [`NamespaceBasedSuffix`](src/PHPStan/NamespaceBasedSuffixRule.php)
 
@@ -190,6 +190,8 @@ Sets up configuration for suffixing the following namespaces
 - `App\Jobs`: `Job`
 
 This makes sures events, listeners, policies and jobs has the same suffix.
+
+Namespaces are matched by prefix, so applications with a root namespace other than `App` need their own entries in the `namespaceAndSuffix` parameter (e.g. `Acme\Listeners: Listener`).
 
 #### [`PascalCaseEnumCases`](src/PHPStan/PascalCaseEnumCasesRule.php)
 
@@ -205,13 +207,13 @@ Rules that are only applied in a Laravel context.
 
 **Identifier:** `worksome.laravel.configFilenameKebabCase`
 
-This rule ensures that all config files are named in kebab-case. It only applies when the `config` directory is included in your PHPStan paths.
+This rule ensures that all config files are named in kebab-case (lowercase letters and numbers, separated by hyphens). It only applies when the `config` directory is included in your PHPStan paths.
 
 #### [`DisallowBladeOutsideOfResourcesDirectoryRule`](src/PHPStan/Laravel/DisallowBladeOutsideOfResourcesDirectoryRule.php)
 
 **Identifier:** `worksome.laravel.disallowBladeOutsideOfResourcesDirectory`
 
-This rule ensures that no `.blade.php` files are placed outside of Laravel's `resources` directory. The directory can be changed with the `bladeResourcesDirectory` parameter (defaults to `%currentWorkingDirectory%/resources`).
+This rule ensures that no `.blade.php` files are placed outside of Laravel's `resources` directory. Only files within your PHPStan paths are checked, so a Blade file outside of them is not reported. The directory can be changed with the `bladeResourcesDirectory` parameter (defaults to `%currentWorkingDirectory%/resources`).
 
 #### [`DisallowEnvironmentCheckRule`](src/PHPStan/Laravel/DisallowEnvironmentCheck/DisallowEnvironmentCheckRule.php)
 
@@ -261,11 +263,13 @@ This removes all `@param` tags which has not specified a type or comment.
 /**
  * @param string $name
  * @param $type some random type
- * @param $other // <-- will be removed
+ * @param $other
  */
 public function someMethod($name, $type, $other): void
 {}
 ```
+
+In the example above, the `@param $other` tag will be removed.
 
 This is mainly because PHPStan requires this before it sees the property as valid.
 
@@ -284,9 +288,9 @@ The Worksome code style includes custom Rector rules for automatically refactori
 This ensures that specified [PHP attributes](https://www.php.net/manual/en/language.attributes.php) are automatically
 removed when they are not allowed.
 
-#### [`CompactToVariablesRector`](https://getrector.com/rule-detail/compact-to-variables-rector)
+#### [Compact to array](src/Rector/Generic/CompactToArrayRector.php)
 
-Replaces `compact()` calls with an explicit array, as part of the generic code quality set.
+Replaces `compact()` calls with an explicit array, as part of the generic code quality set. Calls with variable names that cannot be resolved statically are left unchanged.
 
 ## Credits
 

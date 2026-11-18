@@ -43,6 +43,7 @@ class ExceptionSuffixRule implements Rule
         return [
             RuleErrorBuilder::message('Exceptions should have `Exception` suffix.')
                 ->identifier('worksome.exceptionSuffix')
+                ->line($node->getOriginalNode()->name?->getStartLine() ?? $node->getStartLine())
                 ->build(),
         ];
     }

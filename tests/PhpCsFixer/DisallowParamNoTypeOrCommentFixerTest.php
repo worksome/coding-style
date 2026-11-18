@@ -80,6 +80,15 @@ it('removes `@param` tags with no type or comment', function (string $expected, 
     function someMethod($name): void {}
 ',
     ];
+
+    yield 'a `@param` mentioned in a description is untouched' => [
+        '<?php
+    /**
+     * @param string $name See @param $other
+     */
+    function someMethod($name): void {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

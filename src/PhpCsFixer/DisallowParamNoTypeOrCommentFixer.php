@@ -35,7 +35,10 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
             $docBlock = new DocBlock($tokens[$index]->getContent());
 
             foreach ($docBlock->getAnnotationsOfType('param') as $annotation) {
-                if (! Preg::match('/@param\h+&?(?:\.\.\.)?\$\w+\s*(?:\*\/)?\s*$/', $annotation->getContent())) {
+                if (! Preg::match(
+                    '/^\h*(?:\/\*\*|\*)?\h*@param\h+&?(?:\.\.\.)?\$\w+\s*(?:\*\/)?\s*$/',
+                    $annotation->getContent()
+                )) {
                     continue;
                 }
 

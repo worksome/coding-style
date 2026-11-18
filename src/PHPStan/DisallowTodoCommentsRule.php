@@ -37,12 +37,14 @@ class DisallowTodoCommentsRule implements Rule
         $errors = [];
 
         foreach (PhpToken::tokenize($contents) as $token) {
-            if (! $token->is([T_COMMENT, T_DOC_COMMENT])) {
+            // `yield from` is a single token, so comments between the two keywords are part of its text.
+            if (! $token->is([T_COMMENT, T_DOC_COMMENT, T_YIELD_FROM])) {
                 continue;
             }
 
-            foreach (explode("\n", $token->text) as $offset => $line) {
-                if (stripos($line, 'todo') === false) {
+            foreach (preg_split('/\r\n|\r|\n/', $token->text) ?: [] as $offset => $line) {
+                // The rule's own identifier, used in `@phpstan-ignore` comments, is not a TODO.
+                if (stripos(str_ireplace('worksome.disallowTodoComments', '', $line), 'todo') === false) {
                     continue;
                 }
 

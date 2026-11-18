@@ -11,12 +11,30 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use PHPStan\PhpDocParser\Lexer\Lexer;
+use PHPStan\PhpDocParser\Parser\ConstExprParser;
+use PHPStan\PhpDocParser\Parser\ParserException;
+use PHPStan\PhpDocParser\Parser\TokenIterator;
+use PHPStan\PhpDocParser\Parser\TypeParser;
+use PHPStan\PhpDocParser\ParserConfig;
 use SplFileInfo;
-use Worksome\CodingStyle\PhpCsFixer\Support\PropertyDoc;
 use const T_DOC_COMMENT;
 
 class PropertyDollarSignFixer implements FixerInterface
 {
+    private Lexer $lexer;
+
+    private TypeParser $typeParser;
+
+    public function __construct()
+    {
+        $config = new ParserConfig([]);
+
+        $this->lexer = new Lexer($config);
+        $this->typeParser = new TypeParser($config, new ConstExprParser($config));
+    }
+
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
@@ -35,16 +53,8 @@ class PropertyDollarSignFixer implements FixerInterface
             $content = $tokens[$index]->getContent();
 
             $newContent = Preg::replaceCallback(
-                '/^(\h*\*\h*)(@property(?:-read|-write)?\h+\S.*?)(\h*)$/m',
-                static function (array $matches): string {
-                    $propertyDoc = PropertyDoc::from($matches[2]);
-
-                    if ($propertyDoc->variableHasDollarSymbol()) {
-                        return $matches[0];
-                    }
-
-                    return $matches[1] . $propertyDoc->joined() . $matches[3];
-                },
+                '/^(\h*(?:\/\*\*|\*)\h*@property(?:-read|-write)?\h+)(.*?)(\h*(?:\*\/)?\h*)$/m',
+                fn (array $matches): string => $matches[1] . $this->fixPropertyDetail($matches[2]) . $matches[3],
                 $content,
             );
 
@@ -54,6 +64,46 @@ class PropertyDollarSignFixer implements FixerInterface
 
             $tokens[$index] = new Token([T_DOC_COMMENT, $newContent]);
         }
+    }
+
+    /**
+     * Add a dollar sign to the property name in the detail of a `@property` tag (the type, name and description).
+     *
+     * The detail is returned unchanged when the property name cannot be identified unambiguously.
+     */
+    private function fixPropertyDetail(string $detail): string
+    {
+        $tokens = new TokenIterator($this->lexer->tokenize($detail));
+
+        if ($tokens->isCurrentTokenType(Lexer::TOKEN_VARIABLE)) {
+            return $detail;
+        }
+
+        try {
+            $type = $this->typeParser->parse($tokens);
+        } catch (ParserException) {
+            return $detail;
+        }
+
+        $tokens->tryConsumeTokenType(Lexer::TOKEN_HORIZONTAL_WS);
+
+        // A tag with only a name and no type, such as `@property foo`.
+        if ($tokens->isCurrentTokenType(Lexer::TOKEN_END)) {
+            return $type instanceof IdentifierTypeNode && Preg::match('/^\w+$/', $detail)
+                ? '$' . $detail
+                : $detail;
+        }
+
+        if (
+            ! $tokens->isCurrentTokenType(Lexer::TOKEN_IDENTIFIER)
+            || ! Preg::match('/^\w+$/', $tokens->currentTokenValue())
+        ) {
+            return $detail;
+        }
+
+        $offset = $tokens->currentTokenOffset();
+
+        return substr($detail, 0, $offset) . '$' . substr($detail, $offset);
     }
 
     public function isCandidate(Tokens $tokens): bool
