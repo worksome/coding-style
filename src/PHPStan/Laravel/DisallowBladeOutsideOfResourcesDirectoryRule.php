@@ -17,6 +17,7 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
 {
     public function __construct(
         private readonly string $resourcesDirectory,
+        private readonly string $currentWorkingDirectory,
     ) {
     }
 
@@ -36,7 +37,7 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
             return [];
         }
 
-        if (str_starts_with($file, rtrim($this->normalisePath($this->resourcesDirectory), '/') . '/')) {
+        if (str_starts_with($file, rtrim($this->resourcesDirectory(), '/') . '/')) {
             return [];
         }
 
@@ -46,6 +47,19 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
                 ->line(1)
                 ->build(),
         ];
+    }
+
+    private function resourcesDirectory(): string
+    {
+        $directory = $this->normalisePath($this->resourcesDirectory);
+
+        if (str_starts_with($directory, '/') || preg_match('/^[A-Za-z]:\//', $directory) === 1) {
+            return $directory;
+        }
+
+        $relative = preg_replace('/^(?:\.\/)+/', '', $directory) ?? $directory;
+
+        return rtrim($this->normalisePath($this->currentWorkingDirectory), '/') . '/' . $relative;
     }
 
     private function normalisePath(string $path): string

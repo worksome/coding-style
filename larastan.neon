@@ -49,10 +49,13 @@ services:
         class: Worksome\CodingStyle\PHPStan\Laravel\Migrations\RequireWithoutTimestampsRule
     -
         class: Worksome\CodingStyle\PHPStan\Laravel\ConfigFilenameKebabCaseRule
+        arguments:
+            currentWorkingDirectory: %currentWorkingDirectory%
     -
         class: Worksome\CodingStyle\PHPStan\Laravel\DisallowBladeOutsideOfResourcesDirectoryRule
         arguments:
             resourcesDirectory: %bladeResourcesDirectory%
+            currentWorkingDirectory: %currentWorkingDirectory%
 
 conditionalTags:
     Worksome\CodingStyle\PHPStan\Laravel\DisallowEnvironmentCheck\DisallowEnvironmentCheckRule:

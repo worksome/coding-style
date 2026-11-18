@@ -89,6 +89,39 @@ it('removes `@param` tags with no type or comment', function (string $expected, 
     function someMethod($name): void {}
 ',
     ];
+
+    yield 'modifiers separated by whitespace are removed' => [
+        '<?php
+    /**
+     * @param string $name
+     */
+    function someMethod($name, &...$args): void {}
+',
+        '<?php
+    /**
+     * @param string $name
+     * @param & ...$args
+     */
+    function someMethod($name, &...$args): void {}
+',
+    ];
+
+    yield 'tags continued by a Markdown list are untouched' => [
+        '<?php
+    /**
+     * @param $path
+     * * @see Path::normalize() before passing this value.
+     */
+    function someMethod($path): void {}
+',
+    ];
+
+    yield 'a docblock at the end of the file is removed' => [
+        '<?php
+',
+        '<?php
+/** @param $x */',
+    ];
 });
 
 it('has valid fixer metadata', function () {

@@ -5,7 +5,7 @@ namespace Worksome\CodingStyle\Tests\PHPStan\Laravel\ConfigFilenameKebabCaseRule
 use Worksome\CodingStyle\PHPStan\Laravel\ConfigFilenameKebabCaseRule;
 
 it('requires config files to be kebab-case', function (string $path, array ...$errors) {
-    $this->rule = new ConfigFilenameKebabCaseRule();
+    $this->rule = new ConfigFilenameKebabCaseRule(__DIR__ . '/Fixture');
 
     expect($path)->toHaveRuleErrors($errors);
 })->with([
@@ -34,3 +34,9 @@ it('requires config files to be kebab-case', function (string $path, array ...$e
         __DIR__ . '/Fixture/notConfig.php',
     ],
 ]);
+
+it('ignores `config` directories above the project root', function () {
+    $this->rule = new ConfigFilenameKebabCaseRule(__DIR__ . '/Fixture/config/project');
+
+    expect(__DIR__ . '/Fixture/config/project/app/UserProfile.php')->toHaveRuleErrors([]);
+});

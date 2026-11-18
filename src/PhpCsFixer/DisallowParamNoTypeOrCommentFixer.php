@@ -34,9 +34,18 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
 
             $docBlock = new DocBlock($tokens[$index]->getContent());
 
+            $lines = $docBlock->getLines();
+
             foreach ($docBlock->getAnnotationsOfType('param') as $annotation) {
+                // A Markdown list item (e.g. `* * @see ...`) is parsed as a new tag, but continues this one.
+                $nextLine = $lines[$annotation->getEnd() + 1] ?? null;
+
+                if ($nextLine !== null && Preg::match('/^\h*\*\h*[*+-]\h/', $nextLine->getContent())) {
+                    continue;
+                }
+
                 if (! Preg::match(
-                    '/^\h*(?:\/\*\*|\*)?\h*@param\h+&?(?:\.\.\.)?\$\w+\s*(?:\*\/)?\s*$/',
+                    '/^\h*(?:\/\*\*|\*)?\h*@param\h+&?\h*(?:\.\.\.)?\h*\$\w+\s*(?:\*\/)?\s*$/',
                     $annotation->getContent()
                 )) {
                     continue;
@@ -52,7 +61,14 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
             }
 
             // A single-line docblock is removed entirely, so leave an empty docblock for NoEmptyPhpdocFixer to tidy up.
+            // NoEmptyPhpdocFixer requires a following token, so a docblock at the end of the file is removed here.
             if ($newContent === '') {
+                if ($index === $tokens->count() - 1) {
+                    $tokens->clearTokenAndMergeSurroundingWhitespace($index);
+
+                    continue;
+                }
+
                 $newContent = '/** */';
             }
 

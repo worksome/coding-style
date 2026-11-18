@@ -15,6 +15,11 @@ use PHPStan\Rules\RuleErrorBuilder;
  */
 class ConfigFilenameKebabCaseRule implements Rule
 {
+    public function __construct(
+        private readonly string $currentWorkingDirectory,
+    ) {
+    }
+
     public function getNodeType(): string
     {
         return FileNode::class;
@@ -26,6 +31,12 @@ class ConfigFilenameKebabCaseRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $path = str_replace('\\', '/', $scope->getFile());
+        $root = rtrim(str_replace('\\', '/', $this->currentWorkingDirectory), '/') . '/';
+
+        // Only directories within the project count, so a project checked out under a `config` directory is not matched.
+        if (str_starts_with($path, $root)) {
+            $path = substr($path, strlen($root));
+        }
 
         if (! str_contains('/' . dirname($path) . '/', '/config/')) {
             return [];

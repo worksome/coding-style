@@ -11,16 +11,34 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String_;
+use PHPStan\Analyser\Scope;
+use Rector\PHPStan\ScopeFetcher;
 use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * Unlike Rector's `CompactToVariablesRector`, this keeps every argument (including mixed string and array arguments),
- * and leaves the call unchanged when any variable name cannot be resolved statically.
+ * Unlike Rector's `CompactToVariablesRector`, this keeps every argument (including mixed string and array arguments).
+ *
+ * The call is left unchanged when any name cannot be resolved statically, is not a variable that is always defined at
+ * the call site (as `compact()` omits undefined variables), or is a superglobal (which `compact()` cannot read
+ * inside a function).
  */
 class CompactToArrayRector extends AbstractRector
 {
+    private const array UNSUPPORTED_NAMES = [
+        'this',
+        'GLOBALS',
+        '_SERVER',
+        '_GET',
+        '_POST',
+        '_FILES',
+        '_COOKIE',
+        '_SESSION',
+        '_REQUEST',
+        '_ENV',
+    ];
+
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -59,10 +77,31 @@ class CompactToArrayRector extends AbstractRector
             return null;
         }
 
+        $scope = ScopeFetcher::fetch($node);
+
+        foreach ($names as $name) {
+            if (! $this->isAlwaysDefinedVariable($scope, $name)) {
+                return null;
+            }
+        }
+
         return new Array_(array_map(
             fn (string $name): ArrayItem => new ArrayItem(new Variable($name), new String_($name)),
             array_values(array_unique($names)),
         ));
+    }
+
+    private function isAlwaysDefinedVariable(Scope $scope, string $name): bool
+    {
+        if (in_array($name, self::UNSUPPORTED_NAMES, true)) {
+            return false;
+        }
+
+        if (preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/', $name) !== 1) {
+            return false;
+        }
+
+        return $scope->hasVariableType($name)->yes();
     }
 
     /**

@@ -5,7 +5,7 @@ namespace Worksome\CodingStyle\Tests\PHPStan\Laravel\DisallowBladeOutsideOfResou
 use Worksome\CodingStyle\PHPStan\Laravel\DisallowBladeOutsideOfResourcesDirectoryRule;
 
 it('disallows Blade files outside of the resources directory', function (string $path, array ...$errors) {
-    $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule(__DIR__ . '/Fixture/resources');
+    $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule(__DIR__ . '/Fixture/resources', __DIR__);
 
     expect($path)->toHaveRuleErrors($errors);
 })->with([
@@ -31,7 +31,17 @@ it('disallows Blade files outside of the resources directory', function (string 
 it('normalises the configured resources directory', function () {
     $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule(
         str_replace('/', '\\', __DIR__ . '/Fixture/resources/'),
+        __DIR__,
     );
 
     expect(__DIR__ . '/Fixture/resources/valid.blade.php')->toHaveRuleErrors([]);
 });
+
+it('resolves a relative resources directory', function (string $resourcesDirectory) {
+    $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule($resourcesDirectory, __DIR__ . '/Fixture');
+
+    expect(__DIR__ . '/Fixture/resources/valid.blade.php')->toHaveRuleErrors([])
+        ->and(__DIR__ . '/Fixture/invalid.blade.php')->toHaveRuleErrors([
+            ['Blade files must be placed in the resources directory.', 1],
+        ]);
+})->with(['resources', './resources']);

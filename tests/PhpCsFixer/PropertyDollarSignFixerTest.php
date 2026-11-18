@@ -138,6 +138,25 @@ class Unparseable {}
 class ValidCallable {}
 ',
     ];
+
+    yield 'types continuing on the next line are untouched' => [
+        '<?php
+/**
+ * @property Foo
+ *     |Bar $value
+ * @property string $name
+ */
+class Multiline {}
+',
+        '<?php
+/**
+ * @property Foo
+ *     |Bar $value
+ * @property string name
+ */
+class Multiline {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

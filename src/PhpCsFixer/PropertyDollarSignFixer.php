@@ -53,8 +53,11 @@ class PropertyDollarSignFixer implements FixerInterface
             $content = $tokens[$index]->getContent();
 
             $newContent = Preg::replaceCallback(
-                '/^(\h*(?:\/\*\*|\*)\h*@property(?:-read|-write)?\h+)(.*?)(\h*(?:\*\/)?\h*)$/m',
-                fn (array $matches): string => $matches[1] . $this->fixPropertyDetail($matches[2]) . $matches[3],
+                // The lookahead captures a following line that continues the type (e.g. `*     |Bar $value`).
+                '/^(\h*(?:\/\*\*|\*)\h*@property(?:-read|-write)?\h+)(.*?)(\h*(?:\*\/)?\h*)$(?=(\R\h*\*\h*[|&<>,()\[\]{}:])?)/m',
+                fn (array $matches): string => ($matches[4] ?? '') !== ''
+                    ? $matches[0]
+                    : $matches[1] . $this->fixPropertyDetail($matches[2]) . $matches[3],
                 $content,
             );
 
