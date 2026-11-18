@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle;
 
-use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
 use PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\CommentedOutCodeSniff;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
@@ -23,8 +22,10 @@ use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\NullableTypeDeclarationFixer;
 use PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
+use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
 use PhpCsFixer\Fixer\Operator\OperatorLinebreakFixer;
 use PhpCsFixer\Fixer\Operator\StandardizeNotEqualsFixer;
+use PhpCsFixer\Fixer\Operator\TernaryToElvisOperatorFixer;
 use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
@@ -35,20 +36,16 @@ use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
+use PhpCsFixer\Fixer\Whitespace\TypeDeclarationSpacesFixer;
 use PhpCsFixer\Fixer\Whitespace\TypesSpacesFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff;
-use SlevomatCodingStandard\Sniffs\Classes\PropertyDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Classes\RequireMultiLineMethodSignatureSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\ForbiddenAnnotationsSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireMultiLineConditionSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireMultiLineTernaryOperatorSniff;
-use SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff;
 use SlevomatCodingStandard\Sniffs\Functions\RequireMultiLineCallSniff;
-use SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\DisallowGroupUseSniff;
-use SlevomatCodingStandard\Sniffs\Namespaces\NamespaceDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\RequireOneNamespaceInFileSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSpacingSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
@@ -122,13 +119,20 @@ class WorksomeEcsConfig
             ->withConfiguredRule(UnaryOperatorSpacesFixer::class, [
                 'only_dec_inc' => true,
             ])
+            ->withConfiguredRule(TrailingCommaInMultilineFixer::class, [
+                'elements' => [
+                    TrailingCommaInMultilineFixer::ELEMENTS_ARRAYS,
+                    TrailingCommaInMultilineFixer::ELEMENTS_PARAMETERS,
+                ],
+            ])
             ->withRules([
+                CastSpacesFixer::class,
+                NotOperatorWithSuccessorSpaceFixer::class,
+                TernaryToElvisOperatorFixer::class,
+                TypeDeclarationSpacesFixer::class,
                 RequireMultiLineConditionSniff::class,
-                RequireShortTernaryOperatorSniff::class,
                 RequireMultiLineCallSniff::class,
-                SpaceAfterNotSniff::class,
                 RequireMultiLineMethodSignatureSniff::class,
-                RequireTrailingCommaInDeclarationSniff::class,
                 SpaceInGenericsFixer::class,
                 PhpdocSeparationFixer::class,
                 RequireOneNamespaceInFileSniff::class,
@@ -136,7 +140,6 @@ class WorksomeEcsConfig
                 ListSyntaxFixer::class,
                 NoEmptyCommentFixer::class,
                 NoEmptyPhpdocFixer::class,
-                NamespaceDeclarationSniff::class,
                 MethodDeclarationSniff::class,
                 LineEndingFixer::class,
                 SingleTraitInsertPerStatementFixer::class,
@@ -145,10 +148,7 @@ class WorksomeEcsConfig
                 NoUnneededImportAliasFixer::class,
                 NoEmptyStatementFixer::class,
                 ModernClassNameReferenceSniff::class,
-                PropertyDeclarationSniff::class,
-                ParameterTypeHintSpacingSniff::class,
                 DisallowGroupUseSniff::class,
-                SpaceAfterCastSniff::class,
                 ClassDefinitionFixer::class,
                 NoUnusedImportsFixer::class,
                 DisallowParamNoTypeOrCommentFixer::class,
@@ -156,7 +156,6 @@ class WorksomeEcsConfig
                 TypesSpacesFixer::class,
                 SingleQuoteFixer::class,
                 BlankLineBeforeStatementFixer::class,
-                TrailingCommaInMultilineFixer::class,
                 ClassAttributesSeparationFixer::class,
                 PhpdocNoUselessInheritdocFixer::class,
                 PhpdocTrimFixer::class,
