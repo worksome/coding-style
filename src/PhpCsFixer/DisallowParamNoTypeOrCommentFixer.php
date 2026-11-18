@@ -38,7 +38,7 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
             $lines = $docBlock->getLines();
 
             foreach ($docBlock->getAnnotationsOfType('param') as $annotation) {
-                if ($this->isContinuedByMarkdownList($lines, $annotation->getEnd())) {
+                if ($this->hasContinuation($lines, $annotation->getEnd())) {
                     continue;
                 }
 
@@ -77,21 +77,25 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
     }
 
     /**
-     * Whether the next non-blank line is a Markdown list item (e.g. `* * @see ...`), which is parsed as a new tag but
-     * continues the previous one.
+     * Whether the tag's description continues after the annotation ends.
+     *
+     * PHP-CS-Fixer ends an annotation at a blank line, or at a line containing `* @` (such as a Markdown list item like
+     *
+     * `* * @see ...`), so the tag is only treated as bare when the next non-blank line starts a real tag or ends the
+     * docblock.
      *
      * @param array<int, Line> $lines
      */
-    private function isContinuedByMarkdownList(array $lines, int $annotationEnd): bool
+    private function hasContinuation(array $lines, int $annotationEnd): bool
     {
         for ($index = $annotationEnd + 1; isset($lines[$index]); $index++) {
-            $content = $lines[$index]->getContent();
+            $content = rtrim($lines[$index]->getContent(), "\r\n");
 
-            if (Preg::match('/^\h*\*\h*$/', rtrim($content, "\r\n"))) {
+            if (Preg::match('/^\h*\*\h*$/', $content)) {
                 continue;
             }
 
-            return Preg::match('/^\h*\*\h*[*+-]\h/', $content);
+            return ! Preg::match('/^\h*(?:\*\h*@|\*\/)/', $content);
         }
 
         return false;

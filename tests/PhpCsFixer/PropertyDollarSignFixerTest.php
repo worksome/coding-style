@@ -174,6 +174,17 @@ class Punctuation {}
 class Punctuation {}
 ',
     ];
+
+    yield 'types continuing after a blank line are untouched' => [
+        '<?php
+/**
+ * @property Foo
+ *
+ *     |Bar $value
+ */
+class MultilineWithBlankLine {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

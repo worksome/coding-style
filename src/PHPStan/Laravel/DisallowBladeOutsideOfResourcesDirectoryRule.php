@@ -51,10 +51,11 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
 
     private function resourcesDirectory(): string
     {
-        $directory = $this->normalisePath($this->resourcesDirectory);
+        // Only separators are converted first, so leading `..` segments are resolved against the working directory.
+        $directory = str_replace('\\', '/', $this->resourcesDirectory);
 
         if (! str_starts_with($directory, '/') && preg_match('/^[A-Za-z]:\//', $directory) !== 1) {
-            $directory = $this->normalisePath($this->currentWorkingDirectory) . '/' . $directory;
+            $directory = str_replace('\\', '/', $this->currentWorkingDirectory) . '/' . $directory;
         }
 
         return $this->normalisePath($directory);

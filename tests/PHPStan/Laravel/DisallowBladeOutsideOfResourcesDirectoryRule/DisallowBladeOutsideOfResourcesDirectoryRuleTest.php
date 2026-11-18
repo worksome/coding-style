@@ -45,3 +45,12 @@ it('resolves a relative resources directory', function (string $resourcesDirecto
             ['Blade files must be placed in the resources directory.', 1],
         ]);
 })->with(['resources', './resources', 'resources-old/../resources', __DIR__ . '/Fixture/resources-old/../resources']);
+
+it('resolves a resources directory above the working directory', function () {
+    $this->rule = new DisallowBladeOutsideOfResourcesDirectoryRule('../resources', __DIR__ . '/Fixture/app');
+
+    expect(__DIR__ . '/Fixture/resources/valid.blade.php')->toHaveRuleErrors([])
+        ->and(__DIR__ . '/Fixture/invalid.blade.php')->toHaveRuleErrors([
+            ['Blade files must be placed in the resources directory.', 1],
+        ]);
+});

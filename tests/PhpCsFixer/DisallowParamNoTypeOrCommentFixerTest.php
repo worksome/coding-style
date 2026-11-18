@@ -142,6 +142,49 @@ it('removes `@param` tags with no type or comment', function (string $expected, 
  * @param $x
  */',
     ];
+
+    yield 'tags continued by prose after blank lines are untouched' => [
+        '<?php
+    /**
+     * @param $path
+     *
+     *
+     * The path to normalize.
+     */
+    function someMethod($path): void {}
+',
+    ];
+
+    yield 'tags continued by an ordered Markdown list are untouched' => [
+        '<?php
+    /**
+     * @param $path
+     * 1. * @see Path::normalize()
+     * 2)   * @see Path::resolve()
+     */
+    function someMethod($path): void {}
+',
+    ];
+
+    yield 'tags followed by blank lines and another tag are removed' => [
+        '<?php
+    /**
+     *
+     *
+     * @return void
+     */
+    function someMethod($path): void {}
+',
+        '<?php
+    /**
+     * @param $path
+     *
+     *
+     * @return void
+     */
+    function someMethod($path): void {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {
