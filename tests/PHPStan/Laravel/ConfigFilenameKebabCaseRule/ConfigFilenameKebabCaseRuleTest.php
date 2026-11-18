@@ -40,3 +40,9 @@ it('ignores `config` directories above the project root', function () {
 
     expect(__DIR__ . '/Fixture/config/project/app/UserProfile.php')->toHaveRuleErrors([]);
 });
+
+it('ignores files outside the project root', function () {
+    $this->rule = new ConfigFilenameKebabCaseRule(__DIR__ . '/Fixture/app');
+
+    expect(__DIR__ . '/Fixture/config/camelCase.php')->toHaveRuleErrors([]);
+});

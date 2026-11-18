@@ -44,4 +44,4 @@ it('resolves a relative resources directory', function (string $resourcesDirecto
         ->and(__DIR__ . '/Fixture/invalid.blade.php')->toHaveRuleErrors([
             ['Blade files must be placed in the resources directory.', 1],
         ]);
-})->with(['resources', './resources']);
+})->with(['resources', './resources', 'resources-old/../resources', __DIR__ . '/Fixture/resources-old/../resources']);

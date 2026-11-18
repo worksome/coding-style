@@ -55,9 +55,9 @@ class PropertyDollarSignFixer implements FixerInterface
             $newContent = Preg::replaceCallback(
                 // The lookahead captures a following line that continues the type (e.g. `*     |Bar $value`).
                 '/^(\h*(?:\/\*\*|\*)\h*@property(?:-read|-write)?\h+)(.*?)(\h*(?:\*\/)?\h*)$(?=(\R\h*\*\h*[|&<>,()\[\]{}:])?)/m',
-                fn (array $matches): string => ($matches[4] ?? '') !== ''
-                    ? $matches[0]
-                    : $matches[1] . $this->fixPropertyDetail($matches[2]) . $matches[3],
+                fn (array $matches): string => $matches[1]
+                    . $this->fixPropertyDetail($matches[2], ($matches[4] ?? '') !== '')
+                    . $matches[3],
                 $content,
             );
 
@@ -74,7 +74,7 @@ class PropertyDollarSignFixer implements FixerInterface
      *
      * The detail is returned unchanged when the property name cannot be identified unambiguously.
      */
-    private function fixPropertyDetail(string $detail): string
+    private function fixPropertyDetail(string $detail, bool $typeMayContinue): string
     {
         $tokens = new TokenIterator($this->lexer->tokenize($detail));
 
@@ -91,8 +91,9 @@ class PropertyDollarSignFixer implements FixerInterface
         $tokens->tryConsumeTokenType(Lexer::TOKEN_HORIZONTAL_WS);
 
         // A tag with only a name and no type, such as `@property foo`.
+        // If the next line may continue the type (e.g. `*     |Bar $value`), the first line has no name to fix.
         if ($tokens->isCurrentTokenType(Lexer::TOKEN_END)) {
-            return $type instanceof IdentifierTypeNode && Preg::match('/^\w+$/', $detail)
+            return ! $typeMayContinue && $type instanceof IdentifierTypeNode && Preg::match('/^\w+$/', $detail)
                 ? '$' . $detail
                 : $detail;
         }

@@ -97,7 +97,7 @@ class CompactToArrayRector extends AbstractRector
             return false;
         }
 
-        if (preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/', $name) !== 1) {
+        if (preg_match('/\A[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*\z/', $name) !== 1) {
             return false;
         }
 

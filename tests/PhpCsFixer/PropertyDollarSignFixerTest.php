@@ -157,6 +157,23 @@ class Multiline {}
 class Multiline {}
 ',
     ];
+
+    yield 'descriptions on the next line starting with punctuation do not block the fix' => [
+        '<?php
+/**
+ * @property string $name
+ * [More details](#details)
+ */
+class Punctuation {}
+',
+        '<?php
+/**
+ * @property string name
+ * [More details](#details)
+ */
+class Punctuation {}
+',
+    ];
 });
 
 it('has valid fixer metadata', function () {

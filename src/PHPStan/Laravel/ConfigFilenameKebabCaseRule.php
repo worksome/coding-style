@@ -34,9 +34,11 @@ class ConfigFilenameKebabCaseRule implements Rule
         $root = rtrim(str_replace('\\', '/', $this->currentWorkingDirectory), '/') . '/';
 
         // Only directories within the project count, so a project checked out under a `config` directory is not matched.
-        if (str_starts_with($path, $root)) {
-            $path = substr($path, strlen($root));
+        if (! str_starts_with($path, $root)) {
+            return [];
         }
+
+        $path = substr($path, strlen($root));
 
         if (! str_contains('/' . dirname($path) . '/', '/config/')) {
             return [];

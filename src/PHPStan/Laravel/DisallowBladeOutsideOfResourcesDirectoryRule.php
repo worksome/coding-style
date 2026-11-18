@@ -53,17 +53,36 @@ class DisallowBladeOutsideOfResourcesDirectoryRule implements Rule
     {
         $directory = $this->normalisePath($this->resourcesDirectory);
 
-        if (str_starts_with($directory, '/') || preg_match('/^[A-Za-z]:\//', $directory) === 1) {
-            return $directory;
+        if (! str_starts_with($directory, '/') && preg_match('/^[A-Za-z]:\//', $directory) !== 1) {
+            $directory = $this->normalisePath($this->currentWorkingDirectory) . '/' . $directory;
         }
 
-        $relative = preg_replace('/^(?:\.\/)+/', '', $directory) ?? $directory;
-
-        return rtrim($this->normalisePath($this->currentWorkingDirectory), '/') . '/' . $relative;
+        return $this->normalisePath($directory);
     }
 
+    /**
+     * Use forward slashes, and resolve `.` and `..` segments.
+     */
     private function normalisePath(string $path): string
     {
-        return str_replace('\\', '/', $path);
+        $path = str_replace('\\', '/', $path);
+        $prefix = preg_match('/^(?:[A-Za-z]:)?\//', $path, $matches) === 1 ? $matches[0] : '';
+        $segments = [];
+
+        foreach (explode('/', substr($path, strlen($prefix))) as $segment) {
+            if ($segment === '' || $segment === '.') {
+                continue;
+            }
+
+            if ($segment === '..') {
+                array_pop($segments);
+
+                continue;
+            }
+
+            $segments[] = $segment;
+        }
+
+        return $prefix . implode('/', $segments);
     }
 }

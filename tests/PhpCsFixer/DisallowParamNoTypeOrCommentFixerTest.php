@@ -122,6 +122,26 @@ it('removes `@param` tags with no type or comment', function (string $expected, 
         '<?php
 /** @param $x */',
     ];
+
+    yield 'tags continued by a Markdown list after a blank line are untouched' => [
+        '<?php
+    /**
+     * @param $path
+     *
+     * * @see Path::normalize() before passing this value.
+     */
+    function someMethod($path): void {}
+',
+    ];
+
+    yield 'a multi-line docblock at the end of the file is removed' => [
+        '<?php
+',
+        '<?php
+/**
+ * @param $x
+ */',
+    ];
 });
 
 it('has valid fixer metadata', function () {

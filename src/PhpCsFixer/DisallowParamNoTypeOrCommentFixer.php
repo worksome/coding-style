@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\CodingStyle\PhpCsFixer;
 
 use PhpCsFixer\DocBlock\DocBlock;
+use PhpCsFixer\DocBlock\Line;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -37,10 +38,7 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
             $lines = $docBlock->getLines();
 
             foreach ($docBlock->getAnnotationsOfType('param') as $annotation) {
-                // A Markdown list item (e.g. `* * @see ...`) is parsed as a new tag, but continues this one.
-                $nextLine = $lines[$annotation->getEnd() + 1] ?? null;
-
-                if ($nextLine !== null && Preg::match('/^\h*\*\h*[*+-]\h/', $nextLine->getContent())) {
+                if ($this->isContinuedByMarkdownList($lines, $annotation->getEnd())) {
                     continue;
                 }
 
@@ -62,18 +60,41 @@ class DisallowParamNoTypeOrCommentFixer implements FixerInterface
 
             // A single-line docblock is removed entirely, so leave an empty docblock for NoEmptyPhpdocFixer to tidy up.
             // NoEmptyPhpdocFixer requires a following token, so a docblock at the end of the file is removed here.
+            $isEmpty = Preg::match('/^\s*(?:\/\*\*)?[\s*]*(?:\*\/)?\s*$/', $newContent);
+
+            if ($isEmpty && $index === $tokens->count() - 1) {
+                $tokens->clearTokenAndMergeSurroundingWhitespace($index);
+
+                continue;
+            }
+
             if ($newContent === '') {
-                if ($index === $tokens->count() - 1) {
-                    $tokens->clearTokenAndMergeSurroundingWhitespace($index);
-
-                    continue;
-                }
-
                 $newContent = '/** */';
             }
 
             $tokens[$index] = new Token([T_DOC_COMMENT, $newContent]);
         }
+    }
+
+    /**
+     * Whether the next non-blank line is a Markdown list item (e.g. `* * @see ...`), which is parsed as a new tag but
+     * continues the previous one.
+     *
+     * @param array<int, Line> $lines
+     */
+    private function isContinuedByMarkdownList(array $lines, int $annotationEnd): bool
+    {
+        for ($index = $annotationEnd + 1; isset($lines[$index]); $index++) {
+            $content = $lines[$index]->getContent();
+
+            if (Preg::match('/^\h*\*\h*$/', rtrim($content, "\r\n"))) {
+                continue;
+            }
+
+            return Preg::match('/^\h*\*\h*[*+-]\h/', $content);
+        }
+
+        return false;
     }
 
     public function isCandidate(Tokens $tokens): bool

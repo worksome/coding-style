@@ -8,7 +8,7 @@ class SkipUnsupportedNamesCompact
     {
         $a = 1;
 
-        return [compact('a', 'my name'), compact('a', ''), compact('a', '1x'), compact('a', '_SERVER'), compact('this')];
+        return [compact('a', 'my name'), compact('a', ''), compact('a', '1x'), compact('a', '_SERVER'), compact('this'), compact('a', "a\n")];
     }
 }
 
