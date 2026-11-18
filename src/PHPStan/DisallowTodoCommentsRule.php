@@ -43,8 +43,9 @@ class DisallowTodoCommentsRule implements Rule
             }
 
             foreach (preg_split('/\r\n|\r|\n/', $token->text) ?: [] as $offset => $line) {
-                // The rule's own identifier, used in `@phpstan-ignore` comments, is not a TODO.
-                if (stripos(str_ireplace('worksome.disallowTodoComments', '', $line), 'todo') === false) {
+                // Only the whole word counts, so words such as "Mastodon" and the rule's own identifier (used in
+                // `@phpstan-ignore` comments) are not reported.
+                if (preg_match('/\btodos?\b/i', $line) !== 1) {
                     continue;
                 }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle\PHPStan;
 
+use Error;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -40,8 +41,19 @@ class ExceptionSuffixRule implements Rule
             return [];
         }
 
+        // Subclasses of `Error` may follow PHP's own naming (e.g. `TypeError`) instead.
+        $isError = $classReflection->isSubclassOf(Error::class);
+
+        if ($isError && str_ends_with($classReflection->getName(), 'Error')) {
+            return [];
+        }
+
         return [
-            RuleErrorBuilder::message('Exceptions should have `Exception` suffix.')
+            RuleErrorBuilder::message(
+                $isError
+                    ? 'Errors should have `Error` or `Exception` suffix.'
+                    : 'Exceptions should have `Exception` suffix.'
+            )
                 ->identifier('worksome.exceptionSuffix')
                 ->line($node->getOriginalNode()->name?->getStartLine() ?? $node->getStartLine())
                 ->build(),

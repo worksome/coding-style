@@ -164,7 +164,7 @@ This rule is used to ensure that all PHP files include with the `declare(strict_
 
 **Identifier:** `worksome.disallowTodoComments`
 
-This rule prevents to-do comments from being used. Jira should be used instead.
+This rule prevents to-do comments (containing the word `TODO` or `TODOs`, in any case) from being used. Jira should be used instead.
 
 #### [`DisallowPHPUnit`](src/PHPStan/DisallowPHPUnitRule.php)
 
@@ -176,7 +176,7 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 
 **Identifier:** `worksome.exceptionSuffix`
 
-This rule ensures that all named classes implementing `Throwable` have an `Exception` suffix. Anonymous classes are not checked, and the suffix is not configurable.
+This rule ensures that all named classes implementing `Throwable` have an `Exception` suffix. Subclasses of `Error` may use an `Error` suffix instead (e.g. `InvalidStateError`). Anonymous classes are not checked, and the suffixes are not configurable.
 
 #### [`NamespaceBasedSuffix`](src/PHPStan/NamespaceBasedSuffixRule.php)
 

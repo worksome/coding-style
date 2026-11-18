@@ -32,6 +32,15 @@ it('disallows TODO comments', function (string $path, array ...$errors) {
     'rule identifier in an ignore comment' => [
         __DIR__ . '/Fixture/skip_ignore_identifier.php.inc',
     ],
+    'TODO as part of another word' => [
+        __DIR__ . '/Fixture/skip_todo_inside_words.php.inc',
+    ],
+    'plural and punctuated TODOs' => [
+        __DIR__ . '/Fixture/todo_variants.php.inc',
+        ['Comments with TODO are disallowed.', 5],
+        ['Comments with TODO are disallowed.', 6],
+        ['Comments with TODO are disallowed.', 7],
+    ],
     'file without TODO anywhere' => [
         __DIR__ . '/Fixture/skip_no_matching_text.php.inc',
     ],
