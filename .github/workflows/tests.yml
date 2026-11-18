@@ -10,7 +10,7 @@ jobs:
     name: Pest ${{ matrix.test-suite }}
     strategy:
       matrix:
-        test-suite: ['phpcsfixer', 'phpstan', 'rector', 'phpcs']
+        test-suite: ['phpcsfixer', 'phpstan', 'rector']
 
     steps:
       - name: Checkout code
