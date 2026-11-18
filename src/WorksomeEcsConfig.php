@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace Worksome\CodingStyle;
 
-use PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseKeywordSniff;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
-use PHP_CodeSniffer\Standards\PSR2\Sniffs\Files\EndFileNewlineSniff;
 use PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff;
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\LowercaseDeclarationSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\CommentedOutCodeSniff;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
@@ -41,16 +36,10 @@ use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\TypesSpacesFixer;
-use SlevomatCodingStandard\Sniffs\Classes\ClassConstantVisibilitySniff;
-use SlevomatCodingStandard\Sniffs\Classes\ClassMemberSpacingSniff;
-use SlevomatCodingStandard\Sniffs\Classes\EmptyLinesAroundClassBracesSniff;
-use SlevomatCodingStandard\Sniffs\Classes\MethodSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff;
 use SlevomatCodingStandard\Sniffs\Classes\PropertyDeclarationSniff;
-use SlevomatCodingStandard\Sniffs\Classes\PropertySpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\RequireMultiLineMethodSignatureSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\ForbiddenAnnotationsSniff;
-use SlevomatCodingStandard\Sniffs\Commenting\UselessInheritDocCommentSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireMultiLineConditionSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireMultiLineTernaryOperatorSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff;
@@ -60,23 +49,13 @@ use SlevomatCodingStandard\Sniffs\Namespaces\DisallowGroupUseSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\NamespaceDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\RequireOneNamespaceInFileSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSpacingSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSpacingSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
+use Worksome\CodingStyle\PhpCsFixer\DisallowParamNoTypeOrCommentFixer;
+use Worksome\CodingStyle\PhpCsFixer\PropertyDollarSignFixer;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
-use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
-use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
-use Worksome\CodingStyle\Sniffs\Enums\PascalCasingEnumCasesSniff;
-use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowEnvUsageSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowHasFactorySniff;
-use Worksome\CodingStyle\Sniffs\Laravel\EventListenerSuffixSniff;
-use Worksome\CodingStyle\Sniffs\PhpDoc\DisallowParamNoTypeOrCommentSniff;
-use Worksome\CodingStyle\Sniffs\PhpDoc\PropertyDollarSignSniff;
 
 class WorksomeEcsConfig
 {
@@ -113,10 +92,6 @@ class WorksomeEcsConfig
                     'ray' => null,
                 ],
             ])
-            ->withConfiguredRule(EmptyLinesAroundClassBracesSniff::class, [
-                'linesCountAfterOpeningBrace' => 0,
-                'linesCountBeforeClosingBrace' => 0,
-            ])
             ->withConfiguredRule(ForbiddenAnnotationsSniff::class, [
                 'forbiddenAnnotations' => [
                     '@package',
@@ -150,7 +125,6 @@ class WorksomeEcsConfig
             ->withRules([
                 RequireMultiLineConditionSniff::class,
                 RequireShortTernaryOperatorSniff::class,
-                ReturnTypeHintSpacingSniff::class,
                 RequireMultiLineCallSniff::class,
                 SpaceAfterNotSniff::class,
                 RequireMultiLineMethodSignatureSniff::class,
@@ -162,7 +136,6 @@ class WorksomeEcsConfig
                 ListSyntaxFixer::class,
                 NoEmptyCommentFixer::class,
                 NoEmptyPhpdocFixer::class,
-                EndFileNewlineSniff::class,
                 NamespaceDeclarationSniff::class,
                 MethodDeclarationSniff::class,
                 LineEndingFixer::class,
@@ -172,33 +145,15 @@ class WorksomeEcsConfig
                 NoUnneededImportAliasFixer::class,
                 NoEmptyStatementFixer::class,
                 ModernClassNameReferenceSniff::class,
-                ClassConstantVisibilitySniff::class,
                 PropertyDeclarationSniff::class,
                 ParameterTypeHintSpacingSniff::class,
                 DisallowGroupUseSniff::class,
-                UselessInheritDocCommentSniff::class,
                 SpaceAfterCastSniff::class,
                 ClassDefinitionFixer::class,
-                LowercaseDeclarationSniff::class,
-                InlineControlStructureSniff::class,
-                LowerCaseKeywordSniff::class,
-                LanguageConstructSpacingSniff::class,
-                MethodSpacingSniff::class,
-                PropertySpacingSniff::class,
-                ClassMemberSpacingSniff::class,
                 NoUnusedImportsFixer::class,
-                ExceptionSuffixSniff::class,
-                DisallowTodoCommentsSniff::class,
-                DisallowCompactUsageSniff::class,
-                ConfigFilenameKebabCaseSniff::class,
-                DisallowBladeOutsideOfResourcesDirectorySniff::class,
-                DisallowEnvUsageSniff::class,
-                DisallowHasFactorySniff::class,
-                EventListenerSuffixSniff::class,
-                DisallowParamNoTypeOrCommentSniff::class,
-                PropertyDollarSignSniff::class,
+                DisallowParamNoTypeOrCommentFixer::class,
+                PropertyDollarSignFixer::class,
                 TypesSpacesFixer::class,
-                PascalCasingEnumCasesSniff::class,
                 SingleQuoteFixer::class,
                 BlankLineBeforeStatementFixer::class,
                 TrailingCommaInMultilineFixer::class,

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Worksome\CodingStyle\Rector\Generic\CompactToArrayRector;
 use Worksome\CodingStyle\Rector\Generic\DisallowedAttributesRector;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -10,4 +11,6 @@ return static function (RectorConfig $rectorConfig): void {
         ->ruleWithConfiguration(DisallowedAttributesRector::class, [
             'JetBrains\PhpStorm\Pure',
         ]);
+
+    $rectorConfig->rule(CompactToArrayRector::class);
 };

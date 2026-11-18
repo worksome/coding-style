@@ -11,6 +11,9 @@ parameters:
         declareStrictTypes: %worksome.allRules%
         disallowPhpunit: %worksome.allRules%
         namespaceBasedSuffix: %worksome.allRules%
+        exceptionSuffix: %worksome.allRules%
+        disallowTodoComments: %worksome.allRules%
+        pascalCaseEnumCases: %worksome.allRules%
 
 parametersSchema:
     namespaceAndSuffix: arrayOf(string(), string())
@@ -19,6 +22,9 @@ parametersSchema:
         declareStrictTypes: anyOf(bool(), arrayOf(bool())),
         disallowPhpunit: anyOf(bool(), arrayOf(bool())),
         namespaceBasedSuffix: anyOf(bool(), arrayOf(bool())),
+        exceptionSuffix: anyOf(bool(), arrayOf(bool())),
+        disallowTodoComments: anyOf(bool(), arrayOf(bool())),
+        pascalCaseEnumCases: anyOf(bool(), arrayOf(bool())),
     ])
 
 services:
@@ -30,6 +36,12 @@ services:
         class: Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule
         arguments:
             namespaceAndSuffix: %namespaceAndSuffix%
+    -
+        class: Worksome\CodingStyle\PHPStan\ExceptionSuffixRule
+    -
+        class: Worksome\CodingStyle\PHPStan\DisallowTodoCommentsRule
+    -
+        class: Worksome\CodingStyle\PHPStan\PascalCaseEnumCasesRule
 
 conditionalTags:
     Worksome\CodingStyle\PHPStan\DeclareStrictTypesRule:
@@ -38,3 +50,9 @@ conditionalTags:
         phpstan.rules.rule: %worksome.disallowPhpunit%
     Worksome\CodingStyle\PHPStan\NamespaceBasedSuffixRule:
         phpstan.rules.rule: %worksome.namespaceBasedSuffix%
+    Worksome\CodingStyle\PHPStan\ExceptionSuffixRule:
+        phpstan.rules.rule: %worksome.exceptionSuffix%
+    Worksome\CodingStyle\PHPStan\DisallowTodoCommentsRule:
+        phpstan.rules.rule: %worksome.disallowTodoComments%
+    Worksome\CodingStyle\PHPStan\PascalCaseEnumCasesRule:
+        phpstan.rules.rule: %worksome.pascalCaseEnumCases%

@@ -8,4 +8,7 @@ return WorksomeEcsConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
         __DIR__ . '/tests',
+    ])
+    ->withSkip([
+        '*.blade.php',
     ]);
