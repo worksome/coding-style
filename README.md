@@ -154,17 +154,8 @@ The Worksome code style extends the [PSR-12 base rule set](https://php-fig.org/p
 
 #### [Worksome](src)
 
-- [`ConfigFilenameKebabCaseSniff`](#config-filename-kebab-case)
-- [`DisallowBladeOutsideOfResourcesDirectorySniff`](#disallow-blade-outside-the-resources-directory)
-- [`DisallowCompactUsageSniff`](#disallow-compact-usage)
-- [`DisallowEnvUsageSniff`](#disallow-env-usage)
-- [`DisallowHasFactorySniff`](#disallow-hasfactory-usage)
-- [`DisallowParamNoTypeOrCommentSniff`](#param-tags-with-no-type-or-comment)
-- [`DisallowTodoCommentsSniff`](#disallow-todo-comments)
-- [`EventListenerSuffixSniff`](#event-listener-suffix)
-- [`ExceptionSuffixSniff`](#exception-suffix)
-- [`PropertyDollarSignSniff`](#property-dollar-sign)
-- [`PascalCasingEnumCasesSniff`](#pascal-casing-enum-cases)
+- [`DisallowParamNoTypeOrCommentFixer`](#param-tags-with-no-type-or-comment)
+- [`PropertyDollarSignFixer`](#property-dollar-sign)
 - [`SpaceInGenericsFixer`](#space-in-generics)
 
 ## Custom PHPStan rules
@@ -181,11 +172,23 @@ Rules that are applied to all projects.
 
 This rule is used to ensure that all PHP files include with the `declare(strict_types=1)` statement.
 
+#### [`DisallowTodoComments`](src/PHPStan/DisallowTodoCommentsRule.php)
+
+**Identifier:** `worksome.disallowTodoComments`
+
+This rule prevents to-do comments from being used. Jira should be used instead.
+
 #### [`DisallowPHPUnit`](src/PHPStan/DisallowPHPUnitRule.php)
 
 **Identifier:** `worksome.disallowPhpunit`
 
 This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `TestCase` classes.
+
+#### [`ExceptionSuffix`](src/PHPStan/ExceptionSuffixRule.php)
+
+**Identifier:** `worksome.exceptionSuffix`
+
+This rule ensures that all classes implementing `Throwable` have an `Exception` suffix.
 
 #### [`NamespaceBasedSuffix`](src/PHPStan/NamespaceBasedSuffixRule.php)
 
@@ -194,15 +197,33 @@ This rule prevents PHPUnit tests in favour of Pest PHP. It will allow abstract `
 Sets up configuration for suffixing the following namespaces
 
 - `App\Events`: `Event`
-- `App\Listener`: `Listener`
+- `App\Listeners`: `Listener`
 - `App\Policies`: `Policy`
 - `App\Jobs`: `Job`
 
 This makes sures events, listeners, policies and jobs has the same suffix.
 
+#### [`PascalCaseEnumCases`](src/PHPStan/PascalCaseEnumCasesRule.php)
+
+**Identifier:** `worksome.pascalCaseEnumCases`
+
+This rule ensures that all enum cases use pascal-casing (e.g. `Case::PascalCase`).
+
 ### Laravel
 
 Rules that are only applied in a Laravel context.
+
+#### [`ConfigFilenameKebabCaseRule`](src/PHPStan/Laravel/ConfigFilenameKebabCaseRule.php)
+
+**Identifier:** `worksome.laravel.configFilenameKebabCase`
+
+This rule ensures that all config files are named in kebab-case. It only applies when the `config` directory is included in your PHPStan paths.
+
+#### [`DisallowBladeOutsideOfResourcesDirectoryRule`](src/PHPStan/Laravel/DisallowBladeOutsideOfResourcesDirectoryRule.php)
+
+**Identifier:** `worksome.laravel.disallowBladeOutsideOfResourcesDirectory`
+
+This rule ensures that no `.blade.php` files are placed outside of Laravel's `resources` directory. The directory can be changed with the `bladeResourcesDirectory` parameter (defaults to `%currentWorkingDirectory%/resources`).
 
 #### [`DisallowEnvironmentCheckRule`](src/PHPStan/Laravel/DisallowEnvironmentCheck/DisallowEnvironmentCheckRule.php)
 
@@ -222,71 +243,29 @@ This rule will enforce the use of kebab-case for Artisan commands.
 
 This rule enforces that all `update`, `insert`, `save`, `saveQuietly`, `delete`, `restore`, method calls within Laravel migration files are properly enclosed in a `withoutTimestamps()` context.
 
-## Custom PHP_CodeSniffer sniffs
+#### Third-party rules
 
-The Worksome code style includes various custom PHP_CodeSniffer sniffs where auto-fixers via PHP CS Fixer are not possible.
+The following are enabled through configuration of third-party rules:
 
-### Generic
+- **Disallow `env` usage** — Larastan's `noEnvCallsOutsideOfConfig` rule (identifier `larastan.noEnvCallsOutsideOfConfig`) ensures `env()` is only called in config files.
+- **Disallow `HasFactory` usage** — [`disallowedClasses`](https://github.com/spaze/phpstan-disallowed-calls) ensures the `HasFactory` trait is not used, so that factory classes are called directly.
 
-#### [Pascal-casing enum cases](src/Sniffs/Enums/PascalCasingEnumCasesSniff.php)
+## Custom PHP CS Fixer fixers
 
-This ensures that all enum cases use pascal-casing (e.g. `Case::PascalCase`).
+The Worksome code style includes the following custom PHP CS Fixer fixers, which are applied via ECS.
 
-### Laravel
-
-All custom sniffs specific to Laravel.
-
-#### [Config filename kebab case](src/Sniffs/Laravel/ConfigFilenameKebabCaseSniff.php)
-
-Checks if all config files are written in kebab case.
-
-#### [Disallow `compact` usage](src/Sniffs/Functions/DisallowCompactUsageSniff.php)
-
-Makes sure that `compact()` isn't used in code.
-
-#### [Disallow `env` usage](src/Sniffs/Laravel/DisallowEnvUsageSniff.php)
-
-Makes sure that you don't use `env` helper in your code, except for config files.
-
-#### [Disallow `HasFactory` usage](src/Sniffs/Laravel/DisallowHasFactorySniff.php)
-
-Ensures that the `HasFactory` trait is not used on models, this ensures that the factory class is called directly.
-
-#### [Event listener suffix](src/Sniffs/Laravel/EventListenerSuffixSniff.php)
-
-Enforces event listeners to end with a specific suffix, this suffix is defaulted to `Listener`.
-
-| parameters | defaults   |
-|------------|------------|
-| suffix     | `Listener` |
-
-#### [Disallow blade outside the `resources` directory](src/Sniffs/Laravel/DisallowBladeOutsideOfResourcesDirectorySniff.php)
-
-Makes sure no `.blade.php` files exist outside of Laravel's `resources` directory.
-
-| parameters         | defaults                   |
-|--------------------|----------------------------|
-| resourcesDirectory | `{YOUR_PROJECT}/resources` |
-
-#### [Exception suffix](src/Sniffs/Classes/ExceptionSuffixSniff.php)
-
-This ensures that all `Exception` classes should have a suffix of `Exception`.
-
-### PhpDoc
-
-All custom sniffs which are not specific to Laravel.
-
-#### [Property dollar sign](src/Sniffs/PhpDoc/PropertyDollarSignSniff.php)
+#### [Property dollar sign](src/PhpCsFixer/PropertyDollarSignFixer.php)
 
 Makes sure that you always have a dollar sign in your properties defined in phpdoc.
+
 ```php
 /**
-* @property string $name
+ * @property string $name
  */
 class User {}
 ```
 
-#### [Param tags with no type or comment](src/Sniffs/PhpDoc/DisallowParamNoTypeOrCommentSniff.php)
+#### [Param tags with no type or comment](src/PhpCsFixer/DisallowParamNoTypeOrCommentFixer.php)
 
 This removes all `@param` tags which has not specified a type or comment.
 
@@ -302,10 +281,6 @@ public function someMethod($name, $type, $other): void
 
 This is mainly because PHPStan requires this before it sees the property as valid.
 
-#### [Disallow `TODO` comments](src/Sniffs/Comments/DisallowTodoCommentsSniff.php)
-
-This ensures that all to-do comments are blocked from use. Jira should be used instead.
-
 #### [Space in generics](src/PhpCsFixer/SpaceInGenericsFixer.php)
 
 This ensures that generics types in PHPDoc comments contain a single space after the comma.
@@ -320,6 +295,10 @@ The Worksome code style includes custom Rector rules for automatically refactori
 
 This ensures that specified [PHP attributes](https://www.php.net/manual/en/language.attributes.php) are automatically
 removed when they are not allowed.
+
+#### [`CompactToVariablesRector`](https://getrector.com/rule-detail/compact-to-variables-rector)
+
+Replaces `compact()` calls with an explicit array, as part of the generic code quality set.
 
 ## Credits
 

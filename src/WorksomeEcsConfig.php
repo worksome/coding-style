@@ -65,18 +65,9 @@ use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
+use Worksome\CodingStyle\PhpCsFixer\DisallowParamNoTypeOrCommentFixer;
+use Worksome\CodingStyle\PhpCsFixer\PropertyDollarSignFixer;
 use Worksome\CodingStyle\PhpCsFixer\SpaceInGenericsFixer;
-use Worksome\CodingStyle\Sniffs\Classes\ExceptionSuffixSniff;
-use Worksome\CodingStyle\Sniffs\Comments\DisallowTodoCommentsSniff;
-use Worksome\CodingStyle\Sniffs\Enums\PascalCasingEnumCasesSniff;
-use Worksome\CodingStyle\Sniffs\Functions\DisallowCompactUsageSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\ConfigFilenameKebabCaseSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowBladeOutsideOfResourcesDirectorySniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowEnvUsageSniff;
-use Worksome\CodingStyle\Sniffs\Laravel\DisallowHasFactorySniff;
-use Worksome\CodingStyle\Sniffs\Laravel\EventListenerSuffixSniff;
-use Worksome\CodingStyle\Sniffs\PhpDoc\DisallowParamNoTypeOrCommentSniff;
-use Worksome\CodingStyle\Sniffs\PhpDoc\PropertyDollarSignSniff;
 
 class WorksomeEcsConfig
 {
@@ -187,18 +178,9 @@ class WorksomeEcsConfig
                 PropertySpacingSniff::class,
                 ClassMemberSpacingSniff::class,
                 NoUnusedImportsFixer::class,
-                ExceptionSuffixSniff::class,
-                DisallowTodoCommentsSniff::class,
-                DisallowCompactUsageSniff::class,
-                ConfigFilenameKebabCaseSniff::class,
-                DisallowBladeOutsideOfResourcesDirectorySniff::class,
-                DisallowEnvUsageSniff::class,
-                DisallowHasFactorySniff::class,
-                EventListenerSuffixSniff::class,
-                DisallowParamNoTypeOrCommentSniff::class,
-                PropertyDollarSignSniff::class,
+                DisallowParamNoTypeOrCommentFixer::class,
+                PropertyDollarSignFixer::class,
                 TypesSpacesFixer::class,
-                PascalCasingEnumCasesSniff::class,
                 SingleQuoteFixer::class,
                 BlankLineBeforeStatementFixer::class,
                 TrailingCommaInMultilineFixer::class,

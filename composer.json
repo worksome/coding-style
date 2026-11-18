@@ -22,8 +22,7 @@
         "friendsofphp/php-cs-fixer": "^3.95.27",
         "larastan/larastan": "^3.10",
         "orchestra/testbench": "^11.3",
-        "pestphp/pest": "^5.3",
-        "squizlabs/php_codesniffer": "^4.0.4"
+        "pestphp/pest": "^5.3"
     },
     "suggest": {
         "canvural/larastan-strict-rules": "Required for the Larastan strict rules in Laravel projects.",
@@ -87,12 +86,10 @@
         "test:phpstan": "pest --testsuite phpstan",
         "test:rector": "pest --testsuite rector",
         "test:phpcsfixer": "pest --testsuite phpcsfixer",
-        "test:phpcs": "pest --testsuite phpcs",
         "test": [
             "@test:phpstan",
             "@test:rector",
-            "@test:phpcsfixer",
-            "@test:phpcs"
+            "@test:phpcsfixer"
         ]
     },
     "minimum-stability": "stable",
